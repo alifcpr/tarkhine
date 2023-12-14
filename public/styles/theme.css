@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .display-1-bold {
+    @apply font-estedad font-bold text-[64px];
+  }
+  .display-2-bold {
+    @apply font-estedad font-bold text-[56px];
+  }
+
+  .h1-bold {
+    @apply font-estedad font-bold text-[44px];
+  }
+
+  .h2-bold {
+    @apply font-estedad font-bold text-[40px];
+  }
+
+  .h3-bold {
+    @apply font-estedad font-bold text-[32px];
+  }
+
+  .h4-bold {
+    @apply font-estedad font-bold text-[24px];
+  }
+
+  .h5-bold {
+    @apply font-estedad font-bold text-[20px];
+  }
+
+  .h6-bold {
+    @apply font-estedad font-bold text-[16px];
+  }
+
+  .h7-semibold {
+    @apply font-estedad font-semibold text-[20px];
+  }
+
+  .body-xl {
+    @apply font-estedad font-normal text-[20px];
+  }
+
+  .body-lg {
+    @apply font-estedad font-normal text-[18px];
+  }
+
+  .body-md {
+    @apply font-estedad font-normal text-[16px];
+  }
+
+  .body-sm {
+    @apply font-estedad font-normal text-[14px];
+  }
+
+  .caption-md {
+    @apply font-estedad font-normal text-[12px];
+  }
+
+  .caption-lg {
+    @apply font-estedad font-normal text-[14px];
+  }
+
+  .caption-sm {
+    @apply font-estedad font-normal text-[10px];
+  }
+
+  .button-lg {
+    @apply font-estedad font-medium text-[16px];
+  }
+
+  .button-sm {
+    @apply font-estedad font-medium text-[14px];
+  }
+
+  .overline-lg {
+    @apply font-estedad font-normal text-[16px];
+  }
+
+  .overline-sm {
+    @apply font-estedad font-bold text-[12px];
+  }
+}
