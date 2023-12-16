@@ -2,6 +2,8 @@ import { estedadFont } from "@/utils/font";
 import "./globals.css";
 import type { Metadata } from "next";
 import React from "react";
+import Header from "@/components/shared/Header";
+import Footer from "@/components/shared/Footer";
 
 export const metadata: Metadata = {
   title: "ترخینه",
@@ -19,7 +21,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fa_IR" dir="rtl">
-      <body className={estedadFont.variable}>{children}</body>
+      <body className={estedadFont.variable}>
+        <Header />
+        <main className="mx-auto max-w-sm p-1 md:max-w-5xl xl:max-w-7xl">
+          {children}
+        </main>
+        <Footer />
+      </body>
     </html>
   );
 }
