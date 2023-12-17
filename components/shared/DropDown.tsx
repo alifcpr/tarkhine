@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import { Heart, Location, LogoutCurve, User, Wallet2 } from "iconsax-react";
 import Link from "next/link";
 import React from "react";
 
@@ -16,8 +16,26 @@ const DropDown = ({
   ulClasses,
   textClasses,
 }: DropDownProps) => {
+  
+  const renderIcon = (type: string) => {
+    switch (type) {
+      case "profile":
+        return <User className="h-5 w-5 text-black" />;
 
-    
+      case "orders":
+        return <Wallet2 className="h-5 w-5 text-black" />;
+
+      case "favorite":
+        return <Heart className="h-5 w-5 text-black" />;
+
+      case "addresses":
+        return <Location className="h-5 w-5 text-black" />;
+
+      case "logout":
+        return <LogoutCurve className="h-5 w-5 text-black" />;
+    }
+  };
+
   const handleClick = (type: string) => {
     if (type === "logout") {
       console.log("logout");
@@ -39,14 +57,7 @@ const DropDown = ({
                   className="flex w-full items-center gap-x-3 text-start"
                   href={item.href}
                 >
-                  {item.icon && (
-                    <Image
-                      src={item.icon}
-                      alt={item.title}
-                      width={20}
-                      height={20}
-                    />
-                  )}
+                  {item.icon && renderIcon(item.value)}
                   {item.title}
                 </Link>
               </>
@@ -56,14 +67,7 @@ const DropDown = ({
                 onClick={() => handleClick(item.type)}
               >
                 {/* item is not link */}
-                {item.icon && (
-                  <Image
-                    src={item.icon}
-                    alt={item.title}
-                    width={20}
-                    height={20}
-                  />
-                )}
+                {item.icon && renderIcon(item.value)}
                 <p>{item.title}</p>
               </span>
             )}
