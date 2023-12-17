@@ -1,8 +1,9 @@
 "use client";
 import { Heart, Location, LogoutCurve, User, Wallet2 } from "iconsax-react";
 import Link from "next/link";
-import React from "react";
+import { useCallback } from "react";
 
+// types
 type DropDownProps = {
   containerClasses?: string;
   ulClasses?: string;
@@ -17,7 +18,8 @@ const DropDown = ({
   textClasses,
 }: DropDownProps) => {
   
-  const renderIcon = (type: string) => {
+  // funcs
+  const renderIcon = useCallback((type: string) => {
     switch (type) {
       case "profile":
         return <User className="h-5 w-5 text-black" />;
@@ -34,8 +36,9 @@ const DropDown = ({
       case "logout":
         return <LogoutCurve className="h-5 w-5 text-black" />;
     }
-  };
+  }, []);
 
+  // handle clickable buttons
   const handleClick = (type: string) => {
     if (type === "logout") {
       console.log("logout");

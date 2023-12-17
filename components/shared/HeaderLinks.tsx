@@ -1,6 +1,6 @@
 "use client";
-import { headerItems } from "@/constants";
-import { HeaderItems } from "@/types/type.d";
+import { headerLinks } from "@/constants";
+import { HeaderLinks as HLType } from "@/types/type.d";
 import { usePathname } from "next/navigation";
 import React from "react";
 import Link from "next/link";
@@ -8,11 +8,12 @@ import { ArrowDown2 } from "iconsax-react";
 import DropDown from "./DropDown";
 
 const HeaderLinks = () => {
+  // hooks
   const pathName = usePathname();
 
   return (
     <>
-      {headerItems.map((item: HeaderItems, index: number) => {
+      {headerLinks.map((item: HLType, index: number) => {
         const isActive = pathName === item.href;
 
         return (

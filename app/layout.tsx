@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fa_IR" dir="rtl">
+    <html lang="fa" dir="rtl">
       <body className={estedadFont.variable}>
         <Header />
         <main className="mx-auto max-w-sm p-1 md:max-w-5xl xl:max-w-7xl">
