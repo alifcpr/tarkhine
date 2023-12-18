@@ -34,3 +34,11 @@ export interface MobileLinks {
     title: string;
   }[];
 }
+
+export interface BannerSliderItems {
+  _id: number;
+  title: string;
+  buttonText: string;
+  href: string;
+  picture: string;
+}

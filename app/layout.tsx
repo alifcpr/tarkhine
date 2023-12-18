@@ -19,13 +19,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // mx-auto max-w-sm p-1 md:max-w-5xl xl:max-w-7xl
+
   return (
     <html lang="fa" dir="rtl">
       <body className={estedadFont.variable}>
         <Header />
-        <main className="mx-auto max-w-sm p-1 md:max-w-5xl xl:max-w-7xl">
-          {children}
-        </main>
+        <main className="">{children}</main>
         <Footer />
       </body>
     </html>

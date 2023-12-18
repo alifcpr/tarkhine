@@ -17,7 +17,6 @@ const DropDown = ({
   ulClasses,
   textClasses,
 }: DropDownProps) => {
-  
   // funcs
   const renderIcon = useCallback((type: string) => {
     switch (type) {
@@ -46,7 +45,7 @@ const DropDown = ({
   };
 
   return (
-    <div className={`absolute ${containerClasses}`}>
+    <div className={`absolute z-50 ${containerClasses}`}>
       <ul className={` rounded-8  shadow-md ${ulClasses}`}>
         {content.map((item: any, index: number) => (
           <li

@@ -1,4 +1,9 @@
-import { HeaderLinks, MobileLinks, ProfileLinks } from "@/types/type.d";
+import {
+  BannerSliderItems,
+  HeaderLinks,
+  MobileLinks,
+  ProfileLinks,
+} from "@/types/type.d";
 
 export const headerLinks: HeaderLinks[] = [
   { _id: 1, type: "link", href: "/", title: "صفحه اصلی" },
@@ -99,7 +104,7 @@ export const mobileLinks: MobileLinks[] = [
     value: "menu",
     icon: true,
     type: "filter",
-    accordianItems: [
+    accordionItems: [
       {
         _id: 1,
         type: "link",
@@ -127,7 +132,7 @@ export const mobileLinks: MobileLinks[] = [
     value: "branch",
     icon: true,
     type: "filter",
-    accordianItems: [
+    accordionItems: [
       { _id: 1, title: "اکباتان", type: "link", href: "/branch/etkbatan" },
       { _id: 2, title: "چالوس", type: "link", href: "/branch/chalos" },
       { _id: 3, title: "اقدسیه", type: "link", href: "/branch/aghdasie" },
@@ -149,5 +154,29 @@ export const mobileLinks: MobileLinks[] = [
     type: "link",
     href: "/contact",
     value: "contact",
+  },
+];
+
+export const bannerSliderItems: BannerSliderItems[] = [
+  {
+    _id: 1,
+    picture: "/assets/images/Slider-image1.jpg",
+    title: "تجربه غذای سالم و گیاهی به سبک ترخینه",
+    buttonText: "سفارش غذا",
+    href: "/foods",
+  },
+  {
+    _id: 2,
+    picture: "/assets/images/Slider-image2.jpg",
+    title: "سرسبزی تریخینه دلیل حس خوب شماست!",
+    buttonText: "سفارش غذا",
+    href: "/foods",
+  },
+  {
+    _id: 3,
+    picture: "/assets/images/Slider-image3.jpg",
+    title: "لذت غذای سالم و گیاهی را با ترخینه تجربه کنید!",
+    buttonText: "سفارش غذا",
+    href: "/foods",
   },
 ];

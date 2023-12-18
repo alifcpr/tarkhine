@@ -70,8 +70,12 @@
     @apply font-estedad font-medium text-[16px];
   }
 
-  .button-sm {
+  .button-md {
     @apply font-estedad font-medium text-[14px];
+  }
+
+  .button-sm {
+    @apply font-estedad font-medium text-[10px];
   }
 
   .overline-lg {

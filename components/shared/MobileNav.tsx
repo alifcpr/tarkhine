@@ -44,56 +44,54 @@ const MobileLinks = ({ closeDrawer }: MobileLinksProps) => {
   };
 
   return (
-    <>
-      <ul>
-        {mobileLinks.map((item: MLType, index: number) => {
-          const isActive = pathName === item.href;
+    <ul className="px-2">
+      {mobileLinks.map((item: MLType, index: number) => {
+        const isActive = pathName === item.href;
 
-          return (
-            <li
-              key={index}
-              className={`caption-lg border-muted-500 py-2 [&:not(first-child)]:border-b ${
-                isActive && "text-primary-800"
-              }`}
-            >
-              {item.type === "link" ? (
-                // item is a link
-                <Link
-                  href={item.href!}
-                  onClick={closeDrawer}
-                  className="flex w-full items-center gap-x-2"
-                >
-                  {item.icon && renderIcon(item.value)}
-                  <p>{item.title}</p>
-                </Link>
-              ) : (
-                // item is a accordion
-                <Accordian
-                  icon={renderIcon(item.value)}
-                  title={item.title}
-                  contentClasses="flex flex-col pe-5"
-                  titleContainer="gap-2"
-                >
-                  {item.accordionItems?.map(
-                    (accordionContent: any, index: number) => (
-                      <Link
-                        onClick={closeDrawer}
-                        href={accordionContent.href}
-                        key={index}
-                      >
-                        <div className="caption-md mt-2 rounded-8 bg-primary-100 p-2 hover:bg-primary-100">
-                          {accordionContent.title}
-                        </div>
-                      </Link>
-                    )
-                  )}
-                </Accordian>
-              )}
-            </li>
-          );
-        })}
-      </ul>
-    </>
+        return (
+          <li
+            key={index}
+            className={`caption-lg border-muted-500 py-2 [&:not(first-child)]:border-b ${
+              isActive && "text-primary-800"
+            }`}
+          >
+            {item.type === "link" ? (
+              // item is a link
+              <Link
+                href={item.href!}
+                onClick={closeDrawer}
+                className="flex w-full items-center gap-x-2"
+              >
+                {item.icon && renderIcon(item.value)}
+                <p>{item.title}</p>
+              </Link>
+            ) : (
+              // item is a accordion
+              <Accordian
+                icon={renderIcon(item.value)}
+                title={item.title}
+                contentClasses="flex flex-col pe-5"
+                titleContainer="gap-2"
+              >
+                {item.accordionItems?.map(
+                  (accordionContent: any, index: number) => (
+                    <Link
+                      onClick={closeDrawer}
+                      href={accordionContent.href}
+                      key={index}
+                    >
+                      <div className="caption-md mt-2 rounded-8 bg-primary-100 p-2 hover:bg-primary-100">
+                        {accordionContent.title}
+                      </div>
+                    </Link>
+                  )
+                )}
+              </Accordian>
+            )}
+          </li>
+        );
+      })}
+    </ul>
   );
 };
 
