@@ -1,4 +1,5 @@
 "use client";
+import useClickOutside from "@/hooks/useClickoutSide";
 import { Add } from "iconsax-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -44,6 +45,9 @@ const Drawer = ({ children, open, onClose }: DrawerProps) => {
   // state
   const [isClient, setIsClient] = useState(false);
 
+  // To close the drawer when it is clicked outside the drawer
+  const ref = useClickOutside(onClose);
+
   // hooks
   useEffect(() => {
     setIsClient(true);
@@ -51,26 +55,25 @@ const Drawer = ({ children, open, onClose }: DrawerProps) => {
 
   if (typeof window === "object" && isClient) {
     return createPortal(
-      <aside
+      <div
         className={`smooth-transition fixed inset-0 z-50 backdrop-blur-sm lg:hidden ${
           open
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
         }`}
       >
-        <div
+        <aside
+          ref={ref}
           className={`smooth-transition absolute top-0 h-full w-2/3 bg-muted-100 shadow-md md:w-1/3  ${
             open ? "right-0" : "-right-full"
           }`}
         >
           <DrawerTopFrame onClose={onClose} />
           <div>{children}</div>
-        </div>
-      </aside>,
+        </aside>
+      </div>,
       document.body
     );
-  } else {
-    return null;
   }
 };
 
