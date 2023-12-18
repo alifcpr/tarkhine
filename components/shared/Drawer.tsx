@@ -1,7 +1,7 @@
 "use client";
-import useClickOutside from "@/hooks/useClickoutSide";
 import { Add } from "iconsax-react";
 import Image from "next/image";
+import useClickOutside from "../../hooks/useClickOutside";
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 

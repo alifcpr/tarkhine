@@ -13,12 +13,15 @@ import { SwiperSlide, Swiper } from "swiper/react";
 const BannerSlider = () => {
   return (
     <>
-      <div className="relative">
+      <section className="relative">
         <div className="banner-slider relative h-[200px] lg:h-[250px] xl:h-[336px]">
           <Swiper
             slidesPerView={1}
-            spaceBetween={30}
             loop={true}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: true,
+            }}
             modules={[Pagination, Navigation]}
             navigation
             pagination={{
@@ -97,7 +100,7 @@ const BannerSlider = () => {
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 };

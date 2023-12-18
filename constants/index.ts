@@ -1,5 +1,6 @@
 import {
   BannerSliderItems,
+  CategoryItems,
   HeaderLinks,
   MobileLinks,
   ProfileLinks,
@@ -178,5 +179,32 @@ export const bannerSliderItems: BannerSliderItems[] = [
     title: "لذت غذای سالم و گیاهی را با ترخینه تجربه کنید!",
     buttonText: "سفارش غذا",
     href: "/foods",
+  },
+];
+
+export const categoryItems: CategoryItems[] = [
+  {
+    _id: 1,
+    pitcture: "/assets/images/ct-1.png",
+    href: "/food?category=nooshidani",
+    title: "نوشیدنی",
+  },
+  {
+    _id: 2,
+    pitcture: "/assets/images/ct-2.png",
+    href: "/food?category=deser",
+    title: "دسر",
+  },
+  {
+    _id: 3,
+    pitcture: "/assets/images/ct-3.png",
+    href: "/food?category=pishghaza",
+    title: "پیش غذا",
+  },
+  {
+    _id: 4,
+    pitcture: "/assets/images/ct-4.png",
+    href: "/food?category=mainfood",
+    title: "غذای اصلی",
   },
 ];

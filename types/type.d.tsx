@@ -42,3 +42,10 @@ export interface BannerSliderItems {
   href: string;
   picture: string;
 }
+
+export interface CategoryItems {
+  _id: number;
+  title: string;
+  pitcture: string;
+  href: string;
+}
