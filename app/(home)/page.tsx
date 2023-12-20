@@ -1,7 +1,8 @@
+import BranchCard from "@/components/cards/BranchCard";
 import CategoryCard from "@/components/cards/CategoryCard";
 import BannerSlider from "@/components/shared/BannerSlider";
-import { categoryItems } from "@/constants";
-import { CategoryItems } from "@/types/type.d";
+import { branchList, categoryItems } from "@/constants";
+import { BranchList, CategoryItems } from "@/types/type.d";
 import { Diagram, HomeWifi, MenuBoard, User } from "iconsax-react";
 import React from "react";
 
@@ -17,9 +18,10 @@ const Home = () => {
           ))}
         </div>
       </section>
+
       <section className="relative mt-10 flex flex-col gap-y-9 bg-black/60 bg-[url(/assets/images/restaurant-environment.jpg)] bg-cover bg-center px-5 py-10 bg-blend-darken  md:mt-16 md:flex-row xl:px-28">
         <div className="w-full ">
-          <h1 className="overline-lg xl:h4-bold text-start text-muted-100 md:text-start">
+          <h1 className="overline-lg xl:h4-bold mb-2 text-start text-muted-100 md:text-start">
             رستوران‌های زنجیره‌ای ترخینه
           </h1>
           <div className="flex w-full flex-col items-end  md:w-5/6 md:items-center md:justify-center md:text-justify lg:w-2/3 lg:items-end">
@@ -30,7 +32,7 @@ const Home = () => {
               پایه معماری و طراحی مدرن در کنار طبیعتی دلنواز، غذایی سالم و درخور
               شان شما عزیزان ارائه دهیم.
             </p>
-            <button className="caption-md xl:button-lg smooth-transition rounded-4 border-2  border-muted-100 px-8 py-2 text-muted-100 hover:bg-muted-100 hover:text-black">
+            <button className="caption-md xl:button-lg smooth-transition mt-2 rounded-4 border-2  border-muted-100 px-8 py-2 text-muted-100 hover:bg-muted-100 hover:text-black">
               اطلاعات بیشتر
             </button>
           </div>
@@ -64,6 +66,318 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <section>
+        <h1 className="h5-bold lg:h4-bold mb-7 mt-12 text-center">
+          ترخینه گردی
+        </h1>
+
+        <div className="mx-4 grid grid-cols-12 gap-3 max-xl:h-max md:gap-6 xl:mx-28 xl:h-[350px] xl:gap-10">
+          {branchList.map((branch: BranchList, index: number) => (
+            <BranchCard key={index} {...branch} />
+          ))}
+        </div>
+      </section>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 };

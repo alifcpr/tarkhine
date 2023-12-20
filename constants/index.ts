@@ -1,5 +1,6 @@
 import {
   BannerSliderItems,
+  BranchList,
   CategoryItems,
   HeaderLinks,
   MobileLinks,
@@ -206,5 +207,61 @@ export const categoryItems: CategoryItems[] = [
     pitcture: "/assets/images/ct-4.png",
     href: "/food?category=mainfood",
     title: "غذای اصلی",
+  },
+];
+
+export const branchList: BranchList[] = [
+  {
+    _id: 1,
+    title: "شعبه اکباتان",
+    address: "شهرک اکباتان، فاز ۳، مجتمع تجاری کوروش، طبقه سوم",
+    thumbnail: "/assets/images/branch-1.png",
+    href: "/branch/ekbatan",
+    slideImages: [
+      { _id: 1, picture: "/assets/images/res-slide-1.jpg" },
+      { _id: 2, picture: "/assets/images/res-slide-2.jpg" },
+      { _id: 2, picture: "/assets/images/res-slide-3.jpg" },
+      { _id: 3, picture: "/assets/images/res-slide-4.jpg" },
+    ],
+  },
+  {
+    _id: 2,
+    title: "شعبه چالوس",
+    address:
+      "چالوس، خیابان ۱۷ شهریور، بعد کوچه کوروش، جنب داروخانه دکتر میلانی",
+    thumbnail: "/assets/images/branch-2.png",
+    href: "/branch/chalos",
+    slideImages: [
+      { _id: 1, picture: "/assets/images/res-slide-1.jpg" },
+      { _id: 2, picture: "/assets/images/res-slide-2.jpg" },
+      { _id: 2, picture: "/assets/images/res-slide-3.jpg" },
+      { _id: 3, picture: "/assets/images/res-slide-4.jpg" },
+    ],
+  },
+  {
+    _id: 3,
+    title: "شعبه اقدسیه",
+    address: "خیابان اقدسیه ، نرسیده به میدان خیام، پلاک ۸",
+    thumbnail: "/assets/images/branch-3.png",
+    href: "/branch/ahdasie",
+    slideImages: [
+      { _id: 1, picture: "/assets/images/res-slide-1.jpg" },
+      { _id: 2, picture: "/assets/images/res-slide-2.jpg" },
+      { _id: 2, picture: "/assets/images/res-slide-3.jpg" },
+      { _id: 3, picture: "/assets/images/res-slide-4.jpg" },
+    ],
+  },
+  {
+    _id: 4,
+    title: "شعبه ونک",
+    address: "میدان ونک، خیابان فردوسی، نبش کوچه نیلوفر، پلاک ۲۶",
+    thumbnail: "/assets/images/branch-4.png",
+    href: "/branch/vanak",
+    slideImages: [
+      { _id: 1, picture: "/assets/images/res-slide-1.jpg" },
+      { _id: 2, picture: "/assets/images/res-slide-2.jpg" },
+      { _id: 2, picture: "/assets/images/res-slide-3.jpg" },
+      { _id: 3, picture: "/assets/images/res-slide-4.jpg" },
+    ],
   },
 ];

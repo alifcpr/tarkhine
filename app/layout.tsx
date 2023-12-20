@@ -24,9 +24,11 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <body className={estedadFont.variable}>
-        <Header />
-        <main className="">{children}</main>
-        <Footer />
+        <div className="">
+          <Header />
+          <main className="mx-auto max-w-7xl">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

@@ -4,11 +4,10 @@ import { BannerSliderItems } from "@/types/type.d";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import { SwiperSlide, Swiper } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
 
 const BannerSlider = () => {
   return (
@@ -18,6 +17,7 @@ const BannerSlider = () => {
           <Swiper
             slidesPerView={1}
             loop={true}
+            grabCursor={true}
             autoplay={{
               delay: 3000,
               disableOnInteraction: true,

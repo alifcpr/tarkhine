@@ -49,3 +49,12 @@ export interface CategoryItems {
   pitcture: string;
   href: string;
 }
+
+export interface BranchList {
+  _id: number;
+  title: string;
+  thumbnail: string;
+  href: string;
+  address: string;
+  slideImages: { _id: number; picture: string }[];
+}

@@ -53,6 +53,12 @@ const Drawer = ({ children, open, onClose }: DrawerProps) => {
     setIsClient(true);
   }, []);
 
+  // deactive scroll when modal is open
+  useEffect(() => {
+    if (open) document.documentElement.style.overflow = "hidden";
+    else document.documentElement.style.overflow = "visible";
+  }, [open]);
+
   if (typeof window === "object" && isClient) {
     return createPortal(
       <div

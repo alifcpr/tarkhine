@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 
 const useClickOutside = (closeFunc: () => void) => {
   // hooks
-  const ref = useRef<null | HTMLElement>(null);
+  const ref = useRef<null | HTMLDivElement>(null);
 
   useEffect(() => {
     const handleOutSideClick = (e: MouseEvent) => {
