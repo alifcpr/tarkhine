@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import React from "react";
 import Header from "@/components/shared/Header";
 import Footer from "@/components/shared/Footer";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "ترخینه",
@@ -27,6 +28,7 @@ export default function RootLayout({
         <div className="">
           <Header />
           <main className="mx-auto max-w-7xl">{children}</main>
+          <Toaster containerClassName="font-estedad" />
           <Footer />
         </div>
       </body>

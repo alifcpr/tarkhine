@@ -97,6 +97,16 @@
   }
 }
 
+@layer components {
+  .input-white-outline {
+    @apply body-md w-[320px] rounded-4 border border-muted-600 bg-transparent px-4 py-2 placeholder:text-muted-300 smooth-transition focus:outline-none ring-muted-600 focus:ring-2 disabled:opacity-70 disabled:cursor-not-allowed;
+  }
+
+  .button-white-outline {
+    @apply button-lg smooth-transition rounded-4 border hover:bg-white hover:text-primary-1400 disabled:bg-muted-200 cursor-pointer disabled:cursor-not-allowed disabled:py-2 disabled:px-8;
+  }
+}
+
 /* slider css */
 
 .banner-slider .swiper-button-prev,

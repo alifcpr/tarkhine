@@ -17,7 +17,6 @@ const DropDown = ({
   ulClasses,
   textClasses,
 }: DropDownProps) => {
-  
   // funcs
   const renderIcon = useCallback((type: string) => {
     switch (type) {

@@ -58,3 +58,10 @@ export interface BranchList {
   address: string;
   slideImages: { _id: number; picture: string }[];
 }
+
+export interface MessageBoxInputs {
+  name: string;
+  phoneNumber: string;
+  email?: string;
+  text: string;
+}
