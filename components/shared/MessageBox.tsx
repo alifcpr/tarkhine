@@ -56,7 +56,7 @@ const MessageBox = () => {
             <div>
               <input
                 type="text"
-                className="input-white-outline lg:caption-md xl:caption-lg lg:max-w-[220px] xl:max-w-[350px] xl:py-3"
+                className="input-white-outline lg:caption-md xl:caption-lg lg:min-w-[220px] xl:min-w-[350px] xl:px-2 xl:py-3"
                 placeholder="نام نام خانوادگی"
                 {...register("name")}
                 disabled={isLoading}
@@ -68,7 +68,7 @@ const MessageBox = () => {
             <div>
               <input
                 type="text"
-                className="input-white-outline lg:caption-md xl:caption-lg lg:max-w-[220px] xl:max-w-[350px] xl:py-3"
+                className="input-white-outline lg:caption-md xl:caption-lg lg:min-w-[220px] xl:min-w-[350px] xl:px-2 xl:py-3"
                 placeholder="شماره تماس"
                 {...register("phoneNumber")}
                 disabled={isLoading}
@@ -80,7 +80,7 @@ const MessageBox = () => {
             <div>
               <input
                 type="text"
-                className="input-white-outline lg:caption-md xl:caption-lg lg:max-w-[220px] xl:max-w-[350px] xl:py-3"
+                className="input-white-outline lg:caption-md xl:caption-lg lg:min-w-[220px] xl:min-w-[350px] xl:px-2 xl:py-3"
                 placeholder="آدرس ایمیل (اختیاری)"
                 {...register("email")}
                 disabled={isLoading}
@@ -92,7 +92,7 @@ const MessageBox = () => {
           </div>
           <div className="relative self-stretch">
             <textarea
-              className="input-white-outline lg:caption-md xl:caption-lg h-full lg:max-w-[220px] xl:max-w-[350px] xl:py-3"
+              className="input-white-outline lg:caption-md xl:caption-lg h-full lg:min-w-[220px] xl:min-w-[350px] xl:px-2 xl:py-3"
               placeholder="پیام شما"
               {...register("text")}
               disabled={isLoading}

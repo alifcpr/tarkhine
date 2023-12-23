@@ -65,3 +65,14 @@ export interface MessageBoxInputs {
   email?: string;
   text: string;
 }
+
+export interface UrlQueryParams {
+  params: string;
+  value: string;
+  key: string;
+}
+
+export interface RemoveUrlQueryParams {
+  key: string;
+  params: string;
+}

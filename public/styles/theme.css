@@ -95,11 +95,19 @@
   .image-wrapper {
     @apply bg-gradient-to-tl from-primary-950/80 to-black/80;
   }
+
+  .div-gray-outline {
+    @apply border-2 rounded-8 border-muted-500 overflow-hidden px-4 py-3 focus-within:border-primary-900;
+  }
+
+  .div-gray-outline input {
+    @apply placeholder:text-muted-800 text-muted-900;
+  }
 }
 
 @layer components {
   .input-white-outline {
-    @apply body-md w-[320px] rounded-4 border border-muted-600 bg-transparent px-4 py-2 placeholder:text-muted-300 smooth-transition focus:outline-none ring-muted-600 focus:ring-2 disabled:opacity-70 disabled:cursor-not-allowed;
+    @apply rounded-4 border border-muted-600 bg-transparent placeholder:text-muted-300 smooth-transition focus:outline-none ring-muted-600 focus:ring-2 disabled:opacity-70 disabled:cursor-not-allowed;
   }
 
   .button-white-outline {

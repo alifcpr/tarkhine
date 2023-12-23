@@ -34,6 +34,7 @@ const ModalHeader = ({
     <div
       className={`flex w-full items-center justify-between bg-white  ${containerClass}`}
     >
+      <div></div>
       {children && <h1 className={titleClass}>{children}</h1>}
       <button onClick={onClose}>
         <Add className={`h-8 w-8 rotate-45 cursor-pointer ${IconClass}`} />
@@ -67,14 +68,14 @@ const Modal = ({ children, open, onClose }: ModalProps) => {
   if (typeof window === "object" && isClient) {
     return createPortal(
       <div
-        className={`smooth-transition fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm  ${
+        className={`smooth-transition fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm  ${
           open
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
         }`}
       >
         {open && (
-          <div ref={ref} className="relative">
+          <div ref={ref} className="relative overflow-hidden rounded-8">
             {children}
           </div>
         )}

@@ -3,9 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import DropDown from "./DropDown";
-import { ArrowDown2, SearchNormal1, ShoppingCart, User } from "iconsax-react";
+import { ArrowDown2, ShoppingCart, User } from "iconsax-react";
 import HeaderLinks from "./HeaderLinks";
 import MobileNav from "./MobileNav";
+import SearchBox from "./filters/SearchBox";
 
 const isLogin = true;
 
@@ -29,9 +30,7 @@ const Header = () => {
         </div>
 
         <div className="flex items-center gap-x-2">
-          <button className="hidden rounded-4 bg-primary-100 p-1 md:block md:p-2">
-            <SearchNormal1 className="h-5 w-5 text-primary-800 md:h-6 md:w-6" />
-          </button>
+          <SearchBox />
           <button className="rounded-4 bg-primary-100 p-1 md:p-2">
             <ShoppingCart className="h-5 w-5 text-primary-800 md:h-6 md:w-6" />
           </button>
