@@ -1,19 +1,30 @@
 "use client";
 
 import LoginForm from "@/components/forms/LoginForm";
+import RegisterCodeForm from "@/components/forms/RegiserCodeForm";
 import { useState } from "react";
 
 const LoginPage = () => {
-  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  // phone number value
+  const [phoneNumber, setPhoneNumber] = useState<string>("0933800855");
+  // stepTwo === true (show RegisterCodeForm) stepTwo === false (show LoginForm)
   const [stepTwo, setStepTwo] = useState<boolean>(false);
 
   return (
     <div className="flex min-h-screen min-w-full items-center justify-center">
-      <LoginForm
-        phoneState={phoneNumber}
-        setPhoneState={setPhoneNumber}
-        setStepTwo={setStepTwo}
-      />
+      {stepTwo ? (
+        <RegisterCodeForm
+          phoneState={phoneNumber}
+          setPhoneState={setPhoneNumber}
+          setStepTwo={setStepTwo}
+        />
+      ) : (
+        <LoginForm
+          phoneState={phoneNumber}
+          setPhoneState={setPhoneNumber}
+          setStepTwo={setStepTwo}
+        />
+      )}
     </div>
   );
 };
