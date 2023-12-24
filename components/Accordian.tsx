@@ -26,10 +26,10 @@ const Accordian = ({
   // states
   const [open, setOpen] = useState<boolean>(false);
   const [contentSize, setContentSize] = useState<number>(0);
-  // ref
+  // content ref
   const contentRef = useRef<null | HTMLDivElement>(null);
 
-  // hooks
+  // reset contentSize state according to the size of the element
   useEffect(() => {
     if (open) {
       const content: number = Number(contentRef.current?.scrollHeight);

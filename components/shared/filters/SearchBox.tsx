@@ -23,7 +23,8 @@ const SearchBox = () => {
       </button>
       <Modal open={open} onClose={() => setOpen(false)}>
         <Modal.Header
-          containerClass="bg-muted-400 px-8 py-5"
+          onClose={() => setOpen(false)}
+          containerClass="px-8 py-5 !bg-muted-400"
           titleClass="h5-bold text-muted-800"
           iconClass="text-muted-800 w-10 h-10"
         >

@@ -24,7 +24,7 @@ const MobileLinks = ({ closeDrawer }: MobileLinksProps) => {
   // hooks
   const pathName = usePathname();
 
-  // funcs
+  // Icon rendering based on button type
   const renderIcon = (type: string) => {
     switch (type) {
       case "home page":

@@ -8,7 +8,7 @@ import { ArrowDown2 } from "iconsax-react";
 import DropDown from "./DropDown";
 
 const HeaderLinks = () => {
-  // hooks
+  // for get current page path
   const pathName = usePathname();
 
   return (

@@ -1,6 +1,7 @@
 import BranchCard from "@/components/cards/BranchCard";
 import CategoryCard from "@/components/cards/CategoryCard";
 import BannerSlider from "@/components/shared/BannerSlider";
+import Search from "@/components/shared/filters/Search";
 import { branchList, categoryItems } from "@/constants";
 import { BranchList, CategoryItems } from "@/types/type.d";
 import { Diagram, HomeWifi, MenuBoard, User } from "iconsax-react";
@@ -10,9 +11,15 @@ const Home = () => {
   return (
     <div>
       <BannerSlider />
-      <div className="m-4 mx-auto w-1/2">
+      <div className="px-5">
+        <Search
+          containerClasses="mx-auto mt-5 border !py-2 max-md:flex md:hidden"
+          iconClasses="w-6 h-6"
+          mode="Enter"
+        />
       </div>
-      <section className="mt-12 flex flex-col gap-y-14 px-4 md:gap-y-16 lg:gap-y-20 xl:gap-y-28">
+      <div className="m-4 mx-auto w-1/2"></div>
+      <section className="mt-10 flex flex-col gap-y-14 px-4 md:gap-y-16 lg:gap-y-20 xl:gap-y-28">
         <h1 className="h5-bold  lg:h4-bold text-center">منوی رستوران</h1>
         <div className="mx-4 grid grid-cols-12 gap-x-4 gap-y-20 md:gap-x-10 md:gap-y-24  xl:mx-28">
           {categoryItems.map((category: CategoryItems, index: number) => (

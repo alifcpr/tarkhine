@@ -1,3 +1,4 @@
+"use client";
 import { CloseCircle, SearchNormal1 } from "iconsax-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -7,6 +8,7 @@ type SearchProps = {
   icon?: boolean;
   containerClasses?: string;
   inputClasses?: string;
+  iconClasses?: string;
   closeModal?: () => void;
   mode: "Enter" | "Write";
   query?: string;
@@ -16,18 +18,21 @@ const Search = ({
   icon = true,
   containerClasses,
   inputClasses,
+  iconClasses,
   closeModal,
   mode,
   query,
 }: SearchProps) => {
-  // input value
-  const [searchValue, setSearchValue] = useState<string>("");
+  // searchParams
+  const searchParams = useSearchParams();
+
+  // input value , get value from query when (mode === Write)
+  const [searchValue, setSearchValue] = useState<string>(
+    mode === "Write" ? searchParams.get(query!) || "" : ""
+  );
 
   // router
   const router = useRouter();
-
-  // searchParams
-  const searchParams = useSearchParams();
 
   // input change handler
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +49,7 @@ const Search = ({
     }
   };
 
-  // set and remove value to query only work for (mode === Write)
+  // set and remove query to url only work for (mode === Write)
   useEffect(() => {
     if (mode === "Write") {
       const debounceFn = setTimeout(() => {
@@ -94,7 +99,7 @@ const Search = ({
       />
       {icon && (
         <button onClick={handleInputClick} className="mr-2">
-          <SearchNormal1 />
+          <SearchNormal1 className={`${iconClasses}`} />
         </button>
       )}
     </div>

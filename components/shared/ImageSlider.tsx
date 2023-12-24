@@ -15,7 +15,7 @@ const ImageSlider = ({ images }: ImageSliderProps) => {
   // ref
   const swiperRef = useRef<any | null>(null);
 
-  // hooks
+  // change slide when clicked on a image of slide
   useEffect(() => {
     swiperRef.current!.swiper.slideTo(active);
   }, [active, swiperRef]);

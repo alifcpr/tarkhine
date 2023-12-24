@@ -17,7 +17,7 @@ const DropDown = ({
   ulClasses,
   textClasses,
 }: DropDownProps) => {
-  // funcs
+  // Icon rendering based on button type
   const renderIcon = useCallback((type: string) => {
     switch (type) {
       case "profile":
