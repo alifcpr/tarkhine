@@ -8,7 +8,7 @@ import HeaderLinks from "./HeaderLinks";
 import MobileNav from "./MobileNav";
 import SearchBox from "./filters/SearchBox";
 
-const isLogin = true;
+const isLogin = false;
 
 const Header = () => {
   return (
@@ -48,9 +48,12 @@ const Header = () => {
               />
             </button>
           ) : (
-            <button className="rounded-4 bg-primary-100 p-1 md:p-2">
+            <Link
+              href={"/login"}
+              className="rounded-4 bg-primary-100 p-1 md:p-2"
+            >
               <User className="h-5 w-5 text-primary-800 md:h-6 md:w-6" />
-            </button>
+            </Link>
           )}
         </div>
       </div>
