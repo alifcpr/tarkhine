@@ -103,6 +103,13 @@
   .div-gray-outline input {
     @apply placeholder:text-muted-800 text-muted-900;
   }
+
+  .active-link {
+    @apply text-primary-800;
+  }
+  .active-link svg {
+    @apply text-primary-800;
+  }
 }
 
 @layer components {

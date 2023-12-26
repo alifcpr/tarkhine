@@ -1,3 +1,4 @@
+"use client";
 import { profileLinks } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,7 +9,7 @@ import HeaderLinks from "./HeaderLinks";
 import MobileNav from "./MobileNav";
 import SearchBox from "./filters/SearchBox";
 
-const isLogin = false;
+const isLogin = true;
 
 const Header = () => {
   return (

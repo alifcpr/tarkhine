@@ -1,8 +1,23 @@
+"use client";
 import { Instagram } from "iconsax-react";
 import React from "react";
 import MessageBox from "./MessageBox";
+import { usePathname } from "next/navigation";
 
 const Footer = () => {
+  const pathName = usePathname();
+
+  const routeLists = [
+    "/profile",
+    "/profile/addresses",
+    "/profile/orders",
+    "/profile/favorite",
+  ];
+
+  if (routeLists.includes(pathName)) {
+    return null;
+  }
+
   return (
     <>
       <div className=" mt-12 flex items-start justify-evenly bg-black/80 bg-[url(/assets/images/footer-image.jpg)] bg-cover bg-center p-5 text-muted-100 bg-blend-darken xl:justify-between xl:px-28 xl:py-8">

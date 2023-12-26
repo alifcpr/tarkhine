@@ -26,10 +26,10 @@ export default function RootLayout({
     <html lang="fa" dir="rtl">
       <body className={estedadFont.variable}>
         <div className="">
-          {/* <Header /> */}
+          <Header />
           <main className="mx-auto max-w-7xl">{children}</main>
           <Toaster containerClassName="font-estedad" />
-          {/* <Footer /> */}
+          <Footer />
         </div>
       </body>
     </html>

@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { Oval } from "react-loader-spinner";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 type LoginFormProps = {
   phoneState: string;
@@ -35,10 +36,15 @@ const LoginForm = ({
   });
 
   // send code when input value is correct
-  const sendCode = (data: { phoneNumber: string }) => {
+  const sendCode = async (data: { phoneNumber: string }) => {
+    console.log("data : ", data);
     setIsLoading(true);
     try {
-      // call api
+      const dataRes = await axios.post(
+        "https://tarkhineh.onrender.com/v1/auth/login",
+        { phone: data.phoneNumber }
+      );
+      console.log(dataRes);
       toast.success("کد با موفقیت به شماره موبایل شما ارسال شد");
       setStepTwo(true);
     } catch (error) {
@@ -85,6 +91,7 @@ const LoginForm = ({
             className="input-gray-outline body-md  w-full px-4 py-3"
             placeholder="شماره همراه"
             inputMode="numeric"
+            disabled={isLoading}
           />
           {errors.phoneNumber && (
             <p className="caption-md mt-2 text-error-200">

@@ -61,7 +61,7 @@ export const profileLinks: ProfileLinks[] = [
   {
     _id: 2,
     title: "پیگیری سفارش",
-    href: "/orders",
+    href: "/profile/orders",
     type: "link",
     value: "orders",
     icon: true,
@@ -69,7 +69,7 @@ export const profileLinks: ProfileLinks[] = [
   {
     _id: 3,
     title: "علاقه مندی ها",
-    href: "/favorite",
+    href: "/profile/favorite",
     type: "link",
     value: "favorite",
     icon: true,
@@ -77,7 +77,7 @@ export const profileLinks: ProfileLinks[] = [
   {
     _id: 4,
     title: "آدرس های من",
-    href: "/my-locations",
+    href: "/profile/addresses",
     type: "link",
     value: "addresses",
     icon: true,

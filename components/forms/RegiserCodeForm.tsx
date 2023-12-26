@@ -26,7 +26,6 @@ const RegisterCodeForm = ({
   setStepTwo,
   setPhoneState,
 }: RegisterCodeFromProps) => {
-
   // isLoading for disable input and buttons
   const [isLoading, setIsLoading] = useState<boolean>(false);
   // otp input value
@@ -64,7 +63,7 @@ const RegisterCodeForm = ({
 
   // reset Date.now() (when resetTimer change it's reset)
   const countDownTimer = useMemo(() => {
-    return Date.now() + 1000 * 60;
+    return Date.now() + 1000 * 20;
   }, [reset]);
 
   // for change mobile phone
@@ -110,9 +109,15 @@ const RegisterCodeForm = ({
   }, [reset]);
 
   // resend another code for phoneNumber
-  const resendCode = () => {
+  const resendCode = async () => {
     setRest((prev) => !prev);
     setIsLoading(true);
+
+    // const dataApi = await axios.post(
+    //   "https://tarkhineh.onrender.com/v1/auth/resend-code",
+    //   { phone: phoneState }
+    // );
+
     try {
       // call api
       toast.success("کد تایید مجددا ارسال شد");
