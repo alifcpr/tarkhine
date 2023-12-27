@@ -41,7 +41,7 @@ const LoginForm = ({
     setIsLoading(true);
     try {
       const dataRes = await axios.post(
-        "https://tarkhineh.onrender.com/v1/auth/login",
+        "https://tarkhineh.liara.run/v1/auth/login",
         { phone: data.phoneNumber }
       );
       console.log(dataRes);

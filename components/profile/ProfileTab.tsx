@@ -57,7 +57,7 @@ const ProfileTab = ({ isMenuOpen, setIsMenuOpen }: ProfileTabProps) => {
     <div
       className={`absolute inset-0 z-50 col-span-12 bg-muted-100 p-2 ${
         isMenuOpen && "hidden"
-      }   rounded-8 border md:static md:col-span-2 md:block md:h-max`}
+      }   rounded-8 md:static md:col-span-2 md:block md:h-max md:border`}
     >
       <ProfileHeader />
       <div className="flex flex-col gap-y-2">

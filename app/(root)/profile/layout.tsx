@@ -22,7 +22,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="relative mx-4 grid grid-cols-12 gap-x-4 xl:mx-28">
       <ProfileTab isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-      <div className="col-span-12 h-[373px] rounded-8 border md:col-span-10">
+      <div className="col-span-12 min-h-[373px] rounded-8 px-3 md:col-span-10 md:border">
         <MenuState.Provider value={{ isMenuOpen, setIsMenuOpen }}>
           {children}
         </MenuState.Provider>

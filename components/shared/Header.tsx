@@ -8,10 +8,19 @@ import { ArrowDown2, ShoppingCart, User } from "iconsax-react";
 import HeaderLinks from "./HeaderLinks";
 import MobileNav from "./MobileNav";
 import SearchBox from "./filters/SearchBox";
+import { usePathname } from "next/navigation";
 
 const isLogin = true;
 
 const Header = () => {
+  const pathName = usePathname();
+
+  const doNotshowRouteLists = ["/login"];
+
+  if (doNotshowRouteLists.includes(pathName)) {
+    return null;
+  }
+
   return (
     <>
       <div className="flex items-center justify-between bg-muted-100 p-5 lg:px-4 lg:py-8 xl:px-28 xl:py-9">

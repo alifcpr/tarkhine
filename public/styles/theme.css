@@ -121,12 +121,20 @@
     @apply rounded-4 border border-muted-500 bg-transparent placeholder:text-muted-800 smooth-transition focus:outline-none ring-muted-300 focus:ring-2 disabled:opacity-70 disabled:cursor-not-allowed;
   }
 
+  .input-gray-outline {
+    @apply rounded-4 border border-primary-800 bg-transparent placeholder:text-muted-800 smooth-transition focus:outline-none ring-primary-400 focus:ring-2 disabled:opacity-70 disabled:cursor-not-allowed;
+  }
+
   .button-white-outline {
     @apply button-lg smooth-transition rounded-4 border hover:bg-white hover:text-primary-1400 disabled:bg-muted-200 cursor-pointer disabled:cursor-not-allowed disabled:py-2 disabled:px-8;
   }
 
   .button-primary {
     @apply bg-primary-700 text-muted-100 smooth-transition cursor-pointer hover:bg-primary-800 active:bg-primary-1000 disabled:opacity-70  disabled:pointer-events-none;
+  }
+
+  .button-outline-primary {
+    @apply button-lg  smooth-transition rounded-4 border hover:bg-primary-800 border-primary-800 hover:text-muted-100 disabled:bg-muted-200 cursor-pointer disabled:cursor-not-allowed disabled:py-2 disabled:px-8;
   }
 
   .otp-form input {

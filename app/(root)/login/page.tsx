@@ -11,7 +11,7 @@ const LoginPage = () => {
   const [stepTwo, setStepTwo] = useState<boolean>(false);
 
   return (
-    <div className="my-12 flex min-h-screen min-w-full items-center justify-center">
+    <div className="flex min-h-screen min-w-full items-center justify-center">
       {stepTwo ? (
         <RegisterCodeForm
           phoneState={phoneNumber}

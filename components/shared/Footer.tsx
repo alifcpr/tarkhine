@@ -7,14 +7,15 @@ import { usePathname } from "next/navigation";
 const Footer = () => {
   const pathName = usePathname();
 
-  const routeLists = [
+  const doNotshowRouteLists = [
     "/profile",
     "/profile/addresses",
     "/profile/orders",
     "/profile/favorite",
+    "/login",
   ];
 
-  if (routeLists.includes(pathName)) {
+  if (doNotshowRouteLists.includes(pathName)) {
     return null;
   }
 
