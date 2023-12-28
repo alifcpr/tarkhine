@@ -12,6 +12,7 @@ const Footer = () => {
     "/profile/addresses",
     "/profile/orders",
     "/profile/favorite",
+    "/profile/edit",
     "/login",
   ];
 

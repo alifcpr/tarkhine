@@ -6,7 +6,7 @@ import { useState } from "react";
 
 const LoginPage = () => {
   // phone number value
-  const [phoneNumber, setPhoneNumber] = useState<string>("0933800855");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
   // stepTwo === true (show RegisterCodeForm) stepTwo === false (show LoginForm)
   const [stepTwo, setStepTwo] = useState<boolean>(false);
 

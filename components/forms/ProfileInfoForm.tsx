@@ -3,7 +3,7 @@
 "use client";
 import { profileInfoValidation } from "@/validations";
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
@@ -24,7 +24,6 @@ const ProfileInfoForm = ({ type }: ProfileInfoFormProps) => {
     register,
     formState: { errors, isDirty },
     handleSubmit,
-    watch,
     setValue,
   } = useForm({
     resolver: yupResolver(profileInfoValidation),
@@ -38,11 +37,7 @@ const ProfileInfoForm = ({ type }: ProfileInfoFormProps) => {
     },
   });
 
-  useEffect(() => {
-    console.log(errors);
-  }, [errors, watch]);
-
-  const Okkk = (data: any) => {
+  const changeData = (data: any) => {
     console.log(data);
     setIsLoading(true);
 
@@ -61,15 +56,18 @@ const ProfileInfoForm = ({ type }: ProfileInfoFormProps) => {
   return (
     <>
       <form
-        onSubmit={handleSubmit((data) => Okkk(data))}
+        onSubmit={handleSubmit((data) => changeData(data))}
         className="flex flex-col gap-y-3 md:mt-5 md:flex-row md:flex-wrap md:justify-center md:gap-x-3"
         autoComplete="off"
       >
         <div className="flex flex-col gap-y-2 md:w-1/3">
-          <label className="caption-lg">نام</label>
+          <label htmlFor="name" className="caption-lg">
+            نام
+          </label>
           <input
             className="input-gray-outline caption-lg w-full p-2"
             type="text"
+            id="name"
             placeholder="نام"
             disabled={type === "See" || isLoading}
             {...register("name")}
@@ -79,10 +77,13 @@ const ProfileInfoForm = ({ type }: ProfileInfoFormProps) => {
           )}
         </div>
         <div className="flex flex-col gap-y-2 md:w-1/3">
-          <label className="caption-lg">نام خانوادگی</label>
+          <label htmlFor="family" className="caption-lg">
+            نام خانوادگی
+          </label>
           <input
             className="input-gray-outline caption-lg w-full p-2"
             type="text"
+            id="family"
             placeholder="نام خانوادگی"
             disabled={type === "See" || isLoading}
             {...register("family")}
@@ -92,10 +93,13 @@ const ProfileInfoForm = ({ type }: ProfileInfoFormProps) => {
           )}
         </div>
         <div className="flex flex-col gap-y-2 md:w-1/3">
-          <label className="caption-lg">آدرس ایمیل</label>
+          <label htmlFor="email" className="caption-lg">
+            آدرس ایمیل
+          </label>
           <input
             className="input-gray-outline caption-lg w-full p-2"
             type="text"
+            id="email"
             placeholder="آدرس ایمیل"
             disabled={type === "See" || isLoading}
             {...register("email")}
@@ -105,21 +109,27 @@ const ProfileInfoForm = ({ type }: ProfileInfoFormProps) => {
           )}
         </div>
         <div className="flex flex-col gap-y-2 md:w-1/3">
-          <label className="caption-lg">شماره موبایل</label>
+          <label htmlFor="phoneNumber" className="caption-lg">
+            شماره موبایل
+          </label>
           <input
             className="input-gray-outline caption-lg w-full p-2"
             type="text"
+            id="phoneNumber"
             placeholder="شماره موبایل"
             disabled
             {...register("phone")}
           />
         </div>
         <div className="flex flex-col gap-y-2 md:w-1/3">
-          <label className="caption-lg">تاریخ تولد</label>
+          <label htmlFor="brithday" className="caption-lg">
+            تاریخ تولد
+          </label>
           <DatePicker
             inputClass="input-gray-outline caption-lg w-full p-2"
             placeholder="تاریخ تولد (اختیاری)"
             calendar={persian}
+            id="brithday"
             locale={persian_fa}
             className="green font-estedad"
             disabled={type === "See" || isLoading}
@@ -128,10 +138,13 @@ const ProfileInfoForm = ({ type }: ProfileInfoFormProps) => {
           />
         </div>
         <div className="flex flex-col gap-y-2 md:w-1/3">
-          <label className="caption-lg">نام نمایشی</label>
+          <label htmlFor="userName" className="caption-lg">
+            نام نمایشی
+          </label>
           <input
             className="input-gray-outline caption-lg w-full p-2"
             type="text"
+            id="userName"
             placeholder="نام نمایشی"
             disabled={type === "See" || isLoading}
             {...register("userName")}
