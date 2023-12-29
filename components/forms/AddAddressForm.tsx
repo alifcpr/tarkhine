@@ -23,7 +23,7 @@ const AddAddressForm = () => {
     resolver: yupResolver(addressFormValidation),
   });
 
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleAddressSubmit = (data: any) => {
     setIsLoading(true);
@@ -41,7 +41,7 @@ const AddAddressForm = () => {
   return (
     <form
       onSubmit={handleSubmit((data) => handleAddressSubmit(data))}
-      className="flex flex-col gap-y-4"
+      className="flex h-[calc(100vh-10vh)] flex-col  justify-center gap-y-4 md:h-max"
       autoComplete="off"
     >
       <div className="flex flex-col gap-y-2">

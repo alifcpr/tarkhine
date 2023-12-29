@@ -20,7 +20,11 @@ const Page = () => {
 
   return (
     <>
-      <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
+      <Modal
+        containerClasses="!block md:!flex"
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      >
         <Modal.Header
           titleClass="h7-semibold"
           containerClass="!bg-muted-400 px-5 py-4"

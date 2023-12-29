@@ -20,6 +20,7 @@ type ModalBodyProps = {
 type ModalProps = {
   children?: React.ReactNode;
   open: boolean;
+  containerClasses?: string;
   onClose: () => void;
 };
 
@@ -47,7 +48,7 @@ const ModalBody = ({ children, containerClass }: ModalBodyProps) => {
   return <div className={`${containerClass}`}>{children}</div>;
 };
 
-const Modal = ({ children, open, onClose }: ModalProps) => {
+const Modal = ({ children, containerClasses, open, onClose }: ModalProps) => {
   // state
   const [isClient, setIsClient] = useState(false);
 
@@ -68,7 +69,7 @@ const Modal = ({ children, open, onClose }: ModalProps) => {
   if (typeof window === "object" && isClient) {
     return createPortal(
       <div
-        className={`smooth-transition fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm  ${
+        className={`smooth-transition fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm ${containerClasses}  ${
           open
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
