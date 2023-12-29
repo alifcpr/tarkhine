@@ -40,11 +40,11 @@ const LoginForm = ({
     console.log("data : ", data);
     setIsLoading(true);
     try {
-      const dataRes = await axios.post(
-        "https://tarkhineh.liara.run/v1/auth/login",
-        { phone: data.phoneNumber }
+      // eslint-disable-next-line no-unused-vars
+      const {data} = await axios.post(
+        "https://tarkhineh.liara.run/v1/auth/get-otp",
+        { phone: phoneState }
       );
-      console.log(dataRes);
       toast.success("کد با موفقیت به شماره موبایل شما ارسال شد");
       setStepTwo(true);
     } catch (error) {

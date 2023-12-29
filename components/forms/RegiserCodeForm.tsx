@@ -14,6 +14,8 @@ import ReactCodeInput from "react-code-input";
 import toast from "react-hot-toast";
 import Countdown, { zeroPad } from "react-countdown";
 import { Clock } from "iconsax-react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 type RegisterCodeFromProps = {
   phoneState: string;
@@ -34,6 +36,8 @@ const RegisterCodeForm = ({
   const [otpError, setOtpError] = useState<boolean>(false);
   // When it changes, the timer is reset
   const [reset, setRest] = useState<boolean>(false);
+  // router
+  const router = useRouter();
 
   // countDown ref for access to Api
   const countDownRef = useRef<any | null>(null);
@@ -44,11 +48,19 @@ const RegisterCodeForm = ({
   };
 
   // It checks from api whether the verification code is correct or not
-  const checkCode = () => {
+  const checkCode = async () => {
     setIsLoading(true);
 
     try {
-      // call api
+      // eslint-disable-next-line no-unused-vars
+      const { data } = await axios.post(
+        "https://tarkhineh.liara.run/v1/auth/check-otp",
+        { phone: phoneState, otpCode: +inputValue },
+        { withCredentials: true }
+      );
+
+      router.replace("/");
+
       toast.success("کد درست بود خوش آمدی");
     } catch (error) {
       // catch error
@@ -113,13 +125,12 @@ const RegisterCodeForm = ({
     setRest((prev) => !prev);
     setIsLoading(true);
 
-    // const dataApi = await axios.post(
-    //   "https://tarkhineh.onrender.com/v1/auth/resend-code",
-    //   { phone: phoneState }
-    // );
-
     try {
-      // call api
+      // eslint-disable-next-line no-unused-vars
+      const { data } = await axios.post(
+        "https://tarkhineh.liara.run/v1/auth/resend-code",
+        { phone: phoneState }
+      );
       toast.success("کد تایید مجددا ارسال شد");
     } catch (error) {
       console.log(error);
