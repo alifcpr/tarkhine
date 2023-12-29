@@ -67,21 +67,24 @@ const Modal = ({ children, containerClasses, open, onClose }: ModalProps) => {
   }, [open]);
 
   if (typeof window === "object" && isClient) {
-    return createPortal(
-      <div
-        className={`smooth-transition fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm ${containerClasses}  ${
-          open
-            ? "pointer-events-auto opacity-100"
-            : "pointer-events-none opacity-0"
-        }`}
-      >
-        {open && (
-          <div ref={ref} className="relative overflow-hidden rounded-8">
-            {children}
-          </div>
-        )}
-      </div>,
-      document.body
+    return (
+      open &&
+      createPortal(
+        <div
+          className={`smooth-transition fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm ${containerClasses}  ${
+            open
+              ? "pointer-events-auto opacity-100"
+              : "pointer-events-none opacity-0"
+          }`}
+        >
+          {
+            <div ref={ref} className="relative overflow-hidden rounded-8">
+              {children}
+            </div>
+          }
+        </div>,
+        document.body
+      )
     );
   }
 };

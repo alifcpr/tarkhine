@@ -41,7 +41,7 @@ const AddAddressForm = () => {
   return (
     <form
       onSubmit={handleSubmit((data) => handleAddressSubmit(data))}
-      className="flex h-[calc(100vh-10vh)] flex-col  justify-center gap-y-4 md:h-max"
+      className="flex h-[calc(100vh-10vh)] flex-col justify-center gap-y-4 md:h-max"
       autoComplete="off"
     >
       <div className="flex flex-col gap-y-2">

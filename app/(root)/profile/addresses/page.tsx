@@ -1,7 +1,7 @@
 "use client";
 import { AddCircle, ArrowRight2 } from "iconsax-react";
 import { useRouter } from "next/navigation";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MenuState } from "../layout";
 import Empty from "@/components/profile/Empty";
 import Modal from "@/components/shared/Modal";
@@ -15,6 +15,23 @@ const Page = () => {
     router.push("/profile");
     test?.setIsMenuOpen(false);
   };
+
+  useEffect(() => {
+    // callback function to call when event triggers
+    const onPageLoad = () => {
+      console.log("page loaded");
+      // do something else
+    };
+
+    // Check if the page has already loaded
+    if (document.readyState === "complete") {
+      onPageLoad();
+    } else {
+      window.addEventListener("load", onPageLoad, false);
+      // Remove the event listener when component unmounts
+      return () => window.removeEventListener("load", onPageLoad);
+    }
+  }, []);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
