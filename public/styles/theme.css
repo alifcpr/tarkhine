@@ -121,7 +121,7 @@
     @apply rounded-4 border border-muted-500 bg-transparent placeholder:text-muted-800 smooth-transition focus:outline-none ring-muted-300 focus:ring-2 disabled:opacity-70 disabled:cursor-not-allowed;
   }
 
-  .input-gray-outline {
+  .input-primary-outline {
     @apply rounded-4 border border-primary-800 bg-transparent placeholder:text-muted-800 smooth-transition focus:outline-none ring-primary-400 focus:ring-2 disabled:opacity-70 disabled:cursor-not-allowed;
   }
 

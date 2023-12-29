@@ -1,4 +1,4 @@
-import { Maybe, mixed, object, string } from "yup";
+import { Maybe, boolean, mixed, object, string } from "yup";
 
 export const messageValidation = object({
   name: string().required("وارد کردن نام اجباری است"),
@@ -62,4 +62,36 @@ export const profileInfoValidation = object({
         !value ? true : value.length >= 5
     )
     .notRequired(),
+});
+
+const phoneRegex = /^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}/;
+
+export const addressFormValidation = object({
+  title: string().required("وارد کردن عنوان اجباری است"),
+  own: boolean(),
+  phoneNumber: string().when("own", {
+    is: true,
+    then: (schema) =>
+      schema
+        .required("وارد کردن شماره همراه اجباری است")
+        .matches(phoneRegex, "شماره تلفن اشتباه است"),
+    otherwise: (schema) => schema.notRequired().nullable(),
+  }),
+  getterName: string().when("own", {
+    is: false,
+    then: (schema) =>
+      schema.required("وارد کردن نام و نام خانوادگی گیرنده اجباری است"),
+    otherwise: (schema) => schema.notRequired().nullable(),
+  }),
+  getterPhoneNumber: string().when("own", {
+    is: false,
+    then: (schema) =>
+      schema
+        .required("وارد کردن شماره تلفن گیرنده اجباری است")
+        .matches(phoneRegex, "شماره تلفن اشتباه است"),
+    otherwise: (schema) => schema.notRequired().nullable(),
+  }),
+  address: string()
+    .required("وارد کردن آدرس اجباری است")
+    .min(5, "آدرس حداقل باید 5 کاراکتر باشد"),
 });
