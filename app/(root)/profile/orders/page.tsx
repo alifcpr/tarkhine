@@ -1,18 +1,28 @@
 "use client";
 import { ArrowRight2 } from "iconsax-react";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import useTitle from "@/hooks/useTitle";
 import { useRouter } from "next/navigation";
 import { MenuState } from "../layout";
 
 const Page = () => {
-  const test = useContext(MenuState);
   const router = useRouter();
 
   const backToProfile = () => {
     router.push("/profile");
     test?.setIsMenuOpen(false);
   };
+
+  const test = useContext(MenuState);
+  useEffect(() => {
+    const onPageLoad = () => {
+      test?.setIsMenuOpen(true);
+    };
+
+    if (document.readyState === "complete") {
+      onPageLoad();
+    }
+  }, []);
 
   useTitle("سفارشات");
 

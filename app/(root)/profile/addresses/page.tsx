@@ -1,11 +1,11 @@
 "use client";
 import { AddCircle, ArrowRight2 } from "iconsax-react";
-import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import { MenuState } from "../layout";
 import Empty from "@/components/profile/Empty";
 import Modal from "@/components/shared/Modal";
 import AddAddressForm from "@/components/forms/AddAddressForm";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const test = useContext(MenuState);
@@ -17,19 +17,12 @@ const Page = () => {
   };
 
   useEffect(() => {
-    // callback function to call when event triggers
     const onPageLoad = () => {
-      console.log("page loaded");
-      // do something else
+      test?.setIsMenuOpen(true);
     };
 
-    // Check if the page has already loaded
     if (document.readyState === "complete") {
       onPageLoad();
-    } else {
-      window.addEventListener("load", onPageLoad, false);
-      // Remove the event listener when component unmounts
-      return () => window.removeEventListener("load", onPageLoad);
     }
   }, []);
 

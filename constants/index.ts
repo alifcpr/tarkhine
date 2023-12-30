@@ -53,7 +53,7 @@ export const profileLinks: ProfileLinks[] = [
   {
     _id: 1,
     title: "پروفایل",
-    href: "/profile",
+    href: "/profile/info",
     type: "link",
     value: "profile",
     icon: true,

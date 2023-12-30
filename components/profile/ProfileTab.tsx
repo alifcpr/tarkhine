@@ -3,7 +3,7 @@ import { profileLinks } from "@/constants";
 import { ProfileLinks } from "@/types/type.d";
 import React, { Dispatch, SetStateAction, useCallback } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { User, Wallet2, Heart, LogoutCurve, Location } from "iconsax-react";
 
 type ProfileTabProps = {
@@ -27,12 +27,6 @@ const ProfileHeader = () => {
 
 const ProfileTab = ({ isMenuOpen, setIsMenuOpen }: ProfileTabProps) => {
   const pathName = usePathname();
-  const router = useRouter();
-
-  const handleShowMenu = () => {
-    router.push("/profile");
-    setIsMenuOpen(true);
-  };
 
   const renderIcon = useCallback((type: string) => {
     switch (type) {
@@ -71,7 +65,6 @@ const ProfileTab = ({ isMenuOpen, setIsMenuOpen }: ProfileTabProps) => {
               className={`body-lg flex items-center gap-x-2 px-2 py-1 ${
                 isActive && "active-link border-r-2 border-primary-800"
               }`}
-              onClick={handleShowMenu}
             >
               {renderIcon(item.value)}
               <p>{item.title}</p>
