@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import ProfileInfoForm from "@/components/forms/ProfileInfoForm";
 import { ArrowRight2, Edit } from "iconsax-react";

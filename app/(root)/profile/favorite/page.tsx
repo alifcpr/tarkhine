@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { ArrowRight2 } from "iconsax-react";
 import React, { useContext, useEffect } from "react";

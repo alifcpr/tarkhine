@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { AddCircle, ArrowRight2 } from "iconsax-react";
 import React, { useContext, useEffect, useState } from "react";
@@ -6,6 +7,7 @@ import Empty from "@/components/profile/Empty";
 import Modal from "@/components/shared/Modal";
 import AddAddressForm from "@/components/forms/AddAddressForm";
 import { useRouter } from "next/navigation";
+import AddressCard from "@/components/cards/AddressCard";
 
 const Page = () => {
   const test = useContext(MenuState);
@@ -27,6 +29,8 @@ const Page = () => {
   }, []);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const length = 1;
 
   return (
     <>
@@ -61,13 +65,22 @@ const Page = () => {
             <span className="whitespace-nowrap">افزودن آدرس جدید</span>
           </button>
         </div>
-        <div className="flex h-full w-full items-center justify-center">
-          <Empty
-            btnLabel={"افزودن آدرس"}
-            title={"شما در حال حاضر هیچ آدرسی ثبت نکرده‌اید!"}
-            setOpenModal={setIsModalOpen}
-          />
-        </div>
+        {length > 0 ? (
+          <div className="my-5 flex flex-wrap justify-between gap-2">
+            <AddressCard />
+            <AddressCard />
+            <AddressCard />
+            <AddressCard />
+          </div>
+        ) : (
+          <div className="flex h-full w-full flex-wrap items-center justify-center">
+            <Empty
+              btnLabel={"افزودن آدرس"}
+              title={"شما در حال حاضر هیچ آدرسی ثبت نکرده‌اید!"}
+              setOpenModal={setIsModalOpen}
+            />
+          </div>
+        )}
       </div>
     </>
   );
