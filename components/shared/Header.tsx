@@ -17,6 +17,7 @@ const Header = () => {
 
   const doNotshowRouteLists = ["/login"];
 
+  // do not show this component in this routes
   if (doNotshowRouteLists.includes(pathName)) {
     return null;
   }

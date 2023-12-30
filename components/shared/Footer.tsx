@@ -16,6 +16,7 @@ const Footer = () => {
     "/login",
   ];
 
+  // do not show component in this routes
   if (doNotshowRouteLists.includes(pathName)) {
     return null;
   }

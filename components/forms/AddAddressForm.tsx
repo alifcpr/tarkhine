@@ -1,10 +1,17 @@
+import { AddressParams } from "@/types/type.d";
 import { addressFormValidation } from "@/validations";
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { Oval } from "react-loader-spinner";
 
-const AddAddressForm = () => {
+type AddAddressFormProps = {
+  type: "Add" | "Edit";
+  data?: AddressParams;
+};
+
+const AddAddressForm = ({ type, data }: AddAddressFormProps) => {
   const {
     register,
     formState: { errors },
@@ -13,23 +20,52 @@ const AddAddressForm = () => {
     handleSubmit,
   } = useForm({
     defaultValues: {
-      title: "",
-      own: true,
-      phoneNumber: "",
-      getterName: "",
-      getterPhoneNumber: "",
-      address: "",
+      title:
+        type === "Edit" && data
+          ? data.ownReceiver
+            ? data.addressTitle
+            : data.anotherReceiver.addressTitle
+          : "",
+      own: type === "Edit" && data ? data.ownReceiver : true,
+      phoneNumber: type === "Edit" && data ? data.phone : "",
+      getterName: type === "Edit" && data ? data.anotherReceiver.name : "",
+      getterPhoneNumber:
+        type === "Edit" && data ? data.anotherReceiver.phone : "",
+      address:
+        type === "Edit" && data
+          ? data.ownReceiver
+            ? data.description
+            : data.anotherReceiver.description
+          : "",
     },
     resolver: yupResolver(addressFormValidation),
   });
 
+  // When the form is confirmed, it disables all inputs and buttons
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleAddressSubmit = (data: any) => {
+  // for call add address api , when (type === "Add") is working
+  const handleAddAddress = (data: any) => {
     setIsLoading(true);
 
     try {
       // call api
+      toast.success("آدرس جدید با موفقیت ایجاد شد");
+    } catch (error) {
+      console.log(error);
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // for call edit address api , when (type === "Edit") is working
+  const handleEditAddress = (data: any) => {
+    setIsLoading(true);
+
+    try {
+      // call api
+      toast.success("آدرس شما با موفقیت ویرایش شد");
     } catch (error) {
       console.log(error);
       throw error;
@@ -40,7 +76,11 @@ const AddAddressForm = () => {
 
   return (
     <form
-      onSubmit={handleSubmit((data) => handleAddressSubmit(data))}
+      onSubmit={
+        type === "Edit"
+          ? handleSubmit((data) => handleEditAddress(data))
+          : handleSubmit((data) => handleAddAddress(data))
+      }
       className="flex h-[calc(100vh-10vh)] flex-col justify-center gap-y-4 md:h-max"
       autoComplete="off"
     >
@@ -168,6 +208,8 @@ const AddAddressForm = () => {
               color={"#fff"}
               secondaryColor={"#fff"}
             />
+          ) : type === "Edit" ? (
+            "ویرایش آدرس"
           ) : (
             "ثبت آدرس"
           )}

@@ -18,8 +18,10 @@ type ProfileInfoFormProps = {
 };
 
 const ProfileInfoForm = ({ type }: ProfileInfoFormProps) => {
+  // When the form is confirmed, it disables all inputs and buttons
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  // controll all inputs
   const {
     register,
     formState: { errors, isDirty },
@@ -37,6 +39,7 @@ const ProfileInfoForm = ({ type }: ProfileInfoFormProps) => {
     },
   });
 
+  // for call user change info api
   const changeData = (data: any) => {
     console.log(data);
     setIsLoading(true);
