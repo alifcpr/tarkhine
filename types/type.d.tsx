@@ -79,21 +79,11 @@ export interface RemoveUrlQueryParams {
 
 // address type
 
-interface AddressOwn {
+export interface Addresses {
   _id: string;
   addressTitle: string;
   description: string;
-  ownReceiver: boolean;
   phone: string;
+  name: string;
+  ownReciver: boolean;
 }
-
-interface AddressDoNotOwn {
-  anotherReceiver: {
-    addressTitle: string;
-    description: string;
-    phone: string;
-    name: string;
-  };
-}
-
-export interface AddressParams extends AddressOwn, AddressDoNotOwn {}

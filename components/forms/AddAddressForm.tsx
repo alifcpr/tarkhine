@@ -1,4 +1,4 @@
-import { AddressParams } from "@/types/type.d";
+import { Addresses } from "@/types/type.d";
 import { addressFormValidation } from "@/validations";
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useState } from "react";
@@ -8,7 +8,7 @@ import { Oval } from "react-loader-spinner";
 
 type AddAddressFormProps = {
   type: "Add" | "Edit";
-  data?: AddressParams;
+  data?: Addresses;
 };
 
 const AddAddressForm = ({ type, data }: AddAddressFormProps) => {
@@ -20,23 +20,14 @@ const AddAddressForm = ({ type, data }: AddAddressFormProps) => {
     handleSubmit,
   } = useForm({
     defaultValues: {
-      title:
-        type === "Edit" && data
-          ? data.ownReceiver
-            ? data.addressTitle
-            : data.anotherReceiver.addressTitle
-          : "",
-      own: type === "Edit" && data ? data.ownReceiver : true,
-      phoneNumber: type === "Edit" && data ? data.phone : "",
-      getterName: type === "Edit" && data ? data.anotherReceiver.name : "",
+      title: type === "Edit" && data ? data.addressTitle : "",
+      own: type === "Edit" && data ? data.ownReciver : true,
+      phoneNumber:
+        type === "Edit" && data ? (data.ownReciver ? data.phone : "") : "",
+      getterName: type === "Edit" && data ? data.name : "",
       getterPhoneNumber:
-        type === "Edit" && data ? data.anotherReceiver.phone : "",
-      address:
-        type === "Edit" && data
-          ? data.ownReceiver
-            ? data.description
-            : data.anotherReceiver.description
-          : "",
+        type === "Edit" && data ? (data.ownReciver ? "" : data.phone) : "",
+      address: type === "Edit" && data ? data.description : "",
     },
     resolver: yupResolver(addressFormValidation),
   });

@@ -47,7 +47,7 @@ const Page = () => {
           ثبت آدرس
         </Modal.Header>
         <Modal.Body containerClass="p-3 bg-muted-100">
-          <AddAddressForm />
+          <AddAddressForm type="Add" />
         </Modal.Body>
       </Modal>
 
