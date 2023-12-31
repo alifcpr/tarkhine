@@ -70,7 +70,10 @@ const ProfileTab = ({ isMenuOpen, setIsMenuOpen }: ProfileTabProps) => {
               <p>{item.title}</p>
             </Link>
           ) : (
-            <button className="body-lg flex w-max items-center gap-x-2 p-2 text-red-500">
+            <button
+              key={index}
+              className="body-lg flex w-max items-center gap-x-2 p-2 text-red-500"
+            >
               {renderIcon(item.value)}
               <p>{item.title}</p>
             </button>

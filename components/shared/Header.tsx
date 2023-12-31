@@ -9,15 +9,16 @@ import HeaderLinks from "./HeaderLinks";
 import MobileNav from "./MobileNav";
 import SearchBox from "./filters/SearchBox";
 import { usePathname } from "next/navigation";
-
-const isLogin = true;
+import useUser from "@/hooks/useUser";
 
 const Header = () => {
   const pathName = usePathname();
 
-  const doNotshowRouteLists = ["/login"];
+  // User authentication status
+  const { isLoading, status } = useUser();
 
-  // do not show this component in this routes
+  // do not show this component in these routes
+  const doNotshowRouteLists = ["/login"];
   if (doNotshowRouteLists.includes(pathName)) {
     return null;
   }
@@ -45,8 +46,8 @@ const Header = () => {
           <button className="rounded-4 bg-primary-100 p-1 md:p-2">
             <ShoppingCart className="h-5 w-5 text-primary-800 md:h-6 md:w-6" />
           </button>
-          {isLogin ? (
-            <button className="group relative">
+          {status === "authorized" ? (
+            <button disabled={isLoading} className="group relative">
               <span className="group  flex items-center gap-x-1 rounded-4 bg-primary-600 p-1 text-white md:p-2">
                 <User className="h-5 w-5 text-white md:h-6 md:w-6" />
                 <ArrowDown2 className="h-5 w-5 text-white md:h-6 md:w-6" />
@@ -61,7 +62,9 @@ const Header = () => {
           ) : (
             <Link
               href={"/login"}
-              className="rounded-4 bg-primary-100 p-1 md:p-2"
+              className={`smooth-transition rounded-4 bg-primary-100 p-1 md:p-2 ${
+                isLoading && "pointer-events-none opacity-80"
+              }`}
             >
               <User className="h-5 w-5 text-primary-800 md:h-6 md:w-6" />
             </Link>

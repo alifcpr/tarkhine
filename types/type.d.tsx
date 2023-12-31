@@ -77,8 +77,6 @@ export interface RemoveUrlQueryParams {
   params: string;
 }
 
-// address type
-
 export interface Addresses {
   _id: string;
   addressTitle: string;
@@ -86,4 +84,13 @@ export interface Addresses {
   phone: string;
   name: string;
   ownReciver: boolean;
+}
+
+export interface User {
+  createdAt: string;
+  updatedAt: string;
+  _id: string;
+  phone: string;
+  username: string;
+  addresses: any;
 }
