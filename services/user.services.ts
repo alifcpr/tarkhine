@@ -9,13 +9,13 @@ export const getUserInfo = async (): Promise<GetUserInfo> => {
 };
 
 // getUserAddresses
-type GetUserAddress = { page: string; limit: string };
+type GetUserAddress = { page: number; limit: number };
 export const getUserAddress = async ({
-  page,
-  limit,
+  page = 1,
+  limit = 2,
 }: GetUserAddress): Promise<{ data: Addresses[] | []; maxPage: string }> => {
   const { data } = await axiosService.get(
-    "/v1/profile/address?page=1&limit=30"
+    `/v1/profile/address?page=${page}&limit=${limit}`
   );
   return data;
 };

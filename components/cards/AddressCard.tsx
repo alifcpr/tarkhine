@@ -4,6 +4,9 @@ import Modal from "../shared/Modal";
 import AddAddressForm from "../forms/AddAddressForm";
 import { ThreeDots } from "react-loader-spinner";
 import { Addresses } from "@/types/type.d";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteAddressApi } from "@/services/address.services";
+import toast from "react-hot-toast";
 
 type AddressCardProps = {
   addressData: Addresses;
@@ -13,21 +16,22 @@ const AddressCard = ({ addressData }: AddressCardProps) => {
   // modal state
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  // When clicked on delete button , it disable card
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const queryClient = useQueryClient();
+  const { mutate: deleteAddressMutate, isLoading: isDeleting } = useMutation({
+    mutationKey: ["address"],
+    mutationFn: async (id: string) => await deleteAddressApi(id),
+    onSuccess: () => {
+      toast.success("آدرس با موفقیت حذف شد");
+      queryClient.invalidateQueries(["address"]);
+    },
+    onError: () => {
+      toast.error("آدرس حذف نشد بعداامتحان کنید");
+    },
+  });
 
   // for call delelte address api
-  const handleDelete = async () => {
-    setIsLoading(true);
-
-    try {
-      // call api
-    } catch (error) {
-      console.log(error);
-      throw error;
-    } finally {
-      setIsLoading(false);
-    }
+  const handleDelete = async (id: string) => {
+    deleteAddressMutate(id);
   };
 
   return (
@@ -53,7 +57,7 @@ const AddressCard = ({ addressData }: AddressCardProps) => {
         </Modal.Body>
       </Modal>
       <div className="relative flex w-full flex-col gap-y-8 overflow-hidden rounded-8 border border-muted-500 bg-muted-200 p-4 md:w-[49.7%]">
-        {isLoading && (
+        {isDeleting && (
           <div className="absolute inset-0 flex items-center justify-center backdrop-blur-sm">
             <ThreeDots
               visible={true}
@@ -79,7 +83,7 @@ const AddressCard = ({ addressData }: AddressCardProps) => {
               <Edit2 className="h-6 w-6 xl:h-7 xl:w-7" />
             </button>
             <button
-              onClick={handleDelete}
+              onClick={() => handleDelete(addressData._id)}
               className="smooth-transition hover:text-error-200"
             >
               <Trash className="h-6 w-6 xl:h-7 xl:w-7" />
@@ -87,9 +91,11 @@ const AddressCard = ({ addressData }: AddressCardProps) => {
           </div>
         </div>
         <div className="caption-md md:caption-lg flex items-center justify-between text-muted-800">
-          <p>{addressData.addressTitle}</p>
-          <p>{addressData.name}</p>
-          <p dir="ltr">{addressData.phone}</p>
+          <p className="w-1/3 text-start">{addressData.addressTitle}</p>
+          <p className="w-1/3 text-center">{addressData.name}</p>
+          <p className="w-1/3 text-start" dir="ltr">
+            {addressData.phone}
+          </p>
         </div>
       </div>
     </>

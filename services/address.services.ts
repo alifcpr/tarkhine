@@ -19,3 +19,10 @@ export const editAddressApi = async ({ id, addressData }: EditAddressApi) => {
   );
   return data;
 };
+
+// delete address
+type DeleteAddressApi = {message: string; statusCode: number}
+export const deleteAddressApi = async (id: string): Promise<DeleteAddressApi> => {
+  const { data } = await axiosService.delete(`/v1/profile/address/${id}`);
+  return data;
+};

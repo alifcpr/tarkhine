@@ -11,6 +11,7 @@ import AddressCard from "@/components/cards/AddressCard";
 import useGetAddresses from "@/hooks/useGetAddresses";
 import useTitle from "@/hooks/useTitle";
 import Loading from "./loading";
+import Pagination from "@/components/Pagination";
 
 const Page = () => {
   const test = useContext(MenuState);
@@ -59,7 +60,7 @@ const Page = () => {
         </Modal.Body>
       </Modal>
 
-      <div className="h-full">
+      <div>
         <div className="flex items-center justify-between p-3 font-estedad md:border-b">
           <button onClick={backToProfile}>
             <ArrowRight2 className="h-10 w-10 md:hidden" />{" "}
@@ -76,11 +77,14 @@ const Page = () => {
         {isLoading ? (
           <Loading />
         ) : addresses && addresses.data.length > 0 ? (
-          <div className="my-5 flex flex-wrap justify-between gap-2">
-            {addresses.data.map((address) => (
-              <AddressCard key={address._id} addressData={address} />
-            ))}
-          </div>
+          <>
+            <div className="my-5 flex flex-wrap justify-between gap-2">
+              {addresses.data.map((address) => (
+                <AddressCard key={address._id} addressData={address} />
+              ))}
+            </div>
+            <Pagination totalPage={+addresses!.maxPage} />
+          </>
         ) : (
           <div className="flex h-full w-full items-center justify-center">
             <Empty
