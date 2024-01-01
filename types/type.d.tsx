@@ -83,7 +83,19 @@ export interface Addresses {
   description: string;
   phone: string;
   name: string;
-  ownReciver: boolean;
+  ownReceiver: boolean;
+}
+
+export interface AddAddress {
+  addressTitle: string;
+  description: string;
+  anotherReceiver: {
+    addressTitle: string;
+    description: string;
+    phone: string;
+    name: string;
+  };
+  ownReceiver: boolean;
 }
 
 export interface User {

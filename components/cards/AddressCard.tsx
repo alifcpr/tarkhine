@@ -3,8 +3,13 @@ import React, { useState } from "react";
 import Modal from "../shared/Modal";
 import AddAddressForm from "../forms/AddAddressForm";
 import { ThreeDots } from "react-loader-spinner";
+import { Addresses } from "@/types/type.d";
 
-const AddressCard = () => {
+type AddressCardProps = {
+  addressData: Addresses;
+};
+
+const AddressCard = ({ addressData }: AddressCardProps) => {
   // modal state
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -40,7 +45,11 @@ const AddressCard = () => {
           ویرایش آدرس
         </Modal.Header>
         <Modal.Body containerClass="p-3 bg-muted-100">
-          <AddAddressForm type="Edit" />
+          <AddAddressForm
+            closeModal={() => setIsModalOpen(false)}
+            addressData={addressData}
+            type="Edit"
+          />
         </Modal.Body>
       </Modal>
       <div className="relative flex w-full flex-col gap-y-8 overflow-hidden rounded-8 border border-muted-500 bg-muted-200 p-4 md:w-[49.7%]">
@@ -60,7 +69,7 @@ const AddressCard = () => {
         )}
         <div className="flex items-center justify-between gap-x-4">
           <h1 className="caption-lg md:body-md line-clamp-1 text-muted-900">
-            تهران: اقدسیه ، بزرگراه ارتش ، مجتمع شمیران سنتر ، طبقه 10
+            {addressData.description}
           </h1>
           <div className="flex gap-x-3">
             <button
@@ -78,9 +87,9 @@ const AddressCard = () => {
           </div>
         </div>
         <div className="caption-md md:caption-lg flex items-center justify-between text-muted-800">
-          <p>محل کار</p>
-          <p>سردار وظیفه</p>
-          <p dir="ltr">0912 786 4512</p>
+          <p>{addressData.addressTitle}</p>
+          <p>{addressData.name}</p>
+          <p dir="ltr">{addressData.phone}</p>
         </div>
       </div>
     </>

@@ -1,8 +1,21 @@
-import { User } from "@/types/type.d";
-import axios from "./axios";
+import { Addresses, User } from "@/types/type.d";
+import axiosService from "./axios";
 
-type GetUserInfo = { data: User; statusCode: number };
+// getUserInfo
+type GetUserInfo = { data: User | null; statusCode: number | null };
 export const getUserInfo = async (): Promise<GetUserInfo> => {
-  const { data } = await axios.get("/v1/user");
+  const { data } = await axiosService.get("/v1/user");
+  return data;
+};
+
+// getUserAddresses
+type GetUserAddress = { page: string; limit: string };
+export const getUserAddress = async ({
+  page,
+  limit,
+}: GetUserAddress): Promise<{ data: Addresses[] | []; maxPage: string }> => {
+  const { data } = await axiosService.get(
+    "/v1/profile/address?page=1&limit=30"
+  );
   return data;
 };

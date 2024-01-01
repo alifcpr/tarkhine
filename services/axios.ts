@@ -1,24 +1,26 @@
 import axios from "axios";
 
-export default axios.create({
+const axiosService = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   withCredentials: true,
 });
 
-axios.interceptors.request.use(
+axiosService.interceptors.request.use(
   (res) => res,
   (err) => Promise.reject(err)
 );
 
-axios.interceptors.response.use(
+axiosService.interceptors.response.use(
   (res) => res,
   async (err) => {
     const originalConfig = err.config;
     if (err.response.status === 401 && !originalConfig._retry) {
       originalConfig._retry = true;
       try {
-        const { data } = await axios.get(`/v1/auth/refresh`);
-        if (data) return axios(originalConfig);
+        const { data } = await axiosService.get(`/v1/auth/refresh`, {
+          withCredentials: true,
+        });
+        if (data) axiosService(originalConfig);
       } catch (error) {
         return Promise.reject(error);
       }
@@ -26,3 +28,5 @@ axios.interceptors.response.use(
     return Promise.reject(err);
   }
 );
+
+export default axiosService;

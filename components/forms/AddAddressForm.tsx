@@ -1,17 +1,24 @@
-import { Addresses } from "@/types/type.d";
+import { addAddressApi, editAddressApi } from "@/services/address.services";
+import { AddAddress, Addresses } from "@/types/type.d";
 import { addressFormValidation } from "@/validations";
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Oval } from "react-loader-spinner";
 
 type AddAddressFormProps = {
   type: "Add" | "Edit";
-  data?: Addresses;
+  addressData?: Addresses;
+  closeModal: () => void;
 };
 
-const AddAddressForm = ({ type, data }: AddAddressFormProps) => {
+const AddAddressForm = ({
+  type,
+  addressData,
+  closeModal,
+}: AddAddressFormProps) => {
   const {
     register,
     formState: { errors },
@@ -20,56 +27,101 @@ const AddAddressForm = ({ type, data }: AddAddressFormProps) => {
     handleSubmit,
   } = useForm({
     defaultValues: {
-      title: type === "Edit" && data ? data.addressTitle : "",
-      own: type === "Edit" && data ? data.ownReciver : true,
+      title: type === "Edit" && addressData ? addressData.addressTitle : "",
+      own: type === "Edit" && addressData ? addressData.ownReceiver : true,
       phoneNumber:
-        type === "Edit" && data ? (data.ownReciver ? data.phone : "") : "",
-      getterName: type === "Edit" && data ? data.name : "",
+        type === "Edit" && addressData
+          ? addressData.ownReceiver
+            ? addressData.phone
+            : ""
+          : "",
+      getterName: type === "Edit" && addressData ? addressData.name : "",
       getterPhoneNumber:
-        type === "Edit" && data ? (data.ownReciver ? "" : data.phone) : "",
-      address: type === "Edit" && data ? data.description : "",
+        type === "Edit" && addressData
+          ? addressData.ownReceiver
+            ? ""
+            : addressData.phone
+          : "",
+      address: type === "Edit" && addressData ? addressData.description : "",
     },
     resolver: yupResolver(addressFormValidation),
   });
 
-  // When the form is confirmed, it disables all inputs and buttons
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const queryClient = useQueryClient();
+
+  // react query for posting new address
+  const { mutate: addAddressMutate, isLoading: isAdding } = useMutation({
+    mutationKey: ["address"],
+    mutationFn: async (addressData: AddAddress) =>
+      await addAddressApi(addressData),
+    onSuccess: () => {
+      toast.success("آدرس جدید با موفقیت ایجاد شد");
+      queryClient.invalidateQueries();
+      closeModal();
+    },
+    onError: () => {
+      toast.error("آدرس ایجاد نشد ، بعدا امتحان کنید");
+    },
+  });
+
+  // react query for edit address
+  const { mutate: editeAddressMutate, isLoading: isEditing } = useMutation({
+    mutationKey: ["address"],
+    mutationFn: async ({
+      id,
+      addressData,
+    }: {
+      id: string;
+      addressData: AddAddress;
+    }) => editAddressApi({ id, addressData }),
+    onSuccess: () => {
+      toast.success("آدرس با موفقیت ویرایش شد");
+      queryClient.invalidateQueries();
+      closeModal();
+    },
+    onError: () => {
+      toast.error("آدرس ویرایش نشد بعدا امتحان کنید");
+    },
+  });
 
   // for call add address api , when (type === "Add") is working
-  const handleAddAddress = (data: any) => {
-    setIsLoading(true);
-
-    try {
-      // call api
-      toast.success("آدرس جدید با موفقیت ایجاد شد");
-    } catch (error) {
-      console.log(error);
-      throw error;
-    } finally {
-      setIsLoading(false);
-    }
+  const handleAddAddress = (formData: any) => {
+    addAddressMutate({
+      addressTitle: formData.title,
+      description: formData.address,
+      anotherReceiver: {
+        addressTitle: formData.title,
+        description: formData.address,
+        name: formData.getterName,
+        phone: formData.phoneNumber || formData.getterPhoneNumber,
+      },
+      ownReceiver: formData.own,
+    });
   };
 
   // for call edit address api , when (type === "Edit") is working
-  const handleEditAddress = (data: any) => {
-    setIsLoading(true);
-
-    try {
-      // call api
-      toast.success("آدرس شما با موفقیت ویرایش شد");
-    } catch (error) {
-      console.log(error);
-      throw error;
-    } finally {
-      setIsLoading(false);
-    }
+  const handleEditAddress = (id: string, formData: any) => {
+    //
+    editeAddressMutate({
+      id,
+      addressData: {
+        addressTitle: formData.title,
+        description: formData.address,
+        anotherReceiver: {
+          addressTitle: formData.title,
+          description: formData.address,
+          name: formData.getterName,
+          phone: formData.phoneNumber || formData.getterPhoneNumber,
+        },
+        ownReceiver: formData.own,
+      },
+    });
   };
-
   return (
     <form
       onSubmit={
         type === "Edit"
-          ? handleSubmit((data) => handleEditAddress(data))
+          ? handleSubmit((data) => handleEditAddress(addressData!._id, data))
           : handleSubmit((data) => handleAddAddress(data))
       }
       className="flex h-[calc(100vh-10vh)] flex-col justify-center gap-y-4 md:h-max"
@@ -84,7 +136,7 @@ const AddAddressForm = ({ type, data }: AddAddressFormProps) => {
           className="input-gray-outline caption-lg w-full p-2 md:min-w-[500px]"
           placeholder="عنوان آدرس"
           id="title-address"
-          disabled={isLoading}
+          disabled={isAdding || isEditing}
           {...register("title")}
         />
         {errors.title && (
@@ -101,7 +153,7 @@ const AddAddressForm = ({ type, data }: AddAddressFormProps) => {
           })}
           id="own"
           type="checkbox"
-          disabled={isLoading}
+          disabled={isAdding || isEditing}
           className="cursor-pointer"
         />
         <label htmlFor="own" className="body-md cursor-pointer">
@@ -117,7 +169,7 @@ const AddAddressForm = ({ type, data }: AddAddressFormProps) => {
             type="text"
             className="input-gray-outline caption-lg w-full p-2 md:min-w-[500px]"
             placeholder="شماره همراه"
-            disabled={isLoading}
+            disabled={isAdding || isEditing}
             id="phonenumber"
             {...register("phoneNumber")}
           />
@@ -139,7 +191,7 @@ const AddAddressForm = ({ type, data }: AddAddressFormProps) => {
               placeholder="نام نام خانوداگی تحویل گیرنده"
               id="getter-name"
               {...register("getterName")}
-              disabled={isLoading}
+              disabled={isAdding || isEditing}
             />
             {errors.getterName && (
               <p className="caption-md text-error-200">
@@ -157,7 +209,7 @@ const AddAddressForm = ({ type, data }: AddAddressFormProps) => {
               placeholder="شماره همراه تحویل گیرنده"
               id="getter-phonenumber"
               {...register("getterPhoneNumber")}
-              disabled={isLoading}
+              disabled={isAdding || isEditing}
             />
             {errors.getterPhoneNumber && (
               <p className="caption-md text-error-200">
@@ -177,7 +229,7 @@ const AddAddressForm = ({ type, data }: AddAddressFormProps) => {
           id="address"
           rows={7}
           {...register("address")}
-          disabled={isLoading}
+          disabled={isAdding || isEditing}
         />
         {errors.address && (
           <p className="caption-md text-error-200">{errors.address.message}</p>
@@ -186,10 +238,10 @@ const AddAddressForm = ({ type, data }: AddAddressFormProps) => {
       <div>
         <button
           type="submit"
-          disabled={isLoading}
+          disabled={isAdding || isEditing}
           className="button-primary body-md flex w-full items-center justify-center rounded-md p-2"
         >
-          {isLoading ? (
+          {isAdding || isEditing ? (
             <Oval
               width={23}
               height={23}

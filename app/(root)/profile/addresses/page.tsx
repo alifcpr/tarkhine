@@ -8,6 +8,9 @@ import Modal from "@/components/shared/Modal";
 import AddAddressForm from "@/components/forms/AddAddressForm";
 import { useRouter } from "next/navigation";
 import AddressCard from "@/components/cards/AddressCard";
+import useGetAddresses from "@/hooks/useGetAddresses";
+import useTitle from "@/hooks/useTitle";
+import Loading from "./loading";
 
 const Page = () => {
   const test = useContext(MenuState);
@@ -28,9 +31,14 @@ const Page = () => {
     }
   }, []);
 
+  // modal state
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const length = 1;
+  // page title
+  useTitle("آدرس های من");
+
+  // getting user addresses from api
+  const { data: addresses, isLoading } = useGetAddresses();
 
   return (
     <>
@@ -47,7 +55,7 @@ const Page = () => {
           ثبت آدرس
         </Modal.Header>
         <Modal.Body containerClass="p-3 bg-muted-100">
-          <AddAddressForm type="Add" />
+          <AddAddressForm type="Add" closeModal={() => setIsModalOpen(false)} />
         </Modal.Body>
       </Modal>
 
@@ -65,18 +73,19 @@ const Page = () => {
             <span className="whitespace-nowrap">افزودن آدرس جدید</span>
           </button>
         </div>
-        {length > 0 ? (
+        {isLoading ? (
+          <Loading />
+        ) : addresses && addresses.data.length > 0 ? (
           <div className="my-5 flex flex-wrap justify-between gap-2">
-            <AddressCard />
-            <AddressCard />
-            <AddressCard />
-            <AddressCard />
+            {addresses.data.map((address) => (
+              <AddressCard key={address._id} addressData={address} />
+            ))}
           </div>
         ) : (
-          <div className="flex h-full w-full flex-wrap items-center justify-center">
+          <div className="flex h-full w-full items-center justify-center">
             <Empty
-              btnLabel={"افزودن آدرس"}
-              title={"شما در حال حاضر هیچ آدرسی ثبت نکرده‌اید!"}
+              btnLabel="افزودن آدرس"
+              title="شما در حال حاضر هیچ آدرسی ثبت نکرده‌اید!"
               setOpenModal={setIsModalOpen}
             />
           </div>

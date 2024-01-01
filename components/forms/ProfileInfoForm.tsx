@@ -27,6 +27,7 @@ const ProfileInfoForm = ({ type }: ProfileInfoFormProps) => {
     formState: { errors, isDirty },
     handleSubmit,
     setValue,
+    watch,
   } = useForm({
     resolver: yupResolver(profileInfoValidation),
     defaultValues: {
@@ -134,10 +135,11 @@ const ProfileInfoForm = ({ type }: ProfileInfoFormProps) => {
             calendar={persian}
             id="brithday"
             locale={persian_fa}
+            value={watch("brithday")}
             className="green font-estedad"
             disabled={type === "See" || isLoading}
             maxDate={new Date()}
-            onChange={(data) => setValue("brithday", data)}
+            onChange={(date) => setValue("brithday", date?.toString())}
           />
         </div>
         <div className="flex flex-col gap-y-2 md:w-1/3">
