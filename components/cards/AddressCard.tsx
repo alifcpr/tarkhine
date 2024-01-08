@@ -56,7 +56,7 @@ const AddressCard = ({ addressData }: AddressCardProps) => {
           />
         </Modal.Body>
       </Modal>
-      <div className="relative flex w-full flex-col gap-y-8 overflow-hidden rounded-8 border border-muted-500 bg-muted-200 p-4 md:w-[49.7%]">
+      <div className="relative flex w-full flex-col gap-y-8 overflow-hidden rounded-8 border border-muted-500 bg-muted-200 p-4 xl:w-[49.7%]">
         {isDeleting && (
           <div className="absolute inset-0 flex items-center justify-center backdrop-blur-sm">
             <ThreeDots

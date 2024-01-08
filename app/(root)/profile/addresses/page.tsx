@@ -1,36 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { AddCircle, ArrowRight2 } from "iconsax-react";
-import React, { useContext, useEffect, useState } from "react";
-import { MenuState } from "../layout";
+import React, { useState } from "react";
 import Empty from "@/components/profile/Empty";
 import Modal from "@/components/shared/Modal";
 import AddAddressForm from "@/components/forms/AddAddressForm";
-import { useRouter } from "next/navigation";
 import AddressCard from "@/components/cards/AddressCard";
 import useGetAddresses from "@/hooks/useGetAddresses";
 import useTitle from "@/hooks/useTitle";
 import Loading from "./loading";
 import Pagination from "@/components/Pagination";
+import useProfileMenuController from "@/hooks/useProfileMenuController";
 
 const Page = () => {
-  const test = useContext(MenuState);
-  const router = useRouter();
-
-  const backToProfile = () => {
-    router.push("/profile");
-    test?.setIsMenuOpen(false);
-  };
-
-  useEffect(() => {
-    const onPageLoad = () => {
-      test?.setIsMenuOpen(true);
-    };
-
-    if (document.readyState === "complete") {
-      onPageLoad();
-    }
-  }, []);
+  // for back to profile page and open menu
+  const { backToProfilePage } = useProfileMenuController();
 
   // modal state
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -39,7 +23,7 @@ const Page = () => {
   useTitle("آدرس های من");
 
   // getting user addresses from api
-  const { data: addresses, isLoading } = useGetAddresses();
+  const { data: addresses, isLoading, isPreviousData } = useGetAddresses();
 
   return (
     <>
@@ -60,12 +44,14 @@ const Page = () => {
         </Modal.Body>
       </Modal>
 
-      <div>
+      <div className="h-full">
         <div className="flex items-center justify-between p-3 font-estedad md:border-b">
-          <button onClick={backToProfile}>
+          <button onClick={backToProfilePage}>
             <ArrowRight2 className="h-10 w-10 md:hidden" />{" "}
           </button>
-          <h1 className="h5-bold  md:w-full">آدرس ها</h1>
+          <h1 className="h5-bold  md:w-full">
+            {isPreviousData && "Loading.."}
+          </h1>
           <button
             onClick={() => setIsModalOpen(true)}
             className="hidden text-primary-800 md:flex md:items-center md:gap-x-2"

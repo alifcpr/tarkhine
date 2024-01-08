@@ -38,10 +38,7 @@ const Pagination = ({ totalPage }: PaginationProps) => {
   }
 
   return (
-    <div
-      dir="ltr"
-      className="mb-4 flex h-[200px] items-end justify-center gap-x-2 "
-    >
+    <div dir="ltr" className="mb-4 flex items-center justify-center gap-x-2 ">
       <button
         onClick={prevPage}
         disabled={page === 1}

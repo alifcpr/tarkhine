@@ -1,36 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { ArrowRight2 } from "iconsax-react";
-import React, { useContext, useEffect } from "react";
-import { MenuState } from "../layout";
-import { useRouter } from "next/navigation";
+import React from "react";
 import useTitle from "@/hooks/useTitle";
+import useProfileMenuController from "@/hooks/useProfileMenuController";
 
 const Page = () => {
-  const router = useRouter();
+  // for back to profile page and open menu
+  const { backToProfilePage } = useProfileMenuController();
 
-  const test = useContext(MenuState);
-  useEffect(() => {
-    const onPageLoad = () => {
-      test?.setIsMenuOpen(true);
-    };
-
-    if (document.readyState === "complete") {
-      onPageLoad();
-    }
-  }, []);
-
-  const backToProfile = () => {
-    router.push("/profile");
-    test?.setIsMenuOpen(false);
-  };
-
+  // page title
   useTitle("علاقمندی ها");
 
   return (
     <div>
       <div className="flex items-center justify-between font-estedad">
-        <button onClick={backToProfile}>
+        <button onClick={backToProfilePage}>
           <ArrowRight2 className="h-10 w-10 md:hidden" />{" "}
         </button>
         <h1>مورد علاقه</h1>

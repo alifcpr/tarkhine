@@ -52,11 +52,11 @@ export const profileInfoValidation = object({
     )
     .notRequired(),
   phone: string(),
-  brithday: mixed(),
-  userName: string()
+  birthday: mixed(),
+  username: string()
     .nullable()
     .test(
-      "userName-length",
+      "username-length",
       "نام کاربری شما حداقل باید 5 رقم باشد",
       (value: Maybe<string | null | undefined>) =>
         !value ? true : value.length >= 5

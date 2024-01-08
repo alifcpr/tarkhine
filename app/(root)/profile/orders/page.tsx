@@ -1,36 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { ArrowRight2 } from "iconsax-react";
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import useTitle from "@/hooks/useTitle";
-import { useRouter } from "next/navigation";
-import { MenuState } from "../layout";
+import useProfileMenuController from "@/hooks/useProfileMenuController";
 
 const Page = () => {
-  const router = useRouter();
+  // for back to profile page and open menu
+  const { backToProfilePage } = useProfileMenuController();
 
-  const backToProfile = () => {
-    router.push("/profile");
-    test?.setIsMenuOpen(false);
-  };
-
-  const test = useContext(MenuState);
-  useEffect(() => {
-    const onPageLoad = () => {
-      test?.setIsMenuOpen(true);
-    };
-
-    if (document.readyState === "complete") {
-      onPageLoad();
-    }
-  }, []);
-
+  // page title
   useTitle("سفارشات");
 
   return (
     <div>
       <div className="flex items-center justify-between font-estedad">
-        <button onClick={backToProfile}>
+        <button onClick={backToProfilePage}>
           <ArrowRight2 className="h-10 w-10 md:hidden" />{" "}
         </button>
         <h1>سفارش های من</h1>
@@ -39,5 +24,4 @@ const Page = () => {
     </div>
   );
 };
-
 export default Page;

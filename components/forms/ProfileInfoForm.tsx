@@ -3,23 +3,35 @@
 "use client";
 import { profileInfoValidation } from "@/validations";
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import "react-multi-date-picker/styles/colors/green.css";
-import Link from "next/link";
 import { Oval } from "react-loader-spinner";
+import useUser from "@/hooks/useUser";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { editProfileApi } from "@/services/user.services";
+import { User } from "@/types/type.d";
 import toast from "react-hot-toast";
+import { Edit } from "iconsax-react";
 
-type ProfileInfoFormProps = {
-  type: "See" | "Edit";
-};
+const ProfileInfoForm = () => {
+  const { data } = useUser();
 
-const ProfileInfoForm = ({ type }: ProfileInfoFormProps) => {
-  // When the form is confirmed, it disables all inputs and buttons
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const queryClient = useQueryClient();
+  const [type, setType] = useState<string>("See");
+
+  const { mutate: updateProfile, isLoading: isUpdating } = useMutation({
+    mutationKey: ["user"],
+    mutationFn: async (userData: User) => await editProfileApi(userData),
+    onSuccess: (data) => {
+      toast.success("پروفایل شما با موفقیت تغییر کرد");
+      console.log("data : ", data);
+      queryClient.invalidateQueries(["user"]);
+    },
+  });
 
   // controll all inputs
   const {
@@ -28,33 +40,42 @@ const ProfileInfoForm = ({ type }: ProfileInfoFormProps) => {
     handleSubmit,
     setValue,
     watch,
+    reset,
   } = useForm({
     resolver: yupResolver(profileInfoValidation),
     defaultValues: {
       name: "",
       family: "",
       email: "",
-      phone: "09128765432",
-      brithday: "",
-      userName: "",
+      phone: "",
+      birthday: "",
+      username: "",
     },
   });
+
+  // change form data when we have user data
+  useEffect(() => {
+    if (data) {
+      reset({
+        name: data.name,
+        family: data.family,
+        email: data.email,
+        phone: data.phone,
+        birthday: data.birthday,
+        username: data.username,
+      });
+    }
+  }, [data]);
 
   // for call user change info api
   const changeData = (data: any) => {
     console.log(data);
-    setIsLoading(true);
+    updateProfile(data);
+  };
 
-    try {
-      // call api
-      toast.success("اطلاعات شما با موفقیت تغییر پیدا کرد");
-    } catch (error) {
-      // catch error
-      console.log(error);
-      throw error;
-    } finally {
-      setIsLoading(false);
-    }
+  // change mode from edit to see and reverse
+  const changeMode = (mode: string) => {
+    setType(mode);
   };
 
   return (
@@ -64,7 +85,7 @@ const ProfileInfoForm = ({ type }: ProfileInfoFormProps) => {
         className="flex flex-col gap-y-3 md:mt-5 md:flex-row md:flex-wrap md:justify-center md:gap-x-3"
         autoComplete="off"
       >
-        <div className="flex flex-col gap-y-2 md:w-1/3">
+        <div className="flex w-full flex-col gap-y-2 xl:w-1/3">
           <label htmlFor="name" className="caption-lg">
             نام
           </label>
@@ -73,14 +94,14 @@ const ProfileInfoForm = ({ type }: ProfileInfoFormProps) => {
             type="text"
             id="name"
             placeholder="نام"
-            disabled={type === "See" || isLoading}
+            disabled={type === "See" || isUpdating}
             {...register("name")}
           />
           {errors.name && (
             <p className="caption-md text-error-200">{errors.name.message}</p>
           )}
         </div>
-        <div className="flex flex-col gap-y-2 md:w-1/3">
+        <div className="flex w-full flex-col gap-y-2 xl:w-1/3">
           <label htmlFor="family" className="caption-lg">
             نام خانوادگی
           </label>
@@ -89,14 +110,14 @@ const ProfileInfoForm = ({ type }: ProfileInfoFormProps) => {
             type="text"
             id="family"
             placeholder="نام خانوادگی"
-            disabled={type === "See" || isLoading}
+            disabled={type === "See" || isUpdating}
             {...register("family")}
           />
           {errors.family && (
             <p className="caption-md text-error-200">{errors.family.message}</p>
           )}
         </div>
-        <div className="flex flex-col gap-y-2 md:w-1/3">
+        <div className="flex w-full flex-col gap-y-2 xl:w-1/3">
           <label htmlFor="email" className="caption-lg">
             آدرس ایمیل
           </label>
@@ -105,14 +126,14 @@ const ProfileInfoForm = ({ type }: ProfileInfoFormProps) => {
             type="text"
             id="email"
             placeholder="آدرس ایمیل"
-            disabled={type === "See" || isLoading}
+            disabled={type === "See" || isUpdating}
             {...register("email")}
           />
           {errors.email && (
             <p className="caption-md text-error-200">{errors.email.message}</p>
           )}
         </div>
-        <div className="flex flex-col gap-y-2 md:w-1/3">
+        <div className="flex w-full flex-col gap-y-2 xl:w-1/3">
           <label htmlFor="phoneNumber" className="caption-lg">
             شماره موبایل
           </label>
@@ -125,7 +146,7 @@ const ProfileInfoForm = ({ type }: ProfileInfoFormProps) => {
             {...register("phone")}
           />
         </div>
-        <div className="flex flex-col gap-y-2 md:w-1/3">
+        <div className="flex w-full flex-col gap-y-2 xl:w-1/3">
           <label htmlFor="brithday" className="caption-lg">
             تاریخ تولد
           </label>
@@ -135,14 +156,14 @@ const ProfileInfoForm = ({ type }: ProfileInfoFormProps) => {
             calendar={persian}
             id="brithday"
             locale={persian_fa}
-            value={watch("brithday")}
+            value={watch("birthday")}
             className="green font-estedad"
-            disabled={type === "See" || isLoading}
+            disabled={type === "See" || isUpdating}
             maxDate={new Date()}
-            onChange={(date) => setValue("brithday", date?.toString())}
+            onChange={(date) => setValue("birthday", date && date.toString())}
           />
         </div>
-        <div className="flex flex-col gap-y-2 md:w-1/3">
+        <div className="flex w-full flex-col gap-y-2 xl:w-1/3">
           <label htmlFor="userName" className="caption-lg">
             نام نمایشی
           </label>
@@ -151,31 +172,31 @@ const ProfileInfoForm = ({ type }: ProfileInfoFormProps) => {
             type="text"
             id="userName"
             placeholder="نام نمایشی"
-            disabled={type === "See" || isLoading}
-            {...register("userName")}
+            disabled={type === "See" || isUpdating}
+            {...register("username")}
           />
-          {errors.userName && (
+          {errors.username && (
             <p className="caption-md text-error-200">
-              {errors.userName.message}
+              {errors.username.message}
             </p>
           )}
         </div>
         {type === "Edit" && (
           <div className="flex w-full items-center gap-x-2 md:mx-auto md:w-2/3 md:justify-end">
-            <Link
-              href={"/profile"}
+            <button
+              onClick={() => changeMode("See")}
               className={`button-outline-primary button-lg flex flex-1 justify-center rounded-4 py-2 text-primary-800 md:md:min-w-[130px] md:flex-none md:px-8 ${
-                isLoading && "pointer-events-none opacity-80"
+                isUpdating && "pointer-events-none opacity-80"
               }`}
             >
-              نصراف
-            </Link>
+              انصراف
+            </button>
             <button
-              disabled={!isDirty || isLoading}
+              disabled={!isDirty || isUpdating}
               type="submit"
               className="button-primary button-lg flex flex-1 items-center justify-center rounded-4 p-2 md:w-max md:min-w-[130px] md:flex-none"
             >
-              {isLoading ? (
+              {isUpdating ? (
                 <Oval
                   width={23}
                   height={23}
@@ -192,6 +213,18 @@ const ProfileInfoForm = ({ type }: ProfileInfoFormProps) => {
           </div>
         )}
       </form>
+
+      {type === "See" && (
+        <div className="mt-5 flex justify-center">
+          <button
+            className="button-outline-primary flex items-center gap-x-3 rounded-8 px-3 py-2 text-primary-800"
+            onClick={() => changeMode("Edit")}
+          >
+            <Edit />
+            <span>ویرایش اطلاعات شخصی</span>
+          </button>
+        </div>
+      )}
     </>
   );
 };

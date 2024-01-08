@@ -105,4 +105,8 @@ export interface User {
   phone: string;
   username: string;
   addresses: any;
+  name?: string;
+  family?: string;
+  email?: string;
+  birthday?: string;
 }

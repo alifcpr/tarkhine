@@ -1,9 +1,10 @@
-import React from 'react'
+"use client";
+import useTitle from "@/hooks/useTitle";
+import React from "react";
 
 const Page = () => {
-  return (
-    <div>Page</div>
-  )
-}
+  useTitle("پروفایل");
+  return <div>حساب کاربری</div>;
+};
 
-export default Page
+export default Page;

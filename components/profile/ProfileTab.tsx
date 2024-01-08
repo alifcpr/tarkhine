@@ -1,15 +1,11 @@
 "use client";
 import { profileLinks } from "@/constants";
 import { ProfileLinks } from "@/types/type.d";
-import React, { Dispatch, SetStateAction, useCallback } from "react";
+import React, { useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { User, Wallet2, Heart, LogoutCurve, Location } from "iconsax-react";
-
-type ProfileTabProps = {
-  isMenuOpen: boolean;
-  setIsMenuOpen: Dispatch<SetStateAction<boolean>>;
-};
+import { useMenu } from "@/providers/ProfileMenuStateProvider";
 
 const ProfileHeader = () => {
   return (
@@ -25,8 +21,10 @@ const ProfileHeader = () => {
   );
 };
 
-const ProfileTab = ({ isMenuOpen, setIsMenuOpen }: ProfileTabProps) => {
+const ProfileTab = () => {
   const pathName = usePathname();
+
+  const { isMenuOpen } = useMenu();
 
   const renderIcon = useCallback((type: string) => {
     switch (type) {
@@ -50,8 +48,8 @@ const ProfileTab = ({ isMenuOpen, setIsMenuOpen }: ProfileTabProps) => {
   return (
     <div
       className={`absolute inset-0 z-50 col-span-12 bg-muted-100 p-2 ${
-        isMenuOpen && "hidden"
-      }   rounded-8 md:static md:col-span-2 md:block md:h-max md:border`}
+        isMenuOpen ? "" : "hidden"
+      }   rounded-8 md:static md:col-span-4 md:block md:h-max md:border xl:col-span-2`}
     >
       <ProfileHeader />
       <div className="flex flex-col gap-y-2">

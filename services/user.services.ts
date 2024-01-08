@@ -19,3 +19,12 @@ export const getUserAddress = async ({
   );
   return data;
 };
+
+// user edit profile
+type EditProfileApi = { message: string; statusCode: number };
+export const editProfileApi = async (
+  userData: User
+): Promise<EditProfileApi> => {
+  const { data } = await axiosService.post("/v1/profile/user", userData);
+  return data;
+};
