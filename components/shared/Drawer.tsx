@@ -70,8 +70,8 @@ const Drawer = ({ children, open, onClose }: DrawerProps) => {
       >
         <aside
           ref={ref}
-          className={`smooth-transition absolute top-0 h-full w-2/3 bg-muted-100 shadow-md md:w-1/3  ${
-            open ? "right-0" : "-right-full"
+          className={`smooth-transition absolute top-0 h-full w-2/3  bg-muted-100 shadow-md md:w-1/3 ${
+            open ? "translate-x-0" : "translate-x-full"
           }`}
         >
           <DrawerTopFrame onClose={onClose} />
