@@ -11,7 +11,7 @@ const ProfileInfo = () => {
   const { backToProfilePage } = useProfileMenuController();
 
   // page title
-  useTitle("مشخصات حساب کاربری");
+  useTitle("اطلاعات حساب کاربری");
 
   return (
     <div>

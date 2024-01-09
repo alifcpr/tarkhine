@@ -7,10 +7,10 @@ import Modal from "@/components/shared/Modal";
 import AddAddressForm from "@/components/forms/AddAddressForm";
 import AddressCard from "@/components/cards/AddressCard";
 import useGetAddresses from "@/hooks/useGetAddresses";
-import useTitle from "@/hooks/useTitle";
 import Loading from "./loading";
 import Pagination from "@/components/Pagination";
 import useProfileMenuController from "@/hooks/useProfileMenuController";
+import useTitle from "@/hooks/useTitle";
 
 const Page = () => {
   // for back to profile page and open menu
@@ -19,11 +19,11 @@ const Page = () => {
   // modal state
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  // page title
-  useTitle("آدرس های من");
-
   // getting user addresses from api
   const { data: addresses, isLoading, isPreviousData } = useGetAddresses();
+
+  // page title
+  useTitle("آدرس های من");
 
   return (
     <>

@@ -6,6 +6,7 @@ import Header from "@/components/shared/Header";
 import Footer from "@/components/shared/Footer";
 import { Toaster } from "react-hot-toast";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
+import NextTopLoader from "nextjs-toploader";
 
 export const metadata: Metadata = {
   title: "ترخینه",
@@ -28,6 +29,16 @@ export default function RootLayout({
       <body className={estedadFont.variable}>
         <div className="">
           <ReactQueryProvider>
+            <NextTopLoader
+              color="#417F56"
+              initialPosition={0.08}
+              crawlSpeed={200}
+              height={4}
+              crawl={true}
+              showSpinner={true}
+              easing="ease"
+              speed={200}
+            />
             <Header />
             <main className="mx-auto max-w-7xl">{children}</main>
             <Toaster containerClassName="font-estedad" />

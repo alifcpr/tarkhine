@@ -5,7 +5,12 @@ import Search from "@/components/shared/filters/Search";
 import { branchList, categoryItems } from "@/constants";
 import { BranchList, CategoryItems } from "@/types/type.d";
 import { Diagram, HomeWifi, MenuBoard, User } from "iconsax-react";
+import { Metadata } from "next";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "ترخینه | صفحه اصلی",
+};
 
 const Home = () => {
   return (

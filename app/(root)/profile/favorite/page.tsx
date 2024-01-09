@@ -2,15 +2,15 @@
 "use client";
 import { ArrowRight2 } from "iconsax-react";
 import React from "react";
-import useTitle from "@/hooks/useTitle";
 import useProfileMenuController from "@/hooks/useProfileMenuController";
+import useTitle from "@/hooks/useTitle";
 
 const Page = () => {
   // for back to profile page and open menu
   const { backToProfilePage } = useProfileMenuController();
 
   // page title
-  useTitle("علاقمندی ها");
+  useTitle("غذای های موردعلاقه ی من");
 
   return (
     <div>
