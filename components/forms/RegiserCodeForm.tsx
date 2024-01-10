@@ -15,7 +15,7 @@ import toast from "react-hot-toast";
 import Countdown, { zeroPad } from "react-countdown";
 import { Clock } from "iconsax-react";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 type RegisterCodeFromProps = {
   phoneState: string;
@@ -37,7 +37,7 @@ const RegisterCodeForm = ({
   // When it changes, the timer is reset
   const [reset, setRest] = useState<boolean>(false);
   // router
-  const router = useRouter();
+  // const router = useRouter();
 
   // countDown ref for access to Api
   const countDownRef = useRef<any | null>(null);
@@ -58,8 +58,8 @@ const RegisterCodeForm = ({
         { phone: phoneState, otpCode: +inputValue },
         { withCredentials: true }
       );
-
-      router.replace("/");
+      console.log("CHECK-OTP : ", data);
+      // router.replace("/");
 
       toast.success("کد درست بود خوش آمدی");
     } catch (error) {

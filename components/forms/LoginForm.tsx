@@ -41,10 +41,11 @@ const LoginForm = ({
     setIsLoading(true);
     try {
       // eslint-disable-next-line no-unused-vars
-      const {data} = await axios.post(
+      const { data } = await axios.post(
         "https://tarkhineh.liara.run/v1/auth/get-otp",
         { phone: phoneState }
       );
+      console.log("GET-OTP : ", data);
       toast.success("کد با موفقیت به شماره موبایل شما ارسال شد");
       setStepTwo(true);
     } catch (error) {
