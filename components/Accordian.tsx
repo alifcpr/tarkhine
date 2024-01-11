@@ -48,7 +48,7 @@ const Accordian = ({
           <span className={titleClasses}>{title}</span>
         </div>
         <ArrowDown2
-          className={`smooth-transition h-5 w-5 ${arrowClasses} ${
+          className={`smooth-transition h-5 w-5 will-change-transform ${arrowClasses} ${
             open ? "rotate-0" : "rotate-180"
           }`}
         />
@@ -58,6 +58,7 @@ const Accordian = ({
         style={{
           height: `${open ? contentSize : 0}px`,
           overflow: `${open ? "auto" : "hidden"}`,
+          willChange: "height",
         }}
         className={`smooth-transition ${contentClasses}`}
       >

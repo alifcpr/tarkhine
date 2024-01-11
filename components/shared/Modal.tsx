@@ -71,7 +71,7 @@ const Modal = ({ children, containerClasses, open, onClose }: ModalProps) => {
       open &&
       createPortal(
         <div
-          className={`smooth-transition fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm ${containerClasses}  ${
+          className={`smooth-transition fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm will-change-["opacity"] ${containerClasses}  ${
             open
               ? "pointer-events-auto opacity-100"
               : "pointer-events-none opacity-0"

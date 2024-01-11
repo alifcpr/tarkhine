@@ -62,7 +62,7 @@ const Drawer = ({ children, open, onClose }: DrawerProps) => {
   if (typeof window === "object" && isClient) {
     return createPortal(
       <div
-        className={`smooth-transition fixed inset-0 z-50 backdrop-blur-sm lg:hidden ${
+        className={`smooth-transition fixed inset-0 z-50 backdrop-blur-sm will-change-["opacity"] lg:hidden ${
           open
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
@@ -70,7 +70,7 @@ const Drawer = ({ children, open, onClose }: DrawerProps) => {
       >
         <aside
           ref={ref}
-          className={`smooth-transition absolute top-0 h-full w-2/3  bg-muted-100 shadow-md md:w-1/3 ${
+          className={`smooth-transition absolute top-0 h-full w-2/3 bg-muted-100 shadow-md will-change-transform md:w-1/3 ${
             open ? "translate-x-0" : "translate-x-full"
           }`}
         >
