@@ -81,7 +81,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section>
+      <section className="mb-14">
         <h1 className="h5-bold lg:h4-bold mb-7 mt-12 text-center">
           ترخینه گردی
         </h1>

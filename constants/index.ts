@@ -265,3 +265,10 @@ export const branchList: BranchList[] = [
     ],
   },
 ];
+
+export const aboutItems = [
+  { _id: 1, text: "پرسنلی مجرب و حرفه ای", icon: "user" },
+  { _id: 2, text: "کیفیت بالای غذاها", icon: "chart" },
+  { _id: 3, text: "محیطی دلنشین و آرام", icon: "home" },
+  { _id: 4, text: "منوی متنوع", icon: "menu" },
+];

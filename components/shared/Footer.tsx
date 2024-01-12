@@ -23,7 +23,7 @@ const Footer = () => {
 
   return (
     <>
-      <div className=" mt-12 flex items-start justify-evenly bg-black/80 bg-[url(/assets/images/footer-image.jpg)] bg-cover bg-center p-5 text-muted-100 bg-blend-darken xl:justify-between xl:px-28 xl:py-8">
+      <div className="flex items-start justify-evenly bg-black/80 bg-[url(/assets/images/footer-image.jpg)] bg-cover bg-center p-5 text-muted-100 bg-blend-darken xl:justify-between xl:px-28 xl:py-8">
         <ul className="flex flex-col items-center gap-y-5">
           <li className="body-sm xl:h5-bold lg:body-lg mb-1">دسترسی آسان</li>
           <li className="caption-md xl:body-md lg:caption-lg">

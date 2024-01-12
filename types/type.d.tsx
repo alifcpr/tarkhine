@@ -110,3 +110,9 @@ export interface User {
   email?: string;
   birthday?: string;
 }
+
+export interface AboutItems {
+  _id: number;
+  text: string;
+  icon: string;
+}
