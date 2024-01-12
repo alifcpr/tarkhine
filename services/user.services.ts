@@ -2,7 +2,7 @@ import { Addresses, User } from "@/types/type.d";
 import axiosService from "./axios";
 
 // getUserInfo
-type GetUserInfo = { data: User | null; statusCode: number | null };
+type GetUserInfo = { data: User | string; statusCode: number };
 export const getUserInfo = async (): Promise<GetUserInfo> => {
   const { data } = await axiosService.get("/v1/user");
   return data;

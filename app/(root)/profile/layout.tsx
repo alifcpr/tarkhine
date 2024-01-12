@@ -7,7 +7,6 @@ type LayoutProps = {
 };
 
 const Layout = async ({ children }: LayoutProps) => {
-
   return (
     <ProfileMenuStateProvider>
       <div className="relative mx-4 grid grid-cols-12 gap-x-4 xl:mx-28">
