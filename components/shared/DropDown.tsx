@@ -45,7 +45,7 @@ const DropDown = ({
   };
 
   return (
-    <div className={`absolute z-50 ${containerClasses}`}>
+    <div className={`absolute z-[9999999] ${containerClasses}`}>
       <ul className={` rounded-8  shadow-md ${ulClasses}`}>
         {content.map((item: any, index: number) => (
           <li

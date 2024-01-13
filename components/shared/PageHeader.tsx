@@ -8,8 +8,8 @@ type PageHeaderProps = {
 
 const PageHeader = ({ title, imageSrc }: PageHeaderProps) => {
   return (
-    <div className="relative">
-      <div className="relative h-[178px] overflow-hidden bg-black md:h-[336px]">
+    <div className="pointer-events-none relative bg-red-500">
+      <div className="relative h-[178px] overflow-hidden bg-black md:h-[396px]">
         <Image
           src={imageSrc}
           alt="image slider"

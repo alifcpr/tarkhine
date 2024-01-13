@@ -3,6 +3,9 @@ import { Instagram } from "iconsax-react";
 import React from "react";
 import MessageBox from "./MessageBox";
 import { usePathname } from "next/navigation";
+import { helpLinksItems } from "@/constants";
+import { HelpLinksItems } from "@/types/type.d";
+import Link from "next/link";
 
 const Footer = () => {
   const pathName = usePathname();
@@ -26,11 +29,11 @@ const Footer = () => {
       <div className="flex items-start justify-evenly bg-black/80 bg-[url(/assets/images/footer-image.jpg)] bg-cover bg-center p-5 text-muted-100 bg-blend-darken xl:justify-between xl:px-28 xl:py-8">
         <ul className="flex flex-col items-center gap-y-5">
           <li className="body-sm xl:h5-bold lg:body-lg mb-1">دسترسی آسان</li>
-          <li className="caption-md xl:body-md lg:caption-lg">
-            پرسش های متداول
-          </li>
-          <li className="caption-md xl:body-md lg:caption-lg">قوانین ترخینه</li>
-          <li className="caption-md xl:body-md lg:caption-lg">حریم خصوصی</li>
+          {helpLinksItems.map((item: HelpLinksItems, index: number) => (
+            <li key={index} className="caption-md xl:body-md lg:caption-lg">
+              <Link href={item.href}>{item.title}</Link>
+            </li>
+          ))}
           <li className="flex items-center justify-center gap-x-2">
             <Instagram className="h-5 w-5" />
           </li>

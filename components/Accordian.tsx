@@ -8,6 +8,7 @@ type AccordianProps = {
   titleClasses?: string;
   titleContainer?: string;
   arrowClasses?: string;
+  activeTitle?: string;
   children: string | React.ReactNode;
   title: string;
   icon?: React.ReactNode;
@@ -21,6 +22,7 @@ const Accordian = ({
   arrowClasses,
   children,
   icon,
+  activeTitle,
   title,
 }: AccordianProps) => {
   // states
@@ -41,11 +43,13 @@ const Accordian = ({
     <>
       <div
         onClick={() => setOpen((prev) => !prev)}
-        className={`flex items-center justify-between ${containerClasses}`}
+        className={`flex cursor-pointer items-center justify-between ${containerClasses}`}
       >
         <div className={`flex items-center justify-between ${titleContainer}`}>
           {icon && icon}
-          <span className={titleClasses}>{title}</span>
+          <span className={`${titleClasses} ${open && activeTitle}`}>
+            {title}
+          </span>
         </div>
         <ArrowDown2
           className={`smooth-transition h-5 w-5 will-change-transform ${arrowClasses} ${
@@ -57,7 +61,7 @@ const Accordian = ({
         ref={contentRef}
         style={{
           height: `${open ? contentSize : 0}px`,
-          overflow: `${open ? "auto" : "hidden"}`,
+          overflow: `hidden`,
           willChange: "height",
         }}
         className={`smooth-transition ${contentClasses}`}

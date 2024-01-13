@@ -116,3 +116,15 @@ export interface AboutItems {
   text: string;
   icon: string;
 }
+
+export interface HelpLinksItems {
+  _id: number;
+  title: string;
+  href: string;
+}
+
+export interface Question {
+  _id: number;
+  title: string;
+  content: string;
+}
