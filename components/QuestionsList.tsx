@@ -19,7 +19,9 @@ const QuestionsList = ({ questions }: QuestionsProps) => {
               containerClasses="px-3"
               activeTitle="text-primary-800 !font-bold"
             >
-              <p className="mt-2 leading-8 text-muted-800">{item.content}</p>
+              <p className="mt-2 text-justify leading-8 text-muted-800">
+                {item.content}
+              </p>
             </Accordian>
           </div>
         ))}

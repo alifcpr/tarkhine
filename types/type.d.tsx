@@ -50,12 +50,15 @@ export interface CategoryItems {
   href: string;
 }
 
-export interface BranchList {
+export interface BranchParams {
   _id: number;
   title: string;
   thumbnail: string;
   href: string;
   address: string;
+  phoneOne: string;
+  phoneTwo: string;
+  workTime: string;
   slideImages: { _id: number; picture: string }[];
 }
 

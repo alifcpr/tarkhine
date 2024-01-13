@@ -134,7 +134,7 @@
   }
 
   .button-outline-primary {
-    @apply button-lg  smooth-transition rounded-4 border hover:bg-primary-800 border-primary-800 hover:text-muted-100 disabled:bg-muted-200 cursor-pointer disabled:cursor-not-allowed disabled:py-2 disabled:px-8;
+    @apply button-lg text-primary-800 smooth-transition rounded-4 border hover:bg-primary-800 border-primary-800 hover:text-muted-100 disabled:bg-muted-200 cursor-pointer disabled:cursor-not-allowed disabled:py-2 disabled:px-8;
   }
 
   .otp-form input {

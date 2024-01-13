@@ -1,5 +1,5 @@
 "use client";
-import { BranchList } from "@/types/type.d";
+import { BranchParams } from "@/types/type.d";
 import React, { useState } from "react";
 import Image from "next/image";
 import { ArrowLeft2, Gallery } from "iconsax-react";
@@ -14,7 +14,7 @@ const BranchCard = ({
   slideImages,
   thumbnail,
   title,
-}: BranchList) => {
+}: BranchParams) => {
   // modal state
   const [open, setOpen] = useState(false);
 
@@ -25,19 +25,17 @@ const BranchCard = ({
 
   return (
     <>
-      {
-        <Modal open={open} onClose={() => setOpen(false)}>
-          <Modal.Header
-            containerClass="absolute z-50 !bg-transparent !justify-end"
-            titleClass="hidden"
-            iconClass="text-white !w-10 !h-10 m-4 md:!w-12 md:!h-12"
-            onClose={() => setOpen(false)}
-          />
-          <Modal.Body containerClass="rounded-8 overflow-hidden max-w-sm md:max-w-2xl lg:max-w-4xl overflow-hidden h-[335px] md:h-[450px] lg:h-[500px]">
-            <ImageSlider images={slideImages} />
-          </Modal.Body>
-        </Modal>
-      }
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <Modal.Header
+          containerClass="absolute z-50 !bg-transparent !justify-end"
+          titleClass="hidden"
+          iconClass="text-white !w-10 !h-10 m-4 md:!w-12 md:!h-12"
+          onClose={() => setOpen(false)}
+        />
+        <Modal.Body containerClass="rounded-8 overflow-hidden max-w-sm md:max-w-2xl lg:max-w-4xl overflow-hidden h-[335px] md:h-[450px] lg:h-[500px]">
+          <ImageSlider images={slideImages} />
+        </Modal.Body>
+      </Modal>
 
       <div className="smooth-transition group col-span-12 flex min-h-full flex-row overflow-hidden rounded-8 border hover:border-primary-800 md:col-span-6 md:flex-col lg:col-span-3 xl:border-2 xl:hover:border-muted-500 xl:hover:shadow-md">
         <button

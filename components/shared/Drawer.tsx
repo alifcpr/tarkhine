@@ -62,7 +62,7 @@ const Drawer = ({ children, open, onClose }: DrawerProps) => {
   if (typeof window === "object" && isClient) {
     return createPortal(
       <div
-        className={`smooth-transition fixed inset-0 z-50 backdrop-blur-sm will-change-["opacity"] lg:hidden ${
+        className={`smooth-transition fixed inset-0 z-50 backdrop-blur-sm will-change-["opacity,backdrop"] lg:hidden ${
           open
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"

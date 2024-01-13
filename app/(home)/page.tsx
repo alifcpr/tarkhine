@@ -3,7 +3,7 @@ import CategoryCard from "@/components/cards/CategoryCard";
 import BannerSlider from "@/components/shared/BannerSlider";
 import Search from "@/components/shared/filters/Search";
 import { branchList, categoryItems } from "@/constants";
-import { BranchList, CategoryItems } from "@/types/type.d";
+import { BranchParams, CategoryItems } from "@/types/type.d";
 import { Diagram, HomeWifi, MenuBoard, User } from "iconsax-react";
 import { Metadata } from "next";
 import React from "react";
@@ -86,7 +86,7 @@ const Home = () => {
           ترخینه گردی
         </h1>
         <div className="mx-4 grid grid-cols-12 gap-3 max-xl:h-max md:gap-6 xl:mx-28 xl:h-[350px] xl:gap-10">
-          {branchList.map((branch: BranchList, index: number) => (
+          {branchList.map((branch: BranchParams, index: number) => (
             <BranchCard key={index} {...branch} />
           ))}
         </div>

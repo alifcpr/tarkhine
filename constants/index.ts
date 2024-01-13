@@ -1,7 +1,7 @@
 import {
   AboutItems,
   BannerSliderItems,
-  BranchList,
+  BranchParams,
   CategoryItems,
   HeaderLinks,
   HelpLinksItems,
@@ -213,13 +213,16 @@ export const categoryItems: CategoryItems[] = [
   },
 ];
 
-export const branchList: BranchList[] = [
+export const branchList: BranchParams[] = [
   {
     _id: 1,
     title: "شعبه اکباتان",
     address: "شهرک اکباتان، فاز ۳، مجتمع تجاری کوروش، طبقه سوم",
     thumbnail: "/assets/images/branch-1.png",
     href: "/branch/ekbatan",
+    phoneOne: "021-54891254",
+    phoneTwo: "021-54891255",
+    workTime: "همه روزه از ساعت 12 تا 23 بجز روز های تعطیل",
     slideImages: [
       { _id: 1, picture: "/assets/images/res-slide-1.jpg" },
       { _id: 2, picture: "/assets/images/res-slide-2.jpg" },
@@ -234,6 +237,9 @@ export const branchList: BranchList[] = [
       "چالوس، خیابان ۱۷ شهریور، بعد کوچه کوروش، جنب داروخانه دکتر میلانی",
     thumbnail: "/assets/images/branch-2.png",
     href: "/branch/chalos",
+    phoneOne: "021-54891254",
+    phoneTwo: "021-54891255",
+    workTime: "همه روزه از ساعت 12 تا 23 بجز روز های تعطیل",
     slideImages: [
       { _id: 1, picture: "/assets/images/res-slide-1.jpg" },
       { _id: 2, picture: "/assets/images/res-slide-2.jpg" },
@@ -247,6 +253,9 @@ export const branchList: BranchList[] = [
     address: "خیابان اقدسیه ، نرسیده به میدان خیام، پلاک ۸",
     thumbnail: "/assets/images/branch-3.png",
     href: "/branch/ahdasie",
+    phoneOne: "021-54891254",
+    phoneTwo: "021-54891255",
+    workTime: "همه روزه از ساعت 12 تا 23 بجز روز های تعطیل",
     slideImages: [
       { _id: 1, picture: "/assets/images/res-slide-1.jpg" },
       { _id: 2, picture: "/assets/images/res-slide-2.jpg" },
@@ -260,6 +269,9 @@ export const branchList: BranchList[] = [
     address: "میدان ونک، خیابان فردوسی، نبش کوچه نیلوفر، پلاک ۲۶",
     thumbnail: "/assets/images/branch-4.png",
     href: "/branch/vanak",
+    phoneOne: "021-54891254",
+    phoneTwo: "021-54891255",
+    workTime: "همه روزه از ساعت 12 تا 23 بجز روز های تعطیل",
     slideImages: [
       { _id: 1, picture: "/assets/images/res-slide-1.jpg" },
       { _id: 2, picture: "/assets/images/res-slide-2.jpg" },
