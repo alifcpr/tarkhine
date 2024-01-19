@@ -3,7 +3,7 @@
 "use client";
 import { profileInfoValidation } from "@/validations";
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
@@ -40,32 +40,17 @@ const ProfileInfoForm = () => {
     handleSubmit,
     setValue,
     watch,
-    reset,
   } = useForm({
     resolver: yupResolver(profileInfoValidation),
     defaultValues: {
-      name: "",
-      family: "",
-      email: "",
-      phone: "",
-      birthday: "",
-      username: "",
+      name: data?.name,
+      family: data?.family,
+      email: data?.email,
+      phone: data?.phone,
+      birthday: data?.birthday,
+      username: data?.username,
     },
   });
-
-  // change form data when we have user data
-  useEffect(() => {
-    if (data) {
-      reset({
-        name: data.name,
-        family: data.family,
-        email: data.email,
-        phone: data.phone,
-        birthday: data.birthday,
-        username: data.username,
-      });
-    }
-  }, [data]);
 
   // for call user change info api
   const changeData = (data: any) => {

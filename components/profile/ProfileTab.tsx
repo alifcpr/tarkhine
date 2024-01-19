@@ -9,7 +9,6 @@ import { useMenu } from "@/providers/ProfileMenuStateProvider";
 import useUser from "@/hooks/useUser";
 
 const ProfileHeader = () => {
-  
   const { data } = useUser();
 
   return (
@@ -20,7 +19,7 @@ const ProfileHeader = () => {
           title={data?.name}
           className="body-lg truncate md:w-[10vw] lg:w-[15vw] xl:w-[5vw]"
         >
-          {data?.name}
+          {data?.name} {data?.family}
         </p>
         <span className="text-muted-800" dir="ltr">
           {data?.phone}

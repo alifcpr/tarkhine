@@ -1,3 +1,5 @@
+"use client";
+import useUser from "@/hooks/useUser";
 import { addAddressApi, editAddressApi } from "@/services/address.services";
 import { AddAddress, Addresses } from "@/types/type.d";
 import { addressFormValidation } from "@/validations";
@@ -19,6 +21,8 @@ const AddAddressForm = ({
   addressData,
   closeModal,
 }: AddAddressFormProps) => {
+  const { data } = useUser();
+
   const {
     register,
     formState: { errors },
@@ -29,12 +33,7 @@ const AddAddressForm = ({
     defaultValues: {
       title: type === "Edit" && addressData ? addressData.addressTitle : "",
       own: type === "Edit" && addressData ? addressData.ownReceiver : true,
-      phoneNumber:
-        type === "Edit" && addressData
-          ? addressData.ownReceiver
-            ? addressData.phone
-            : ""
-          : "",
+      phoneNumber: data?.phone,
       getterName: type === "Edit" && addressData ? addressData.name : "",
       getterPhoneNumber:
         type === "Edit" && addressData
@@ -169,7 +168,7 @@ const AddAddressForm = ({
             type="text"
             className="input-gray-outline caption-lg w-full p-2 md:min-w-[500px]"
             placeholder="شماره همراه"
-            disabled={isAdding || isEditing}
+            disabled={true}
             id="phonenumber"
             {...register("phoneNumber")}
           />
