@@ -85,6 +85,10 @@
   .overline-sm {
     @apply font-estedad font-bold text-[12px];
   }
+
+  .ccl {
+    @apply font-estedad bg-green-500 !w-full !min-w-full !max-w-full;
+  }
 }
 
 @layer utilities {

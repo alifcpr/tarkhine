@@ -30,3 +30,9 @@ export const removeUrlQuery = ({ params, key }: RemoveUrlQueryParams) => {
     { skipNull: true }
   );
 };
+
+// convert kb to mb
+export const bytesToMegabytes = (bytes: number) => {
+  const megabytes = bytes / (1024 * 1024);
+  return megabytes.toFixed(2);
+};

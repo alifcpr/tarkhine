@@ -1,4 +1,9 @@
-import { Maybe, boolean, mixed, object, string } from "yup";
+import { Maybe, array, boolean, mixed, object, string } from "yup";
+
+const phoneRegex = /^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}/;
+const emailRegex =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const nationalCodeRegex = /^([0-9]){10}$/;
 
 export const messageValidation = object({
   name: string().required("وارد کردن نام اجباری است"),
@@ -13,14 +18,8 @@ export const messageValidation = object({
 export const loginValidation = object({
   phoneNumber: string()
     .required("وارد کردن شماره همراه اجباری است")
-    .matches(
-      /^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}/,
-      "شماره تلفن وارد شده اشتباه است"
-    ),
+    .matches(phoneRegex, "شماره تلفن وارد شده اشتباه است"),
 });
-
-const emailRegex =
-  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 export const profileInfoValidation = object({
   name: string()
@@ -64,8 +63,6 @@ export const profileInfoValidation = object({
     .notRequired(),
 });
 
-const phoneRegex = /^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}/;
-
 export const addressFormValidation = object({
   title: string().required("وارد کردن عنوان اجباری است"),
   own: boolean(),
@@ -94,4 +91,39 @@ export const addressFormValidation = object({
   address: string()
     .required("وارد کردن آدرس اجباری است")
     .min(5, "آدرس حداقل باید 5 کاراکتر باشد"),
+});
+
+export const getAdviceFormValidation = object({
+  name: string()
+    .required("وارد کردن نام و نام خانوادگی اجباری است")
+    .min(3, "نام و نام خانوادگی شما حداقل باید 3 رقم باشد"),
+  phoneNumber: string()
+    .required("وارد کردن شماره تماس اجباری است")
+    .matches(phoneRegex, "شماره تلفن وارد شده اشتباه است !"),
+  date: string().required("مشخص کردن تاریخ اجباری است"),
+});
+
+export const representationRequestValidation = object({
+  name: string().required("وارد کردن نام و نام خانوادگی اجباری است"),
+  nationalCode: string()
+    .required("وارد کردن کد ملی اجباری است !")
+    .matches(nationalCodeRegex, "کد ملی اشتباه است !"),
+  phoneNumber: string()
+    .required("وارد کردن شماره تماس اجباری است")
+    .matches(phoneRegex, "شماره تلفن اشتباه است !"),
+  province: string().required("وارد کردن نام استان اجباری است !"),
+  city: string().required("وارد کردن نام شهر اجباری است !"),
+  area: string().required("وارد کردن منطقه اجباری است !"),
+  address: string().required("وارد کردن آدرس اجباری است !"),
+  typeOfOwnership: string().required("وارد کردن نوع مالکیت اجباری است"),
+  squareArea: string().required("وارد کردن مساحت (متر مربع) اجباری است"),
+  ageOfBuilding: string().required("وارد کردن سن بنا اجباری است !"),
+  kitchen: boolean(),
+  license: boolean(),
+  lodge: boolean(),
+  parking: boolean(),
+  images: array()
+    .required("وارد کردن تصاویر ملک اجباری است")
+    .max(4, "حداکثر تعداد عکس 4 عدد است")
+    .min(4, "حداقل تعداد عکس 4 عدد است"),
 });

@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const useUser = () => {
   // fetching user data from getUserInfo
+
   const { isLoading, data: userData } = useQuery({
     queryKey: ["user"],
     queryFn: () => getUserInfo(),
@@ -12,7 +13,6 @@ const useUser = () => {
 
   const status = userData ? "authorized" : "unauthorized";
   const { data } = userData ?? { data: null };
-
   return { data, status, isLoading };
 };
 
