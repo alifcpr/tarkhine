@@ -2,9 +2,9 @@ import PageHeader from "@/components/shared/PageHeader";
 import { aboutItems } from "@/constants";
 import { AboutItems } from "@/types/type.d";
 import { Chart2, Home, MenuBoard, User } from "iconsax-react";
-import { Metadata } from "next";
 import Image from "next/image";
 import React from "react";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "درباره ی ما",

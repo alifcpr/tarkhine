@@ -19,7 +19,7 @@ app.interceptors.response.use(
     if (err.response.status === 401 && !originalConfig._retry) {
       originalConfig._retry = true;
       try {
-        const { data } = await axios.get(`${BASE_URL}/v1/auth/refresh`, {
+        const { data } = await axios.get(`${BASE_URL}v1/auth/refresh`, {
           withCredentials: true,
         });
         if (data) app(originalConfig);

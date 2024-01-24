@@ -1,13 +1,14 @@
 "use client";
 import Link from "next/link";
-import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import React, { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { loginValidation } from "@/validations";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { Oval } from "react-loader-spinner";
 import toast from "react-hot-toast";
-import axios from "axios";
+import { getOtpApi } from "@/services/auth.services";
+import { useMutation } from "@tanstack/react-query";
 
 type LoginFormProps = {
   phoneState: string;
@@ -21,7 +22,18 @@ const LoginForm = ({
   setStepTwo,
 }: LoginFormProps) => {
   // button loading
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const { mutate: getOtpMutate, isLoading: isGettingOtp } = useMutation({
+    mutationKey: ["user"],
+    mutationFn: (phone: string) => getOtpApi(phone),
+    onSuccess: () => {
+      setStepTwo(true);
+      toast.success("کد با موفقیت به شماره موبایل شما ارسال شد");
+    },
+    onError: ({ data }) => {
+      toast.error(data.message);
+    },
+  });
 
   // form handler
   const {
@@ -37,24 +49,7 @@ const LoginForm = ({
 
   // send code when input value is correct
   const sendCode = async (data: { phoneNumber: string }) => {
-    console.log("data : ", data);
-    setIsLoading(true);
-    try {
-      // eslint-disable-next-line no-unused-vars
-      const { data } = await axios.post(
-        "https://tarkhineh.liara.run/v1/auth/get-otp",
-        { phone: phoneState }
-      );
-      console.log("GET-OTP : ", data);
-      toast.success("کد با موفقیت به شماره موبایل شما ارسال شد");
-      setStepTwo(true);
-    } catch (error) {
-      // get error
-      console.log(error);
-      throw error;
-    } finally {
-      setIsLoading(false);
-    }
+    getOtpMutate(data.phoneNumber);
   };
 
   // phone state handler
@@ -92,7 +87,7 @@ const LoginForm = ({
             className="input-gray-outline body-md  w-full px-4 py-3"
             placeholder="شماره همراه"
             inputMode="numeric"
-            disabled={isLoading}
+            disabled={isGettingOtp}
           />
           {errors.phoneNumber && (
             <p className="caption-md mt-2 text-error-200">
@@ -102,10 +97,10 @@ const LoginForm = ({
         </div>
         <button
           type="submit"
-          disabled={isLoading || !isDirty}
+          disabled={isGettingOtp || !isDirty}
           className="button-primary button-lg flex w-full items-center justify-center rounded-8 p-2"
         >
-          {isLoading ? (
+          {isGettingOtp ? (
             <Oval
               width={23}
               height={23}
@@ -122,7 +117,7 @@ const LoginForm = ({
       </form>
       <p className="caption-lg mt-8 text-muted-950">
         ورود و عضویت در ترخینه به منزله قبول{" "}
-        <Link href={"/policy "} className="text-primary-800">
+        <Link href={"/privacy"} className="text-primary-800">
           قوانین و مقررات
         </Link>{" "}
         است.

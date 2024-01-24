@@ -32,7 +32,6 @@ const Home = () => {
           ))}
         </div>
       </section>
-
       <section className="relative mt-10 flex flex-col gap-y-9 bg-black/60 bg-[url(/assets/images/restaurant-environment.jpg)] bg-cover bg-center px-5 py-10 bg-blend-darken  md:mt-16 md:flex-row xl:px-28">
         <div className="w-full ">
           <h1 className="overline-lg xl:h4-bold mb-2 text-start text-muted-100 md:text-start">
@@ -80,7 +79,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       <section className="mb-14">
         <h1 className="h5-bold lg:h4-bold mb-7 mt-12 text-center">
           ترخینه گردی

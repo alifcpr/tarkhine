@@ -4,6 +4,7 @@ import React, {
   Dispatch,
   SetStateAction,
   useEffect,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -14,7 +15,9 @@ import ReactCodeInput from "react-code-input";
 import toast from "react-hot-toast";
 import Countdown, { zeroPad } from "react-countdown";
 import { Clock } from "iconsax-react";
-import axios from "axios";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { checkOtpApi, resendCodeApi } from "@/services/auth.services";
+import { useRouter } from "next/navigation";
 // import { useRouter } from "next/navigation";
 
 type RegisterCodeFromProps = {
@@ -28,19 +31,57 @@ const RegisterCodeForm = ({
   setStepTwo,
   setPhoneState,
 }: RegisterCodeFromProps) => {
-  // isLoading for disable input and buttons
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   // otp input value
   const [inputValue, setInputValue] = useState<string>("");
   // It becomes true when the code is wrong
   const [otpError, setOtpError] = useState<boolean>(false);
   // When it changes, the timer is reset
   const [reset, setRest] = useState<boolean>(false);
-  // router
-  // const router = useRouter();
+
+  const router = useRouter();
+
+  const queryClient = useQueryClient();
+  const { mutate: checkOtpMutate, isLoading: isCheckingOtp } = useMutation({
+    mutationKey: ["user"],
+    mutationFn: ({ phone, otpCode }: { phone: string; otpCode: number }) =>
+      checkOtpApi({ phone, otpCode }),
+    onSuccess: () => {
+      toast.success("به وبسایت ترخینه خوش آمدید");
+      router.replace("/");
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+      setOtpError(false);
+    },
+    onError: () => {
+      toast.error("کد وارد شده اشتباه است !");
+      setOtpError(true);
+    },
+  });
+
+  const { mutate: resendCodeMutate, isLoading: isResendingOtp } = useMutation({
+    mutationKey: ["user"],
+    mutationFn: (phone: string) => resendCodeApi(phone),
+    onSuccess: () => {
+      toast.success("کد تایید مجددا ارسال شد");
+    },
+    onError: () => {
+      toast.error("مشکلی در ارسال مجدد کد پیش آمده بعدا امتحان کنید !");
+    },
+  });
 
   // countDown ref for access to Api
   const countDownRef = useRef<any | null>(null);
+
+  // reset countDown timer when reset state change
+  useEffect(() => {
+    if (countDownRef.current) countDownRef.current.start();
+  }, [reset]);
+
+  // It automatically calls the sendCode function when the inputValue reaches 5 characters
+  useEffect(() => {
+    if (inputValue.length === 5) {
+      checkCodeHandler();
+    }
+  }, [inputValue]);
 
   // handle otp input change
   const handleInputs = (inputVal: string) => {
@@ -48,41 +89,26 @@ const RegisterCodeForm = ({
   };
 
   // It checks from api whether the verification code is correct or not
-  const checkCode = async () => {
-    setIsLoading(true);
-
-    try {
-      // eslint-disable-next-line no-unused-vars
-      const { data } = await axios.post(
-        "https://tarkhineh.liara.run/v1/auth/check-otp",
-        { phone: phoneState, otpCode: +inputValue },
-        { withCredentials: true }
-      );
-      console.log("CHECK-OTP : ", data);
-      // router.replace("/");
-
-      toast.success("کد درست بود خوش آمدی");
-    } catch (error) {
-      // catch error
-      console.log(error);
-      setOtpError(true);
-      toast.error("کد وارد شده اشتباه است");
-      throw error;
-    } finally {
-      setIsLoading(false);
-    }
+  const checkCodeHandler = async () => {
+    checkOtpMutate({ phone: phoneState, otpCode: +inputValue });
   };
-
-  // reset Date.now() (when resetTimer change it's reset)
-  const countDownTimer = useMemo(() => {
-    return Date.now() + 1000 * 20;
-  }, [reset]);
 
   // for change mobile phone
   const changeMobilePhone = () => {
     setPhoneState("");
     setStepTwo(false);
   };
+
+  // resend another code for phoneNumber
+  const resendCodeHandler = async () => {
+    setRest((prev) => !prev);
+    resendCodeMutate(phoneState);
+  };
+
+  // reset Date.now() (when resetTimer change it's reset)
+  const countDownTimer = useMemo(() => {
+    return Date.now() + 1000 * 120;
+  }, [reset]);
 
   // Render the element based on the countdown timer
   const renderElement = ({
@@ -96,7 +122,10 @@ const RegisterCodeForm = ({
   }) => {
     if (completed) {
       return (
-        <button onClick={resendCode} className="caption-lg text-primary-800">
+        <button
+          onClick={resendCodeHandler}
+          className="caption-lg text-primary-800"
+        >
           دریافت مجدد کد
         </button>
       );
@@ -114,38 +143,6 @@ const RegisterCodeForm = ({
       );
     }
   };
-
-  // reset countDown timer when reset state change
-  useEffect(() => {
-    if (countDownRef.current) countDownRef.current.start();
-  }, [reset]);
-
-  // resend another code for phoneNumber
-  const resendCode = async () => {
-    setRest((prev) => !prev);
-    setIsLoading(true);
-
-    try {
-      // eslint-disable-next-line no-unused-vars
-      const { data } = await axios.post(
-        "https://tarkhineh.liara.run/v1/auth/resend-code",
-        { phone: phoneState }
-      );
-      toast.success("کد تایید مجددا ارسال شد");
-    } catch (error) {
-      console.log(error);
-      throw error;
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // It automatically calls the sendCode function when the inputValue reaches 5 characters
-  useEffect(() => {
-    if (inputValue.length === 5) {
-      checkCode();
-    }
-  }, [inputValue]);
 
   return (
     <div className="flex flex-col items-center md:rounded-8 md:border-2 md:p-8">
@@ -178,7 +175,7 @@ const RegisterCodeForm = ({
             onChange={handleInputs}
             name={"opt-form"}
             className={`otp-form ${otpError && "otp-error"}`}
-            disabled={isLoading}
+            disabled={isCheckingOtp || isResendingOtp}
           />
           <div className="mt-2 flex w-full items-center justify-between">
             <button onClick={changeMobilePhone} className="caption-lg">
@@ -192,11 +189,11 @@ const RegisterCodeForm = ({
           </div>
         </div>
         <button
-          onClick={checkCode}
-          disabled={isLoading || inputValue.length < 1}
+          onClick={checkCodeHandler}
+          disabled={isCheckingOtp || isResendingOtp || inputValue.length < 1}
           className="button-primary button-lg flex w-full items-center justify-center rounded-8 p-2"
         >
-          {isLoading ? (
+          {isCheckingOtp || isResendingOtp ? (
             <Oval
               width={23}
               height={23}

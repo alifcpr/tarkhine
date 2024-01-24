@@ -6,6 +6,7 @@ type GetUserInfo = { data: User | null; statusCode: number | null };
 export const getUserInfo = async (): Promise<GetUserInfo> => {
   try {
     const { data } = await axiosService.get("/v1/user");
+    console.log("FROM API : ", data);
     return data;
   } catch {
     return { data: null, statusCode: 401 };
