@@ -4,7 +4,6 @@ import { RemoveUrlQueryParams, UrlQueryParams } from "@/types/type.d";
 // add query to url
 export const formUrlQuery = ({ params, value, key }: UrlQueryParams) => {
   const currentUrl = qs.parse(params);
-
   currentUrl[key] = value;
 
   return qs.stringifyUrl(

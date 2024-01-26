@@ -18,3 +18,12 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #131313;
 }
+
+.hideSB::-webkit-scrollbar {
+  height: 0;
+  width: 0;
+}
+
+* {
+  scroll-behavior: smooth;
+}

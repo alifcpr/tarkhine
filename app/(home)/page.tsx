@@ -6,6 +6,7 @@ import { branchList, categoryItems } from "@/constants";
 import { BranchParams, CategoryItems } from "@/types/type.d";
 import { Diagram, HomeWifi, MenuBoard, User } from "iconsax-react";
 import { Metadata } from "next";
+import { cookies } from "next/headers";
 import React from "react";
 
 export const metadata: Metadata = {
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 };
 
 const Home = () => {
+  console.log(cookies().getAll());
   return (
     <div>
       <BannerSlider />
