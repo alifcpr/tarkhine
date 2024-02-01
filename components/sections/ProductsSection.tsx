@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import React from "react";
 import ProductCard from "../cards/ProductCard";
 import Pagination from "../Pagination";
+import NotFound from "../NotFound";
 
 const ProductsSection = () => {
   const searchParams = useSearchParams();
@@ -37,16 +38,23 @@ const ProductsSection = () => {
   if (data)
     return (
       <div className="px-5 lg:px-11 xl:px-14">
-        {data.foods.map((item) => (
-          <div key={item.subCategory} className="mb-3">
-            <h1 className="h4-bold lg:h4-bold mb-3">{item.subCategory}</h1>
-            <div className="grid grid-cols-12 gap-6">
-              {item.data.map((product) => (
-                <ProductCard {...product} key={product._id} />
-              ))}
+        {data.foods.length > 0 ? (
+          data.foods.map((item) => (
+            <div key={item.subCategory} className="mb-3">
+              <h1 className="h4-bold lg:h4-bold mb-3">{item.subCategory}</h1>
+              <div className="grid grid-cols-12 gap-6">
+                {item.data.map((product) => (
+                  <ProductCard {...product} key={product._id} />
+                ))}
+              </div>
             </div>
+          ))
+        ) : (
+          <div className="mb-12">
+            <NotFound title="مورد با این مشخصات پیدا نکردیم " />
           </div>
-        ))}
+        )}
+
         <div className="">
           <Pagination totalPage={data.maxPage} />
         </div>

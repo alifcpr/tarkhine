@@ -25,7 +25,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="flex items-center justify-between bg-muted-100 p-5 lg:px-4 lg:py-8 xl:px-28 xl:py-9">
+      <div className="flex items-center justify-between bg-muted-100 p-5 lg:px-4 lg:py-8 xl:px-14 xl:py-9 2xl:px-28">
         <MobileNav />
         <Link href={"/"}>
           <Image
