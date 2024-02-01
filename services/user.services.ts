@@ -33,3 +33,23 @@ export const editProfileApi = async (
   const { data } = await axiosService.post("/v1/profile/user", userData);
   return data;
 };
+
+type addToFavoriteRes = { message: string; statsCode: number };
+export const addToFavoriteApi = async (
+  foodId: string
+): Promise<addToFavoriteRes> => {
+  const { data } = await axiosService.post(
+    `/v1/profile/favorite-food?foodId=${foodId}`
+  );
+  return data;
+};
+
+type deleteFromFavoriteRes = { message: string; statusCode: number };
+export const deleteFromFavoriteApi = async (
+  foodId: string
+): Promise<deleteFromFavoriteRes> => {
+  const { data } = await axiosService.delete(
+    `/v1/profile/favorite-food?foodId=${foodId}`
+  );
+  return data;
+};

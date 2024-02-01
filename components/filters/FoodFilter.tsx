@@ -23,7 +23,7 @@ const FoodFilter = ({ activeClasses, buttonClasses }: FoodFilterProps) => {
           key: "mainCategory",
           params: pathName,
         });
-        router.push(newUrl);
+        router.push(newUrl, { scroll: false });
       }
       //  add query
       else {
@@ -32,7 +32,7 @@ const FoodFilter = ({ activeClasses, buttonClasses }: FoodFilterProps) => {
           value,
           params: pathName,
         });
-        router.push(newUrl);
+        router.push(newUrl, { scroll: false });
       }
     };
   };

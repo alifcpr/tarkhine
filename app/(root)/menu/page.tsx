@@ -1,10 +1,35 @@
 import FoodFilter from "@/components/filters/FoodFilter";
 import SubFilterFood from "@/components/filters/SubFilterFood";
+import ProductsSection from "@/components/sections/ProductsSection";
 import BannerSlider from "@/components/shared/BannerSlider";
 import Search from "@/components/shared/filters/Search";
+import { getAllProductApi } from "@/services/product.services";
+import { UrlQuery } from "@/types/type";
+import { QueryClient, dehydrate, Hydrate } from "@tanstack/react-query";
 import React from "react";
 
-const Page = () => {
+const Page = async ({ searchParams }: UrlQuery) => {
+  const {
+    mainCategory = "",
+    subCategory = "",
+    limit = 10,
+    page = 1,
+    q = "",
+  } = searchParams;
+
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ["foods", mainCategory, subCategory, limit, page, q],
+    queryFn: async () =>
+      await getAllProductApi({
+        main: mainCategory,
+        sub: subCategory,
+        limit: +limit,
+        page: +page,
+        q,
+      }),
+  });
+
   return (
     <>
       <BannerSlider />
@@ -22,6 +47,9 @@ const Page = () => {
           containerClasses="w-full !py-2 md:w-1/2 lg:w-1/3"
         />
       </div>
+      <Hydrate state={dehydrate(queryClient)}>
+        <ProductsSection />
+      </Hydrate>
     </>
   );
 };

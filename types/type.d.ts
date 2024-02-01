@@ -131,3 +131,35 @@ export interface Question {
   title: string;
   content: string;
 }
+
+export interface UrlQuery {
+  searchParams: { [key: string]: string | undefined };
+}
+
+export interface Comment {
+  _id: string;
+  author: string;
+  foodId: string;
+  text: string;
+  craetedAt: Date;
+  show: boolean;
+  rate: number;
+}
+
+export interface Product {
+  _id: string;
+  title: string;
+  ingredients: string[];
+  description: string;
+  price: number;
+  discount: number;
+  quantity: number;
+  category: string[];
+  subCategory: string[];
+  imagesUrl: string[];
+  rate: number;
+  rateCount: number;
+  comments: Comment[];
+  newPrice?: number;
+  isFavorite: boolean;
+}

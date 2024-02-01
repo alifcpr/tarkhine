@@ -10,12 +10,11 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
+    "@smastrom/react-rating": "^1.5.0",
     "@tanstack/react-query": "^4.36.1",
     "@tanstack/react-query-devtools": "^4.36.1",
     "axios": "^1.6.2",
     "cookie": "^0.6.0",
-    "cookie-parser": "^1.4.6",
-    "cookies-next": "^4.1.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-tailwindcss": "^3.13.0",

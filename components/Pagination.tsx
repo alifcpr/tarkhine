@@ -1,6 +1,6 @@
 import { formUrlQuery } from "@/utils";
 import { ArrowLeft3, ArrowRight3 } from "iconsax-react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 type PaginationProps = {
@@ -8,7 +8,6 @@ type PaginationProps = {
 };
 
 const Pagination = ({ totalPage }: PaginationProps) => {
-  const pathName = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
   const pageQuery = searchParams.get("page") ?? 1;
@@ -26,12 +25,12 @@ const Pagination = ({ totalPage }: PaginationProps) => {
 
   useEffect(() => {
     const newUrl = formUrlQuery({
-      params: pathName.toString(),
+      params: searchParams.toString(),
       key: "page",
       value: String(page),
     });
-    router.push(newUrl);
-  }, [page, pathName, router]);
+    router.push(newUrl, { scroll: false });
+  }, [page, router, searchParams]);
 
   if (totalPage <= 1) {
     return null;

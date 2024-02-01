@@ -44,7 +44,7 @@ const Search = ({
     if (e.key === "Enter") {
       if (mode === "Enter") {
         closeModal && closeModal();
-        router.push(`/food/${searchValue}`);
+        router.push(`/food/${searchValue}`, { scroll: false });
       }
     }
   };
