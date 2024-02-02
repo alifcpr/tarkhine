@@ -7,13 +7,14 @@ import { usePathname } from "next/navigation";
 import { User, Wallet2, Heart, LogoutCurve, Location } from "iconsax-react";
 import { useMenu } from "@/providers/ProfileMenuStateProvider";
 import useUser from "@/hooks/useUser";
+import ProfileImage from "../ProfileImage";
 
 const ProfileHeader = () => {
   const { data } = useUser();
 
   return (
     <div className="mb-4 flex items-center gap-x-3 border-b border-muted-700 py-4 md:gap-x-6">
-      <div className="h-14 w-14 rounded-full border md:h-24 md:w-24"></div>
+      <ProfileImage image={data?.imageUrl} />
       <div className="flex flex-col items-center gap-y-1">
         <p
           title={data?.name}

@@ -106,7 +106,7 @@ const UploadImageBox = ({
           onDragOver={handleDragOver}
           onDrop={handleOnDrop}
           onDragLeave={handleOnDragEnd}
-          className="smooth-transition flex min-h-[300px] w-full cursor-pointer items-center justify-center rounded-8 border-2 hover:bg-muted-200 hover:text-muted-600"
+          className="smooth-transition flex min-h-[300px] w-full cursor-pointer items-center justify-center rounded-8 border-2 bg-muted-500 hover:bg-muted-200 hover:text-muted-600"
         >
           {isDrag ? (
             <h1 className="caption-lg md:body-md mt-2">عکس را رها کنید</h1>
@@ -142,7 +142,7 @@ const UploadImageBox = ({
                 key={index}
                 className={`relative min-h-[150px] w-5/12 overflow-hidden ${previewCardStyle}`}
               >
-                <span className="absolute left-2 top-0 z-40 h-12 w-full bg-gradient-to-r from-muted-900 to-transparent "></span>
+                <span className="absolute left-0 top-0 z-40 h-12 w-full bg-gradient-to-r from-muted-900 to-transparent "></span>
                 <button
                   type="button"
                   onClick={removeImage(index)}

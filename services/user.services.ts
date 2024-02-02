@@ -6,7 +6,6 @@ type GetUserInfo = { data: User | null; statusCode: number | null };
 export const getUserInfo = async (): Promise<GetUserInfo> => {
   try {
     const { data } = await axiosService.get("/v1/user");
-    console.log("FROM API : ", data);
     return data;
   } catch {
     return { data: null, statusCode: 401 };
@@ -53,3 +52,36 @@ export const deleteFromFavoriteApi = async (
   );
   return data;
 };
+
+type uploadProfileImageParams = {
+  setLoadingProgress: (progress: number) => void;
+  file: FormData;
+};
+type uploadProfileImageRes = {
+  message: string;
+  statusCode: number;
+};
+export const uploadProfileImageApi = async ({
+  file,
+  setLoadingProgress,
+}: uploadProfileImageParams): Promise<uploadProfileImageRes> => {
+  const { data } = await axiosService.patch("/v1/profile/image", file, {
+    onUploadProgress: (progressEvent) => {
+      const { loaded, total } = progressEvent;
+      const progress = Math.ceil((loaded * 100) / total!);
+      setLoadingProgress(progress);
+    },
+  });
+  return data;
+};
+
+type deleteProfileImageRes = {
+  message: string;
+  statusCode: number;
+};
+
+export const deleteProfileImageApi =
+  async (): Promise<deleteProfileImageRes> => {
+    const { data } = await axiosService.delete("/v1/profile/image");
+    return data;
+  };

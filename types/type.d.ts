@@ -112,6 +112,8 @@ export interface User {
   family?: string;
   email?: string;
   birthday?: string;
+  imageUrl?: string;
+  image?: string;
 }
 
 export interface AboutItems {
