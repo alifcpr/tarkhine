@@ -12,7 +12,7 @@ const Page = () => {
         imageSrc="/assets/images/contact-image.png"
       />
 
-      <div className="my-10 flex flex-col gap-y-7 px-6 lg:px-12 xl:gap-y-6 xl:px-28">
+      <div className="my-10 flex flex-col gap-y-7 px-6 lg:px-12 xl:gap-y-6 xl:px-10 2xl:px-28">
         {branchList.map((item: BranchParams, index: number) => (
           <ContactCard branchData={item} key={index} />
         ))}
