@@ -66,14 +66,14 @@ const ChooseImageForm = ({
           maxHeight={800}
           previewImage={true}
           imageState={imageState}
-          previewCardStyle="!w-full min-h-[300px] md:!min-h-[500px]"
+          previewCardStyle="!w-full min-h-[300px] md:!min-h-[500px] lg:!min-h-[400px] 2xl:!min-h-[600px]"
           stateName="image"
         />
       </div>
       <div className="my-4 flex items-center justify-between">
         <button
           onClick={uploadImageHandler}
-          disabled={isUploading}
+          disabled={isUploading || imageState.length < 1}
           className={`body-md md:body-lg smooth-transition rounded-4 px-3 py-1 text-primary-800 hover:bg-primary-200 ${
             imageState.length < 1 ||
             (isUploading && "pointer-events-none opacity-70")

@@ -20,7 +20,7 @@ const Page = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   // getting user addresses from api
-  const { data: addresses, isLoading, isPreviousData } = useGetAddresses();
+  const { data: addresses, isLoading } = useGetAddresses();
 
   // page title
   useTitle("آدرس های من");
@@ -49,22 +49,22 @@ const Page = () => {
           <button onClick={backToProfilePage}>
             <ArrowRight2 className="h-10 w-10 md:hidden" />{" "}
           </button>
-          <h1 className="h5-bold  md:w-full">
-            {isPreviousData && "Loading.."}
-          </h1>
+          <h1 className="h5-bold  md:w-full">آدرس های من</h1>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="hidden text-primary-800 md:flex md:items-center md:gap-x-2"
+            className="text-primary-800 md:flex md:items-center md:gap-x-2"
           >
-            <AddCircle />
-            <span className="whitespace-nowrap">افزودن آدرس جدید</span>
+            <AddCircle className="" />
+            <span className="hidden whitespace-nowrap lg:block">
+              افزودن آدرس جدید
+            </span>
           </button>
         </div>
         {isLoading ? (
           <Loading />
         ) : addresses && addresses.data.length > 0 ? (
           <>
-            <div className="my-5 flex flex-wrap justify-between gap-2">
+            <div className="my-5 flex flex-wrap justify-between gap-y-2">
               {addresses.data.map((address) => (
                 <AddressCard key={address._id} addressData={address} />
               ))}

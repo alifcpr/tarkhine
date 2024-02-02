@@ -72,7 +72,7 @@ const ProfileImage = ({ image }: ProfileImageProps) => {
           src={image || "/assets/images/userDefaultProfile.png"}
           className="min-h-full min-w-full rounded-full border-2 object-cover object-center"
         />
-        {!image ? (
+        {image ? (
           <button
             onClick={deleteProfileImageHandler}
             disabled={isDeleting}
