@@ -15,10 +15,10 @@ const ProfileHeader = () => {
   return (
     <div className="mb-4 flex items-center gap-x-3 border-b border-muted-700 py-4 md:gap-x-6">
       <ProfileImage image={data?.imageUrl} />
-      <div className="flex flex-col items-center gap-y-1">
+      <div className="flex flex-col items-center justify-center gap-y-1">
         <p
           title={data?.name}
-          className="body-lg truncate md:w-[10vw] lg:w-[15vw] xl:w-[5vw]"
+          className="body-lg truncate md:w-[10vw] lg:w-[15vw] xl:w-[12vw] 2xl:w-[5vw]"
         >
           {data?.name} {data?.family}
         </p>
@@ -58,7 +58,7 @@ const ProfileTab = () => {
     <div
       className={`absolute inset-0 z-50 col-span-12 bg-muted-100 p-2 ${
         isMenuOpen ? "" : "hidden"
-      }   rounded-8 md:static md:col-span-4 md:block md:h-max md:border xl:col-span-2`}
+      }   rounded-8 md:static md:col-span-4 md:block md:h-max md:border xl:col-span-3 2xl:col-span-2`}
     >
       <ProfileHeader />
       <div className="flex flex-col gap-y-2">
