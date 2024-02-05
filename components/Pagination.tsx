@@ -1,3 +1,4 @@
+"use client";
 import { formUrlQuery } from "@/utils";
 import { ArrowLeft3, ArrowRight3 } from "iconsax-react";
 import { useRouter, useSearchParams } from "next/navigation";

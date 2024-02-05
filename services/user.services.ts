@@ -1,4 +1,4 @@
-import { Addresses, User } from "@/types/type.d";
+import { Addresses, Product, User } from "@/types/type.d";
 import axiosService from "./axios";
 
 // getUserInfo
@@ -83,5 +83,31 @@ type deleteProfileImageRes = {
 export const deleteProfileImageApi =
   async (): Promise<deleteProfileImageRes> => {
     const { data } = await axiosService.delete("/v1/profile/image");
+    console.log(data);
     return data;
   };
+
+type getAllFavoriteFoodsRes = {
+  favoriteFood: Product[];
+  maxPage: number;
+  statusCode: number;
+};
+
+type getAllFavoriteFoodsParams = {
+  main: string;
+  q: string;
+  page: number;
+  limit: number;
+};
+
+export const getAllFavoriteFoodsApi = async ({
+  main,
+  page,
+  limit,
+  q,
+}: getAllFavoriteFoodsParams): Promise<getAllFavoriteFoodsRes> => {
+  const { data } = await axiosService.get(
+    `/v1/profile/favorite-food?main=${main}&q=${q}&page=${1}&limit=${limit}`
+  );
+  return data;
+};

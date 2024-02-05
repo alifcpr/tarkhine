@@ -17,7 +17,7 @@ const ProfileInfo = () => {
     <div>
       <div className="flex items-center justify-between font-estedad">
         <button onClick={backToProfilePage}>
-          <ArrowRight2 className="h-7 w-7 md:hidden" />{" "}
+          <ArrowRight2 className="h-7 w-7 md:hidden" />
         </button>
         <h1 className="h5-bold p-3 md:w-full md:border-b ">پروفایل</h1>
         <div></div>

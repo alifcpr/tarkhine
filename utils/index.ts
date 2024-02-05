@@ -1,5 +1,6 @@
 import qs from "query-string";
 import { RemoveUrlQueryParams, UrlQueryParams } from "@/types/type.d";
+import { ThinStar } from "@smastrom/react-rating";
 
 // add query to url
 export const formUrlQuery = ({ params, value, key }: UrlQueryParams) => {
@@ -34,4 +35,13 @@ export const removeUrlQuery = ({ params, key }: RemoveUrlQueryParams) => {
 export const bytesToMegabytes = (bytes: number) => {
   const megabytes = bytes / (1024 * 1024);
   return megabytes.toFixed(2);
+};
+
+// rating property
+export const customeStyles = {
+  itemShapes: ThinStar,
+  itemStrokeWidth: 1.3,
+  activeFillColor: "#ffb23f",
+  activeStrokeColor: "#F4B740",
+  inactiveStrokeColor: "#F4B740",
 };

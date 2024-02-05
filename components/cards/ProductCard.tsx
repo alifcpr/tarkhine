@@ -4,9 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import FavoriteButton from "../FavoriteButton";
-import { Rating, ThinStar } from "@smastrom/react-rating";
+import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import BuyButton from "../BuyButton";
+import { customeStyles } from "@/utils";
 
 const ProductCard = (props: Product) => {
   const {
@@ -21,14 +22,6 @@ const ProductCard = (props: Product) => {
     isFavorite,
     newPrice,
   } = props;
-
-  const customeStyles = {
-    itemShapes: ThinStar,
-    itemStrokeWidth: 1.3,
-    activeFillColor: "#ffb23f",
-    activeStrokeColor: "#F4B740",
-    inactiveStrokeColor: "#F4B740",
-  };
 
   return (
     <div className="smooth-transition group col-span-12 grid grid-cols-12 overflow-hidden rounded-8 border-2 md:col-span-6  xl:hover:shadow-lg 2xl:col-span-4">

@@ -7,10 +7,10 @@ import Modal from "@/components/shared/Modal";
 import AddAddressForm from "@/components/forms/AddAddressForm";
 import AddressCard from "@/components/cards/AddressCard";
 import useGetAddresses from "@/hooks/useGetAddresses";
-import Loading from "./loading";
 import Pagination from "@/components/Pagination";
 import useProfileMenuController from "@/hooks/useProfileMenuController";
 import useTitle from "@/hooks/useTitle";
+import Loading from "./loading";
 
 const Page = () => {
   // for back to profile page and open menu
@@ -52,19 +52,17 @@ const Page = () => {
           <h1 className="h5-bold  md:w-full">آدرس های من</h1>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="text-primary-800 md:flex md:items-center md:gap-x-2"
+            className="hidden text-primary-800 md:flex md:items-center md:gap-x-2"
           >
-            <AddCircle className="" />
-            <span className="hidden whitespace-nowrap lg:block">
-              افزودن آدرس جدید
-            </span>
+            <AddCircle />
+            <span className="whitespace-nowrap">افزودن آدرس جدید</span>
           </button>
         </div>
         {isLoading ? (
           <Loading />
         ) : addresses && addresses.data.length > 0 ? (
           <>
-            <div className="my-5 flex flex-wrap justify-between gap-y-2">
+            <div className="my-5 flex flex-wrap justify-between gap-2">
               {addresses.data.map((address) => (
                 <AddressCard key={address._id} addressData={address} />
               ))}

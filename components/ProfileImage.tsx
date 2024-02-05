@@ -26,7 +26,7 @@ const ProfileImage = ({ image }: ProfileImageProps) => {
   const queryClient = useQueryClient();
   const { mutate: deleteImageMutate, isLoading: isDeleting } = useMutation({
     mutationKey: ["user"],
-    mutationFn: async () => deleteProfileImageApi,
+    mutationFn: () => deleteProfileImageApi(),
     onSuccess: () => {
       toast.success("عکس پروفایل شما با موفقیت حذف شد");
       queryClient.invalidateQueries({ queryKey: ["user"] });
