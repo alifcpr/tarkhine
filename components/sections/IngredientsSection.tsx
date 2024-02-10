@@ -6,7 +6,7 @@ type IngredientsProps = {
 
 const IngredientsSection = ({ list }: IngredientsProps) => {
   return (
-    <div className="mt-10">
+    <>
       <h1 className="body-lg md:body-xl xl:h4-bold">مواد اولیه</h1>
       <div className="mt-3 flex flex-wrap gap-2">
         {list.map((ingredient) => (
@@ -19,7 +19,7 @@ const IngredientsSection = ({ list }: IngredientsProps) => {
           </p>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 
