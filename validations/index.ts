@@ -1,4 +1,4 @@
-import { Maybe, array, boolean, mixed, object, string } from "yup";
+import { Maybe, array, boolean, mixed, number, object, string } from "yup";
 
 const phoneRegex = /^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}/;
 const emailRegex =
@@ -126,4 +126,13 @@ export const representationRequestValidation = object({
     .required("وارد کردن تصاویر ملک اجباری است")
     .max(4, "حداکثر تعداد عکس 4 عدد است")
     .min(4, "حداقل تعداد عکس 4 عدد است"),
+});
+
+export const commentValidation = object({
+  commentText: string()
+    .required("وارد کردن متن دیدگاه اجباری است !")
+    .min(4, "پیام دیدگاه حداقل باید 4 کاراکتر باشد"),
+  rate: number()
+    .required("امتیاز دادن اجباری است !")
+    .min(1, "امتیاز دادن اجباری است"),
 });

@@ -41,7 +41,7 @@ const DescriptionSection = ({ description }: DescriptionSectionProps) => {
       <p
         ref={contentRef}
         style={{ maxHeight: height, overflow: "hidden" }}
-        className="body-sm md:body-lg mt-2 text-justify selection:bg-primary-100 selection:text-primary-800"
+        className="body-sm md:body-lg mt-2 text-justify"
       >
         {description}
       </p>

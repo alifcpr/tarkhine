@@ -10,6 +10,7 @@ import ProductSlider from "../ProductSlider";
 import Ingredients from "./IngredientsSection";
 import IngredientsSection from "./IngredientsSection";
 import DescriptionSection from "./DescriptionSection";
+import CommentsSection from "./CommentsSection";
 
 type ProductDetailProps = {
   foodId: string;
@@ -97,8 +98,10 @@ const ProductDetail = ({ foodId }: ProductDetailProps) => {
           <div className="mt-4 rounded-8 bg-muted-200 p-2">
             <DescriptionSection description={description} />
           </div>
+          <div className="mt-4 rounded-8 bg-muted-200 p-2">
+            <CommentsSection comments={comments} foodId={_id}/>
+          </div>
         </div>
-
         <div className="col-span-12 hidden bg-muted-200 md:block md:w-full lg:col-span-3 xl:col-span-4"></div>
       </div>
     );
