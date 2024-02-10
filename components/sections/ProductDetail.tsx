@@ -7,6 +7,8 @@ import { Rating } from "@smastrom/react-rating";
 import { customeStyles } from "@/utils";
 import "@smastrom/react-rating/style.css";
 import ProductSlider from "../ProductSlider";
+import Ingredients from "./IngredientsSection";
+import IngredientsSection from "./IngredientsSection";
 
 type ProductDetailProps = {
   foodId: string;
@@ -57,7 +59,7 @@ const ProductDetail = ({ foodId }: ProductDetailProps) => {
     ];
 
     return (
-      <div className="relative grid grid-cols-12 px-4 xl:px-14 2xl:px-28">
+      <div className="relative grid grid-cols-12 gap-x-4 px-4 xl:px-14 2xl:px-28">
         <div className="col-span-12 rounded-8 bg-muted-200 p-2 lg:col-span-9 xl:col-span-8">
           <div>
             <BreadCrumb>
@@ -73,7 +75,7 @@ const ProductDetail = ({ foodId }: ProductDetailProps) => {
             </BreadCrumb>
           </div>
           <div className="mt-5 flex items-center justify-between md:mt-7">
-            <h1 className="body-lg md:body-xl">{title}</h1>
+            <h1 className="body-lg md:body-xl xl:h4-bold">{title}</h1>
             <div className="-scale-x-100">
               <Rating
                 value={rate}
@@ -86,10 +88,10 @@ const ProductDetail = ({ foodId }: ProductDetailProps) => {
           <div className="mt-5">
             <ProductSlider images={imagesUrl} />
           </div>
+          <IngredientsSection list={ingredients} />
         </div>
-        <div className="col-span-12 hidden bg-yellow-500 md:block md:w-full lg:col-span-3 xl:col-span-4">
-          f
-        </div>
+
+        <div className="col-span-12 hidden bg-muted-200 md:block md:w-full lg:col-span-3 xl:col-span-4"></div>
       </div>
     );
   }
