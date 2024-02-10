@@ -45,3 +45,7 @@ export const customeStyles = {
   activeStrokeColor: "#F4B740",
   inactiveStrokeColor: "#F4B740",
 };
+
+export const slug = (title: string) => {
+  return title.split(" ").join("-");
+};

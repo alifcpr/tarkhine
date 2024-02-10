@@ -107,7 +107,7 @@ export const getAllFavoriteFoodsApi = async ({
   q,
 }: getAllFavoriteFoodsParams): Promise<getAllFavoriteFoodsRes> => {
   const { data } = await axiosService.get(
-    `/v1/profile/favorite-food?main=${main}&q=${q}&page=${1}&limit=${limit}`
+    `/v1/profile/favorite-food?main=${main}&q=${q}&page=${page}&limit=${limit}`
   );
   return data;
 };

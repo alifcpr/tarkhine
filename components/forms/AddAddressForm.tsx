@@ -92,7 +92,7 @@ const AddAddressForm = ({
         addressTitle: formData.title,
         description: formData.address,
         name: formData.getterName,
-        phone: formData.phoneNumber || formData.getterPhoneNumber,
+        phone: formData.own ? formData.phoneNumber : formData.getterPhoneNumber,
       },
       ownReceiver: formData.own,
     });
@@ -110,7 +110,9 @@ const AddAddressForm = ({
           addressTitle: formData.title,
           description: formData.address,
           name: formData.getterName,
-          phone: formData.phoneNumber || formData.getterPhoneNumber,
+          phone: formData.own
+            ? formData.phoneNumber
+            : formData.getterPhoneNumber,
         },
         ownReceiver: formData.own,
       },

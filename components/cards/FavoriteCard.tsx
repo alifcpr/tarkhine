@@ -5,6 +5,7 @@ import FavoriteButton from "../FavoriteButton";
 import { Rating } from "@smastrom/react-rating";
 import { customeStyles } from "@/utils";
 import Link from "next/link";
+import "@smastrom/react-rating/style.css";
 import BuyButton from "../BuyButton";
 
 type FavoriteCardProps = {
@@ -40,12 +41,14 @@ const FavoriteCard = ({ data }: FavoriteCardProps) => {
           />
         </div>
         <div className="flex items-center justify-between gap-x-1 md:my-5">
-          <Rating
-            value={data.rate}
-            readOnly
-            className="!h-12 md:!h-6 2xl:!w-1/3"
-            itemStyles={customeStyles}
-          />
+          <div className="-scale-x-100">
+            <Rating
+              value={data.rate}
+              readOnly
+              className="!h-12 md:!h-6 2xl:!w-1/3"
+              itemStyles={customeStyles}
+            />
+          </div>
           <div className="caption-lg md:body-md flex items-center gap-x-1">
             <p>{data.price.toLocaleString("fa")}</p>
             <span>تومان</span>

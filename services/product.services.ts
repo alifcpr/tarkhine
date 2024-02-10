@@ -30,3 +30,14 @@ export const getAllProductApi = async ({
   const data = await res.json();
   return data;
 };
+
+type getProductByIdRes = { data: Product; statusCode: number };
+export const getProductByIdApi = async (
+  id: string
+): Promise<getProductByIdRes> => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}v1/food/id/${id}`
+  );
+  const data = await res.json();
+  return data;
+};

@@ -7,7 +7,7 @@ import FavoriteButton from "../FavoriteButton";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import BuyButton from "../BuyButton";
-import { customeStyles } from "@/utils";
+import { customeStyles, slug } from "@/utils";
 
 const ProductCard = (props: Product) => {
   const {
@@ -39,7 +39,7 @@ const ProductCard = (props: Product) => {
       <div className="col-span-8 flex h-full flex-col items-center justify-between p-2 lg:col-span-8 xl:py-4 xl:pe-3 xl:pr-8">
         <div className="flex w-full items-center justify-between">
           <Link
-            href={`/product/${_id}`}
+            href={`/product/${_id}/${slug(title)}`}
             title={title}
             className="body-md lg:body-lg xl:h7-semibold"
           >

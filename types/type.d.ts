@@ -138,9 +138,17 @@ export interface UrlQuery {
   searchParams: { [key: string]: string | undefined };
 }
 
+export interface Author {
+  _id: string;
+  family: string;
+  name: string;
+  imageUrl: string;
+  role: string;
+}
+
 export interface Comment {
   _id: string;
-  author: string;
+  author: Author[];
   foodId: string;
   text: string;
   craetedAt: Date;
