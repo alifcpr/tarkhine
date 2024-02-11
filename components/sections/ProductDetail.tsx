@@ -16,7 +16,7 @@ type ProductDetailProps = {
   foodId: string;
 };
 const ProductDetail = ({ foodId }: ProductDetailProps) => {
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: ["foods"],
     queryFn: async () => await getProductByIdApi(foodId),
   });
@@ -61,22 +61,22 @@ const ProductDetail = ({ foodId }: ProductDetailProps) => {
     ];
 
     return (
-      <div className="relative grid grid-cols-12 gap-x-4 px-4 xl:px-14 2xl:px-28">
+      <div className="relative grid grid-cols-12 gap-4 px-4 xl:px-14 2xl:px-28">
+        <div className="col-span-12 rounded-8 bg-muted-200 p-2">
+          <BreadCrumb>
+            {breadCrumbData.map((item) => (
+              <BreadCrumbItem
+                key={item.href}
+                href={item.href}
+                active={!!item.active}
+              >
+                {item.title}
+              </BreadCrumbItem>
+            ))}
+          </BreadCrumb>
+        </div>
         <div className="col-span-12 rounded-8  lg:col-span-9 xl:col-span-8">
-          <div>
-            <BreadCrumb>
-              {breadCrumbData.map((item) => (
-                <BreadCrumbItem
-                  key={item.href}
-                  href={item.href}
-                  active={!!item.active}
-                >
-                  {item.title}
-                </BreadCrumbItem>
-              ))}
-            </BreadCrumb>
-          </div>
-          <div className="mt-4 rounded-8 bg-muted-200 p-2">
+          <div className="rounded-8 bg-muted-200 p-2">
             <div className="flex items-center justify-between">
               <h1 className="body-lg md:body-xl xl:h4-bold">{title}</h1>
               <div className="-scale-x-100">
@@ -99,7 +99,7 @@ const ProductDetail = ({ foodId }: ProductDetailProps) => {
             <DescriptionSection description={description} />
           </div>
           <div className="mt-4 rounded-8 bg-muted-200 p-2">
-            <CommentsSection comments={comments} foodId={_id}/>
+            <CommentsSection comments={comments} foodId={_id} />
           </div>
         </div>
         <div className="col-span-12 hidden bg-muted-200 md:block md:w-full lg:col-span-3 xl:col-span-4"></div>

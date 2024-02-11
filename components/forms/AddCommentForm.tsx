@@ -91,6 +91,7 @@ const AddCommentForm = ({ foodId }: AddCommentFormProps) => {
         className="input-gray-outline caption-lg md:body-md p-2"
         placeholder="دیدگاه خود را بنویسید"
         disabled={isAdding}
+        autoFocus
         {...register("commentText")}
       ></textarea>
       {errors.commentText && (

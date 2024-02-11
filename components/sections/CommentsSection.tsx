@@ -4,6 +4,7 @@ import { Comment } from "@/types/type";
 import AddCommentForm from "../forms/AddCommentForm";
 import useUser from "@/hooks/useUser";
 import toast from "react-hot-toast";
+import CommentCard from "../cards/CommentCard";
 
 type CommentsSectionProps = {
   comments: Comment[];
@@ -12,9 +13,10 @@ type CommentsSectionProps = {
 
 const CommentsSection = ({ comments, foodId }: CommentsSectionProps) => {
   const [show, setShow] = useState(false);
-
+  // user information
   const { status } = useUser();
 
+  // check user login state
   const handleShowForm = () => {
     if (status === "authorized") {
       setShow(true);
@@ -36,8 +38,12 @@ const CommentsSection = ({ comments, foodId }: CommentsSectionProps) => {
           </button>
         )}
       </div>
-      <div>{show && <AddCommentForm foodId={foodId}/>}</div>
-      <div></div>
+      <div>{show && <AddCommentForm foodId={foodId} />}</div>
+      <div className="flex flex-col gap-y-3">
+        {comments.map((comment: Comment) => (
+          <CommentCard key={comment._id} data={comment} />
+        ))}
+      </div>
     </div>
   );
 };

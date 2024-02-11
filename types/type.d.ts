@@ -151,7 +151,7 @@ export interface Comment {
   author: Author[];
   foodId: string;
   text: string;
-  craetedAt: Date;
+  createdAt: Date;
   show: boolean;
   rate: number;
 }
