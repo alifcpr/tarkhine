@@ -1,6 +1,7 @@
 import ProductDetail from "@/components/sections/ProductDetail";
 import { getProductByIdApi } from "@/services/product.services";
 import { Hydrate, QueryClient, dehydrate } from "@tanstack/react-query";
+import { Metadata } from "next";
 import React from "react";
 
 type PageProps = {
@@ -21,6 +22,21 @@ const Page = async ({ params }: PageProps) => {
       </Hydrate>
     </>
   );
+};
+
+export const generateMetadata = async ({
+  params: { id },
+}: {
+  params: { id: string };
+}): Promise<Metadata> => {
+  const { data } = await getProductByIdApi(id);
+  return {
+    title: data.title,
+    description: data.description,
+    openGraph: {
+      images: data.imagesUrl[0],
+    },
+  };
 };
 
 export default Page;
