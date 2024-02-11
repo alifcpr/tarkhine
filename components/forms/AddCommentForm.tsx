@@ -76,14 +76,16 @@ const AddCommentForm = ({ foodId }: AddCommentFormProps) => {
           control={control}
           name="rate"
           render={({ field: { onChange, onBlur, value } }) => (
-            <Rating
-              value={value}
-              onChange={onChange}
-              onBlur={onBlur}
-              itemStyles={customeStyles}
-              className="!w-32"
-              isDisabled={isAdding}
-            />
+            <div className="-scale-x-100">
+              <Rating
+                value={value}
+                onChange={onChange}
+                onBlur={onBlur}
+                itemStyles={customeStyles}
+                className="!w-32"
+                isDisabled={isAdding}
+              />
+            </div>
           )}
         />
       </div>
@@ -102,7 +104,7 @@ const AddCommentForm = ({ foodId }: AddCommentFormProps) => {
       <div className="flex items-center justify-end">
         <button
           disabled={isAdding}
-          className="button-primary caption-lg md:body-md w-full rounded-4 px-2 py-1 md:w-max"
+          className="button-primary caption-lg md:body-md flex w-full items-center justify-center rounded-4 px-2 py-1 md:w-max"
         >
           {isAdding ? (
             <Oval
