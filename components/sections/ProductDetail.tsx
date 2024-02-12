@@ -22,6 +22,7 @@ const ProductDetail = ({ foodId }: ProductDetailProps) => {
   });
 
   if (data) {
+    console.log("Data : ", data.data._id);
     const {
       _id,
       category,

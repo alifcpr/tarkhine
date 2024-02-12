@@ -5,6 +5,8 @@ import AddCommentForm from "../forms/AddCommentForm";
 import useUser from "@/hooks/useUser";
 import toast from "react-hot-toast";
 import CommentCard from "../cards/CommentCard";
+import NotFound from "../NotFound";
+import Empty from "../profile/Empty";
 
 type CommentsSectionProps = {
   comments: Comment[];
@@ -39,11 +41,21 @@ const CommentsSection = ({ comments, foodId }: CommentsSectionProps) => {
         )}
       </div>
       <div>{show && <AddCommentForm foodId={foodId} />}</div>
-      <div className="flex flex-col gap-y-3">
-        {comments.map((comment: Comment) => (
-          <CommentCard key={comment._id} data={comment} />
-        ))}
-      </div>
+      {comments.length > 0 ? (
+        <div className="flex flex-col gap-y-3">
+          {comments.map((comment: Comment) => (
+            <CommentCard key={comment._id} data={comment} />
+          ))}
+        </div>
+      ) : (
+        <div className="flex items-center justify-center">
+          <Empty
+            title="هنوز دیدگاهی ثبت نشده !"
+            btnLabel="افزودن دیدگاه"
+            setOpenModal={() => setShow(true)}
+          />
+        </div>
+      )}
     </div>
   );
 };
