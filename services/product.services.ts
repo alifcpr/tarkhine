@@ -25,7 +25,7 @@ export const getAllProductApi = async ({
 }: allProductApiParams): Promise<AllProductRes> => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}v1/food?main=${main}&sub=${sub}&page=${page}&limit=${limit}&q=${q}`,
-    { cache: "no-store" }
+    { cache: "no-store", credentials: "include" }
   );
   const data = await res.json();
   return data;
@@ -37,7 +37,7 @@ export const getProductByIdApi = async (
 ): Promise<getProductByIdRes> => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}v1/food/id/${id}`,
-    { cache: "no-store" }
+    { cache: "no-store", credentials: "include" }
   );
   const data = await res.json();
   return data;
