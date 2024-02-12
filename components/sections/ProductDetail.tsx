@@ -11,6 +11,7 @@ import IngredientsSection from "./IngredientsSection";
 import DescriptionSection from "./DescriptionSection";
 import CommentsSection from "./CommentsSection";
 import BuyButton from "../BuyButton";
+import { v4 as uuidv4 } from "uuid";
 
 type ProductDetailProps = {
   foodId: string;
@@ -22,7 +23,6 @@ const ProductDetail = ({ foodId }: ProductDetailProps) => {
   });
 
   if (data) {
-    console.log("Data : ", data.data._id);
     const {
       _id,
       category,
@@ -65,7 +65,7 @@ const ProductDetail = ({ foodId }: ProductDetailProps) => {
           <BreadCrumb>
             {breadCrumbData.map((item) => (
               <BreadCrumbItem
-                key={item.href}
+                key={uuidv4()}
                 href={item.href}
                 active={!!item.active}
               >

@@ -71,6 +71,20 @@ const config: Config = {
       fontFamily: {
         estedad: ["var(--font-estedad)"],
       },
+
+      keyframes: {
+        skeleton_animate: {
+          from: {
+            backgroundColor: "#F9F9F9",
+          },
+          to: {
+            backgroundColor: "#CBCBCB",
+          },
+        },
+      },
+      animation: {
+        skeleton_loading: "skeleton_animate 0.9s linear infinite alternate",
+      },
     },
   },
   plugins: [],

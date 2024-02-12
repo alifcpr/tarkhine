@@ -3,6 +3,7 @@ import { getProductByIdApi } from "@/services/product.services";
 import { Hydrate, QueryClient, dehydrate } from "@tanstack/react-query";
 import { Metadata } from "next";
 import React from "react";
+import Loading from "./loading";
 
 type PageProps = {
   params: { id: string; productName: string };
@@ -18,6 +19,7 @@ const Page = async ({ params }: PageProps) => {
   return (
     <>
       <Hydrate state={dehydrate(queryClient)}>
+        <Loading />
         <ProductDetail foodId={params.id} />
       </Hydrate>
     </>
