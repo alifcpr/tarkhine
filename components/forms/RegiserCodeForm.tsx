@@ -17,6 +17,7 @@ import { Clock } from "iconsax-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { checkOtpApi, resendCodeApi } from "@/services/auth.services";
 import { useRouter } from "next/navigation";
+import { setAuthCookie } from "@/utils/setAuthCookie";
 // import { useRouter } from "next/navigation";
 
 type RegisterCodeFromProps = {
@@ -44,7 +45,8 @@ const RegisterCodeForm = ({
     mutationKey: ["user"],
     mutationFn: ({ phone, otpCode }: { phone: string; otpCode: number }) =>
       checkOtpApi({ phone, otpCode }),
-    onSuccess: () => {
+    onSuccess: (data) => {
+      setAuthCookie(data.tokens.accessToken, data.tokens.refreshToken);
       toast.success("به وبسایت ترخینه خوش آمدید");
       router.replace("/");
       queryClient.invalidateQueries({ queryKey: ["user"] });
