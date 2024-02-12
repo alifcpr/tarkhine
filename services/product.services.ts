@@ -36,7 +36,8 @@ export const getProductByIdApi = async (
   id: string
 ): Promise<getProductByIdRes> => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}v1/food/id/${id}`
+    `${process.env.NEXT_PUBLIC_BASE_URL}v1/food/id/${id}`,
+    { cache: "no-store" }
   );
   const data = await res.json();
   return data;
