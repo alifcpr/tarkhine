@@ -7,10 +7,10 @@ type EmptyProps = {
   title: string;
   btnLabel: string;
   href?: string;
-  setOpenModal?: Dispatch<SetStateAction<boolean>>;
+  setShow?: Dispatch<SetStateAction<boolean>>;
 };
 
-const Empty = ({ title, btnLabel, href, setOpenModal }: EmptyProps) => {
+const Empty = ({ title, btnLabel, href, setShow }: EmptyProps) => {
   return (
     <div className="relative flex h-[250px] w-[250px] flex-col items-center justify-center">
       <Image
@@ -34,7 +34,7 @@ const Empty = ({ title, btnLabel, href, setOpenModal }: EmptyProps) => {
         ) : (
           <button
             onClick={
-              setOpenModal && !href ? () => setOpenModal(true) : () => {}
+              setShow && !href ? () => setShow(true) : () => {}
             }
             className="button-outline-primary button-lg w-full bg-white p-2 text-primary-800"
           >

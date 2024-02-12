@@ -74,7 +74,7 @@ const Page = () => {
             <Empty
               btnLabel="افزودن آدرس"
               title="شما در حال حاضر هیچ آدرسی ثبت نکرده‌اید!"
-              setOpenModal={setIsModalOpen}
+              setShow={setIsModalOpen}
             />
           </div>
         )}

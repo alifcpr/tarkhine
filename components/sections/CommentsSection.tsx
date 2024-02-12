@@ -5,7 +5,6 @@ import AddCommentForm from "../forms/AddCommentForm";
 import useUser from "@/hooks/useUser";
 import toast from "react-hot-toast";
 import CommentCard from "../cards/CommentCard";
-import NotFound from "../NotFound";
 import Empty from "../profile/Empty";
 
 type CommentsSectionProps = {
@@ -52,7 +51,7 @@ const CommentsSection = ({ comments, foodId }: CommentsSectionProps) => {
           <Empty
             title="هنوز دیدگاهی ثبت نشده !"
             btnLabel="افزودن دیدگاه"
-            setOpenModal={() => setShow(true)}
+            setShow={() => setShow(true)}
           />
         </div>
       )}
