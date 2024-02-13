@@ -146,14 +146,21 @@ export interface Author {
   role: string;
 }
 
+export interface ReplyComment {
+  author: Author[];
+  createdAt: number;
+  text: string;
+}
+
 export interface Comment {
   _id: string;
   author: Author[];
   foodId: string;
   text: string;
-  createdAt: Date;
+  createdAt: number;
   show: boolean;
   rate: number;
+  reply?: ReplyComment;
 }
 
 export interface Product {

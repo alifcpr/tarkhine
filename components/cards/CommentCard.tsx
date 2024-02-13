@@ -1,16 +1,17 @@
-import { Comment } from "@/types/type";
+"use client";
 import { customeStyles } from "@/utils";
 import { Rating } from "@smastrom/react-rating";
 import Image from "next/image";
 import React from "react";
+import { Comment } from "@/types/type";
 
 type CommentCardProps = {
   data: Comment;
 };
 
 const CommentCard = ({ data }: CommentCardProps) => {
-  const { author, rate, text } = data;
-  const { family, imageUrl, name, role } = author[0];
+  const { name, family, imageUrl, role } = data.author[0];
+
   return (
     <div
       className={`${
@@ -38,16 +39,18 @@ const CommentCard = ({ data }: CommentCardProps) => {
           </div>
         </div>
         <div className="-scale-x-100">
-          <Rating
-            className="!w-24 md:!w-28"
-            value={rate}
-            itemStyles={customeStyles}
-            readOnly
-          />
+          {data.rate && (
+            <Rating
+              className="!w-24 md:!w-28"
+              value={data.rate}
+              itemStyles={customeStyles}
+              readOnly
+            />
+          )}
         </div>
       </div>
       <div className="mt-4">
-        <p className="caption-lg md:body-md">{text}</p>
+        <p className="caption-lg md:body-md">{data.text}</p>
       </div>
     </div>
   );

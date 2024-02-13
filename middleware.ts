@@ -19,7 +19,6 @@ export const middleware = async (req: NextRequest) => {
     },
   });
   const data = await res.json();
-  console.log("ok");
 
   // redirect when user not login
   if (data.statusCode === 401 && protectRoutes.includes(req.nextUrl.pathname)) {

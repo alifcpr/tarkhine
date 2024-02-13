@@ -41,9 +41,16 @@ const CommentsSection = ({ comments, foodId }: CommentsSectionProps) => {
       </div>
       <div>{show && <AddCommentForm foodId={foodId} />}</div>
       {comments.length > 0 ? (
-        <div className="flex flex-col gap-y-3">
-          {comments.map((comment: Comment) => (
-            <CommentCard key={comment._id} data={comment} />
+        <div className="flex flex-col gap-y-5">
+          {comments.map((comment: any) => (
+            <div key={comment._id}>
+              <CommentCard data={comment} />
+              {comment.reply && (
+                <div className="mt-2 pr-10">
+                  <CommentCard data={comment.reply} />
+                </div>
+              )}
+            </div>
           ))}
         </div>
       ) : (
