@@ -12,10 +12,13 @@ const protectRoutes = [
 const adminRoutes = ["/admin"];
 
 export const middleware = async (req: NextRequest) => {
+  const accessToken = req.cookies.get("access-token")?.value ?? "";
+  const refreshToken = req.cookies.get("refresh-token")?.value ?? "";
+
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}v1/user`, {
     headers: {
-      "access-token": req.cookies.get("access-token")!.value,
-      "refresh-token": req.cookies.get("refresh-token")!.value,
+      "access-token": accessToken,
+      "refresh-token": refreshToken,
     },
   });
   const data = await res.json();
