@@ -1,4 +1,5 @@
 "use client";
+import useUser from "@/hooks/useUser";
 import {
   addToFavoriteApi,
   deleteFromFavoriteApi,
@@ -19,8 +20,10 @@ const FavoriteButton = ({
   isFavorite,
   otherClasses,
 }: FavoriteButtonProps) => {
-  const queryClient = useQueryClient();
+  const { status } = useUser();
 
+  const queryClient = useQueryClient();
+  // add to favorite api mutation
   const { mutate: addToFavoriteMutate, isLoading: isAdding } = useMutation({
     mutationKey: ["foods"],
     mutationFn: async (id: string) => addToFavoriteApi(id),
@@ -37,6 +40,7 @@ const FavoriteButton = ({
     },
   });
 
+  // delete from favorite api mutation
   const { mutate: deleteFromFavoriteMutate, isLoading: isDeleting } =
     useMutation({
       mutationKey: ["foods"],
@@ -56,6 +60,10 @@ const FavoriteButton = ({
 
   const favoriteAction = (id: string) => {
     return () => {
+      if (status !== "authorize") {
+        toast.error("ابتدا وارد حساب کاربری خود شوید");
+        return;
+      }
       toast.loading("کمی صبر کنید", { id: "toast-loading" });
       if (isFavorite) {
         deleteFromFavoriteMutate(id);
