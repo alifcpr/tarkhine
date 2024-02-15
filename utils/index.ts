@@ -50,11 +50,12 @@ export const slug = (title: string) => {
   return title.split(" ").join("-");
 };
 
-export const getTimestamp = (createdAt: Date): string => {
+export const getTimestamp = (createdAt: number): string => {
   const now = new Date();
-  const timeDifference = now.getTime() - createdAt.getTime();
+  const timeDifference = now.getTime() - createdAt;
 
-  const minute = 60 * 1000;
+  const second = 1000;
+  const minute = 60 * second;
   const hour = 60 * minute;
   const day = 24 * hour;
   const week = 7 * day;
@@ -62,22 +63,25 @@ export const getTimestamp = (createdAt: Date): string => {
   const year = 365 * day;
 
   if (timeDifference < minute) {
-    const seconds = Math.floor(timeDifference / 1000);
+    const seconds = Math.floor(timeDifference / second);
     return `${seconds} ثانیه پیش`;
   } else if (timeDifference < hour) {
     const minutes = Math.floor(timeDifference / minute);
     return `${minutes} دقیقه پیش`;
   } else if (timeDifference < day) {
     const hours = Math.floor(timeDifference / hour);
-    return `${hours} ساعت قبل`;
+    return `${hours} ساعت پیش`;
   } else if (timeDifference < week) {
     const days = Math.floor(timeDifference / day);
-    return `${days} هفته ی قبل`;
+    return `${days} روز پیش`;
+  } else if (timeDifference < month) {
+    const weeks = Math.floor(timeDifference / week);
+    return `${weeks} هفته پیش`;
   } else if (timeDifference < year) {
     const months = Math.floor(timeDifference / month);
-    return `${months} ماه قبل`;
+    return `${months} ماه پیش`;
   } else {
     const years = Math.floor(timeDifference / year);
-    return `${years} سال قبل`;
+    return `${years} سال پیش`;
   }
 };

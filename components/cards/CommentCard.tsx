@@ -1,5 +1,5 @@
 "use client";
-import { customeStyles } from "@/utils";
+import { customeStyles, getTimestamp } from "@/utils";
 import { Rating } from "@smastrom/react-rating";
 import Image from "next/image";
 import React from "react";
@@ -35,7 +35,9 @@ const CommentCard = ({ data }: CommentCardProps) => {
                 {name} {family}
               </span>
             </h1>
-            <p className="caption-md md:body-sm">3 روز پیش</p>
+            <p className="caption-md md:body-sm">
+              {getTimestamp(data.createdAt)}
+            </p>
           </div>
         </div>
         <div className="-scale-x-100">
