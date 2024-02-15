@@ -9,7 +9,35 @@ import "@smastrom/react-rating/style.css";
 import BuyButton from "../BuyButton";
 import { customeStyles, slug } from "@/utils";
 
-const ProductCard = (props: Product) => {
+// export interface Product {
+//   _id: string;
+//   title: string;
+//   ingredients: string[];
+//   description: string;
+//   price: number;
+//   discount: number;
+//   quantity: number;
+//   category: string[];
+//   subCategory: string[];
+//   imagesUrl: string[];
+//   rate: number;
+//   rateCount: number;
+//   comments: Comment[];
+//   newPrice?: number;
+//   isFavorite: boolean;
+// }
+
+const ProductCard = (
+  props: Omit<
+    Product,
+    | "address"
+    | "description"
+    | "comments"
+    | "rateCount"
+    | "subCategory"
+    | "category"
+  >
+) => {
   const {
     _id,
     discount,
