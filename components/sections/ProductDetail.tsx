@@ -12,6 +12,7 @@ import DescriptionSection from "./DescriptionSection";
 import CommentsSection from "./CommentsSection";
 import BuyButton from "../BuyButton";
 import { v4 as uuidv4 } from "uuid";
+import FavoriteButton from "../FavoriteButton";
 
 type ProductDetailProps = {
   foodId: string;
@@ -37,6 +38,7 @@ const ProductDetail = ({ foodId }: ProductDetailProps) => {
       subCategory,
       title,
       newPrice,
+      isFavorite,
     } = data.data;
 
     const breadCrumbData = [
@@ -78,12 +80,17 @@ const ProductDetail = ({ foodId }: ProductDetailProps) => {
           <div className="rounded-8 bg-muted-200 p-2">
             <div className="flex items-center justify-between">
               <h1 className="body-lg md:body-xl xl:h4-bold">{title}</h1>
-              <div className="-scale-x-100">
+              <div className="flex -scale-x-100 items-center gap-x-2">
                 <Rating
                   value={rate}
                   itemStyles={customeStyles}
                   readOnly
                   className="!w-32 md:!w-36"
+                />
+                <FavoriteButton
+                  foodId={_id}
+                  isFavorite={isFavorite}
+                  otherClasses="w-5 h-5 md:w-6 md:h-6"
                 />
               </div>
             </div>
