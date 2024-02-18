@@ -10,6 +10,8 @@ import {
   Question,
 } from "@/types/type.d";
 
+import { Heart, Location, LogoutCurve, User } from "iconsax-react";
+
 export const headerLinks: HeaderLinks[] = [
   { _id: 1, type: "link", href: "/", title: "صفحه اصلی" },
   {
@@ -59,7 +61,7 @@ export const profileLinks: ProfileLinks[] = [
     href: "/profile/info",
     type: "link",
     value: "profile",
-    icon: true,
+    Icon: User,
   },
   {
     _id: 2,
@@ -67,7 +69,7 @@ export const profileLinks: ProfileLinks[] = [
     href: "/profile/orders",
     type: "link",
     value: "orders",
-    icon: true,
+    Icon: LogoutCurve,
   },
   {
     _id: 3,
@@ -75,7 +77,7 @@ export const profileLinks: ProfileLinks[] = [
     href: "/profile/favorite",
     type: "link",
     value: "favorite",
-    icon: true,
+    Icon: Heart,
   },
   {
     _id: 4,
@@ -83,14 +85,7 @@ export const profileLinks: ProfileLinks[] = [
     href: "/profile/addresses",
     type: "link",
     value: "addresses",
-    icon: true,
-  },
-  {
-    _id: 5,
-    title: "خروج از حساب",
-    type: "logout",
-    value: "logout",
-    icon: true,
+    Icon: Location,
   },
 ];
 

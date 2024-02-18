@@ -10,6 +10,7 @@ import MobileNav from "./MobileNav";
 import SearchBox from "./filters/SearchBox";
 import { usePathname } from "next/navigation";
 import useUser from "@/hooks/useUser";
+import LogOut from "./LogOut";
 
 const Header = () => {
   const pathName = usePathname();
@@ -52,12 +53,19 @@ const Header = () => {
                 <User className="h-5 w-5 text-white md:h-6 md:w-6" />
                 <ArrowDown2 className="h-5 w-5 text-white md:h-6 md:w-6" />
               </span>
-              <DropDown
-                content={profileLinks}
-                containerClasses="w-max left-0 top-8 smooth-transition opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto"
-                ulClasses="mt-5 overflow-hidden"
-                textClasses="whitespace-nowrap [&:not(last-child)]:border-b"
-              />
+              <DropDown containerClasses="smooth-transition opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto">
+                {profileLinks.map(({ Icon, _id, href, title }) => (
+                  <DropDown.Item key={_id}>
+                    <div className="flex items-center gap-x-2">
+                      <Icon className="h-5 w-5 text-muted-950" />
+                      <Link href={href}>{title}</Link>
+                    </div>
+                  </DropDown.Item>
+                ))}
+                <DropDown.Item>
+                  <LogOut iconClasses="w-5 h-5 text-muted-950" />
+                </DropDown.Item>
+              </DropDown>
             </button>
           ) : (
             <Link

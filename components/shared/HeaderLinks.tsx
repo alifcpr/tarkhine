@@ -41,12 +41,15 @@ const HeaderLinks = () => {
               )}
             </div>
             {item.dropDownItems && (
-              <DropDown
-                content={item.dropDownItems}
-                containerClasses="top-5 left-0 w-32 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto smooth-transition"
-                ulClasses="mt-5 overflow-hidden"
-                textClasses="[&:not(last-child)]:border-b"
-              />
+              <DropDown containerClasses="smooth-transition opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto !w-32">
+                {item.dropDownItems.map((dropItem) => (
+                  <DropDown.Item key={dropItem._id}>
+                    <Link href={dropItem.href}>
+                      {dropItem.title}
+                    </Link>
+                  </DropDown.Item>
+                ))}
+              </DropDown>
             )}
           </div>
         );

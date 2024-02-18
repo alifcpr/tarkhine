@@ -1,3 +1,4 @@
+
 export interface HeaderLinks {
   _id: number;
   title: string;
@@ -14,10 +15,10 @@ export interface HeaderLinks {
 export interface ProfileLinks {
   _id: number;
   title: string;
-  href?: string;
+  href: string;
   type: string;
   value: string;
-  icon: boolean;
+  Icon: any;
 }
 
 export interface MobileLinks {
