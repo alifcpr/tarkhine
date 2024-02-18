@@ -10,9 +10,14 @@ import toast from "react-hot-toast";
 type LogOutProps = {
   textClasses?: string;
   iconClasses?: string;
+  containerClasses?: string;
 };
 
-const LogOut = ({ textClasses, iconClasses }: LogOutProps) => {
+const LogOut = ({
+  textClasses,
+  iconClasses,
+  containerClasses,
+}: LogOutProps) => {
   // modal state
   const [open, setOpen] = useState<boolean>(false);
 
@@ -65,10 +70,10 @@ const LogOut = ({ textClasses, iconClasses }: LogOutProps) => {
       </Modal>
       <button
         onClick={() => setOpen(true)}
-        className="flex items-center gap-x-2"
+        className={`flex items-center gap-x-2 ${containerClasses}`}
       >
-        <LogoutCurve className={textClasses} />
-        <span className={iconClasses}>خروج از حساب</span>
+        <LogoutCurve className={iconClasses} />
+        <span className={textClasses}>خروج از حساب</span>
       </button>
     </>
   );

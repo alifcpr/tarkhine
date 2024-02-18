@@ -1,13 +1,12 @@
 "use client";
 import { profileLinks } from "@/constants";
-import { ProfileLinks } from "@/types/type.d";
-import React, { useCallback } from "react";
+import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { User, Wallet2, Heart, LogoutCurve, Location } from "iconsax-react";
 import { useMenu } from "@/providers/ProfileMenuStateProvider";
 import useUser from "@/hooks/useUser";
 import ProfileImage from "../ProfileImage";
+import LogOut from "../shared/LogOut";
 
 const ProfileHeader = () => {
   const { data } = useUser();
@@ -32,27 +31,7 @@ const ProfileHeader = () => {
 
 const ProfileTab = () => {
   const pathName = usePathname();
-
   const { isMenuOpen } = useMenu();
-
-  const renderIcon = useCallback((type: string) => {
-    switch (type) {
-      case "profile":
-        return <User className="h-5 w-5 text-black" />;
-
-      case "orders":
-        return <Wallet2 className="h-5 w-5 text-black" />;
-
-      case "favorite":
-        return <Heart className="h-5 w-5 text-black" />;
-
-      case "addresses":
-        return <Location className="h-5 w-5 text-black" />;
-
-      case "logout":
-        return <LogoutCurve className="h-5 w-5 text-error-200" />;
-    }
-  }, []);
 
   return (
     <div
@@ -61,31 +40,30 @@ const ProfileTab = () => {
       }   rounded-8 md:static md:col-span-4 md:block md:h-max md:border xl:col-span-3 2xl:col-span-2`}
     >
       <ProfileHeader />
-      <div className="flex flex-col gap-y-2">
-        {profileLinks.map((item: ProfileLinks, index: number) => {
-          const isActive = item.href === pathName;
+      <div className="flex flex-col gap-y-2 px-2">
+        {profileLinks.map(({ Icon, href, title }, index: number) => {
+          const isActive = href === pathName;
 
-          return item.type === "link" ? (
-            <Link
-              href={item.href!}
-              key={index}
-              className={`body-lg flex items-center gap-x-2 px-2 py-1 ${
-                isActive && "active-link border-r-2 border-primary-800"
-              }`}
-            >
-              {renderIcon(item.value)}
-              <p>{item.title}</p>
-            </Link>
-          ) : (
-            <button
-              key={index}
-              className="body-lg flex w-max items-center gap-x-2 p-2 text-red-500"
-            >
-              {renderIcon(item.value)}
-              <p>{item.title}</p>
-            </button>
+          return (
+            <>
+              <Link
+                href={href}
+                key={index}
+                className={`body-lg flex items-center gap-x-2 px-2 py-1 ${
+                  isActive && "active-link border-r-2 border-primary-800"
+                }`}
+              >
+                <Icon className="h-5 w-5" />
+                <p>{title}</p>
+              </Link>
+            </>
           );
         })}
+        <LogOut
+          containerClasses="px-2 !text-error-200"
+          iconClasses="w-5 h-5 text-error-200"
+          textClasses="body-lg py-1"
+        />
       </div>
     </div>
   );
