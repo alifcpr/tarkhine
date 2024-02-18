@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { logOutApi } from "@/services/user.services";
 import { Oval } from "react-loader-spinner";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 type LogOutProps = {
   textClasses?: string;
@@ -20,6 +21,7 @@ const LogOut = ({
 }: LogOutProps) => {
   // modal state
   const [open, setOpen] = useState<boolean>(false);
+  const router = useRouter();
 
   // for call logout api
   const queryCilent = useQueryClient();
@@ -27,6 +29,7 @@ const LogOut = ({
     mutationKey: ["user"],
     mutationFn: async () => await logOutApi(),
     onSuccess: () => {
+      router.replace("/");
       toast.success("از حساب کاربری خود خارج شدید");
       queryCilent.invalidateQueries({ queryKey: ["user"] });
     },
