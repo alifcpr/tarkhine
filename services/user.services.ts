@@ -111,3 +111,9 @@ export const getAllFavoriteFoodsApi = async ({
   );
   return data;
 };
+
+type LogOutApiRes = { message: string; statusCode: number };
+export const logOutApi = async (): Promise<LogOutApiRes> => {
+  const { data } = await axiosService.get("/v1/auth/logout");
+  return data;
+};
