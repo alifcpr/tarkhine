@@ -7,6 +7,7 @@ import { useMenu } from "@/providers/ProfileMenuStateProvider";
 import useUser from "@/hooks/useUser";
 import ProfileImage from "../ProfileImage";
 import LogOut from "../shared/LogOut";
+import { v4 as uuidv4 } from "uuid";
 
 const ProfileHeader = () => {
   const { data } = useUser();
@@ -41,22 +42,20 @@ const ProfileTab = () => {
     >
       <ProfileHeader />
       <div className="flex flex-col gap-y-2 px-2">
-        {profileLinks.map(({ Icon, href, title }, index: number) => {
+        {profileLinks.map(({ Icon, href, title, _id }, index: number) => {
           const isActive = href === pathName;
 
           return (
-            <>
-              <Link
-                href={href}
-                key={index}
-                className={`body-lg flex items-center gap-x-2 px-2 py-1 ${
-                  isActive && "active-link border-r-2 border-primary-800"
-                }`}
-              >
-                <Icon className="h-5 w-5" />
-                <p>{title}</p>
-              </Link>
-            </>
+            <Link
+              href={href}
+              key={uuidv4()}
+              className={`body-lg flex items-center gap-x-2 px-2 py-1 ${
+                isActive && "active-link border-r-2 border-primary-800"
+              }`}
+            >
+              <Icon className="h-5 w-5" />
+              <p>{title}</p>
+            </Link>
           );
         })}
         <LogOut

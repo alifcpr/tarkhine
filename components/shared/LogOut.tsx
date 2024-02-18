@@ -71,13 +71,13 @@ const LogOut = ({
           </div>
         )}
       </Modal>
-      <button
+      <div
         onClick={() => setOpen(true)}
         className={`flex items-center gap-x-2 ${containerClasses}`}
       >
         <LogoutCurve className={iconClasses} />
         <span className={textClasses}>خروج از حساب</span>
-      </button>
+      </div>
     </>
   );
 };
