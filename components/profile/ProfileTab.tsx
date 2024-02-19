@@ -13,13 +13,10 @@ const ProfileHeader = () => {
   const { data } = useUser();
 
   return (
-    <div className="mb-4 flex items-center gap-x-3 border-b border-muted-700 py-4 md:gap-x-6">
+    <div className="mb-4 flex flex-row items-center gap-x-3 border-b border-muted-700 py-4 md:flex-col md:gap-x-6">
       <ProfileImage image={data?.imageUrl} />
-      <div className="flex flex-col items-center justify-center gap-y-1">
-        <p
-          title={data?.name}
-          className="body-lg truncate md:w-[10vw] lg:w-[15vw] xl:w-[12vw] 2xl:w-[5vw]"
-        >
+      <div className="flex flex-col items-center justify-center gap-y-1 md:mt-3">
+        <p title={data?.name} className="body-lg truncate">
           {data?.name} {data?.family}
         </p>
         <span className="text-muted-800" dir="ltr">

@@ -71,7 +71,7 @@ const Page = () => {
             ))
           ) : (
             <div className="col-span-12 mb-4 flex items-center justify-center">
-              {mainCategory || searchQuery ? (
+              {mainCategory || searchQuery || pageQuery ? (
                 <NotFound title="موردی با این مشخصات یافت نشد" />
               ) : (
                 <Empty
