@@ -29,6 +29,7 @@ const LogOut = ({
     mutationKey: ["user"],
     mutationFn: async () => await logOutApi(),
     onSuccess: () => {
+      setOpen(false);
       router.replace("/");
       toast.success("از حساب کاربری خود خارج شدید");
       queryCilent.invalidateQueries({ queryKey: ["user"] });
@@ -73,7 +74,7 @@ const LogOut = ({
       </Modal>
       <div
         onClick={() => setOpen(true)}
-        className={`flex items-center gap-x-2 ${containerClasses}`}
+        className={`flex cursor-pointer items-center gap-x-2 ${containerClasses}`}
       >
         <LogoutCurve className={iconClasses} />
         <span className={textClasses}>خروج از حساب</span>
