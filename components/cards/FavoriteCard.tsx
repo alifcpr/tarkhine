@@ -62,7 +62,7 @@ const FavoriteCard = ({ data }: FavoriteCardProps) => {
         <BuyButton
           foodId={_id}
           quantity={quantity}
-          btnClasses="w-full p-1 caption-lg rounded-4 mt-2 md:body-md "
+          btnClasses="w-full p-1 caption-lg rounded-4 md:body-md "
         />
       </div>
     </div>

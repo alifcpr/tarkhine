@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { formUrlQuery } from "@/utils";
 import { ArrowLeft3, ArrowRight3 } from "iconsax-react";
@@ -15,6 +16,7 @@ const Pagination = ({ totalPage }: PaginationProps) => {
 
   const buttonsQuantity = Array.from({ length: totalPage }, (_, i) => i + 1);
   const [page, setPage] = useState<number>(+pageQuery);
+  const [initialRender, setInitialRender] = useState<boolean>(false);
 
   const prevPage = () => {
     setPage((prev) => prev - 1);
@@ -25,12 +27,16 @@ const Pagination = ({ totalPage }: PaginationProps) => {
   };
 
   useEffect(() => {
-    const newUrl = formUrlQuery({
-      params: searchParams.toString(),
-      key: "page",
-      value: String(page),
-    });
-    router.push(newUrl, { scroll: false });
+    if (initialRender) {
+      const newUrl = formUrlQuery({
+        params: searchParams.toString(),
+        key: "page",
+        value: String(page),
+      });
+      router.push(newUrl, { scroll: false });
+    } else {
+      setInitialRender(true);
+    }
   }, [page, router, searchParams]);
 
   if (totalPage <= 1) {
