@@ -60,17 +60,15 @@ const FavoriteButton = ({
 
   const favoriteAction = (id: string) => {
     return () => {
-      if (status !== "authorize") {
+      if (status !== "authorized") {
         toast.error("ابتدا وارد حساب کاربری خود شوید");
         return;
       }
       toast.loading("کمی صبر کنید", { id: "toast-loading" });
       if (isFavorite) {
         deleteFromFavoriteMutate(id);
-        console.log("func delete run shod");
       } else {
         addToFavoriteMutate(id);
-        console.log("func add run shod");
       }
     };
   };
