@@ -64,7 +64,7 @@ const Page = () => {
             query="q"
           />
         </div>
-        <div className="relative mt-10 grid grid-cols-12 gap-2">
+        <div className="relative mt-10 grid grid-cols-12 gap-2 pb-3">
           {data.favoriteFood.length > 0 ? (
             data.favoriteFood.map((item) => (
               <FavoriteCard data={item} key={item._id} />

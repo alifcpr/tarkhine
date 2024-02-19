@@ -50,7 +50,7 @@ const FavoriteCard = ({ data }: FavoriteCardProps) => {
             <Rating
               value={rate}
               readOnly
-              className="!h-12 md:!h-6 2xl:!w-1/3"
+              className="!h-12 md:!h-5 2xl:!h-6"
               itemStyles={customeStyles}
             />
           </div>
