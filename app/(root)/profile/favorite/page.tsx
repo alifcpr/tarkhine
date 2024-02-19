@@ -13,6 +13,7 @@ import NotFound from "@/components/NotFound";
 import Pagination from "@/components/Pagination";
 import Empty from "@/components/profile/Empty";
 import Loading from "./loading";
+import { Oval } from "react-loader-spinner";
 
 const Page = () => {
   // for back to profile page and open menu
@@ -27,7 +28,7 @@ const Page = () => {
   const limitQuery = searchParams.get("limit") ?? 10;
   const searchQuery = searchParams.get("q") ?? "";
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isPreviousData } = useQuery({
     queryKey: ["foods", mainCategory, pageQuery, limitQuery, searchQuery],
     queryFn: async () =>
       await getAllFavoriteFoodsApi({
@@ -65,6 +66,19 @@ const Page = () => {
           />
         </div>
         <div className="relative mt-10 grid grid-cols-12 gap-2 pb-3">
+          {isPreviousData && (
+            <div className="absolute inset-0 z-50 flex items-center justify-center bg-muted-950/20 backdrop-blur-sm">
+              <Oval
+                width={40}
+                height={40}
+                wrapperClass={"text-white"}
+                strokeWidthSecondary={7}
+                strokeWidth={5}
+                color={"#fff"}
+                secondaryColor={"#fff"}
+              />
+            </div>
+          )}
           {data.favoriteFood.length > 0 ? (
             data.favoriteFood.map((item) => (
               <FavoriteCard data={item} key={item._id} />
