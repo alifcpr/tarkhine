@@ -1,9 +1,9 @@
 "use client";
+import UserProfileLoading from "@/components/loadings/UserProfileLoading";
 import ProfileTab from "@/components/profile/ProfileTab";
 import useUser from "@/hooks/useUser";
 import ProfileMenuStateProvider from "@/providers/ProfileMenuStateProvider";
 import { ReactNode } from "react";
-import Loading from "./loading";
 
 type LayoutProps = {
   children: ReactNode;
@@ -11,7 +11,7 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   const { data, isLoading } = useUser();
-  if (isLoading) return <Loading />;
+  if (isLoading) return <UserProfileLoading />;
 
   if (data)
     return (

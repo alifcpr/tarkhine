@@ -1,7 +1,6 @@
-"use client";
 import React from "react";
 
-const Loading = () => {
+const UserProfileLoading = () => {
   return (
     <div className="mx-4 mb-10 grid grid-cols-12 gap-x-3 xl:mx-28">
       <div className="col-span-12 rounded-4 md:col-span-4 md:h-[300px] md:animate-skeleton_loading xl:col-span-3 2xl:col-span-2">
@@ -27,4 +26,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default UserProfileLoading;
