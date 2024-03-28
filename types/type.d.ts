@@ -190,3 +190,17 @@ export interface EditAddressParams {
   id: string;
   addressData: string;
 }
+
+export interface CheckOtpParams {
+  phone: string;
+  otpCode: number;
+}
+
+export interface CheckOtpResponse {
+  message: string;
+  statusCode: number;
+  tokens: {
+    accessToken: string;
+    refreshToken: string;
+  };
+}
