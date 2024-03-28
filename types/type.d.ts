@@ -232,3 +232,36 @@ export interface GetProductByIdResponse {
   data: Product;
   statusCode: number;
 }
+
+export interface GetUserInfoResponse {
+  data: User | null;
+  statusCode: number | null;
+}
+
+export interface GetUserAddressParams {
+  page: number;
+  limit: number;
+}
+
+export interface GetUserAddressResponse {
+  data: Addresses[] | [];
+  maxPage: string;
+}
+
+export interface UploadProfileImageParams {
+  setLoadingProgress: (progress: number) => void;
+  file: FormData;
+}
+
+export interface GetAllFavoriteFoodsResponse {
+  favoriteFood: Product[];
+  maxPage: number;
+  statusCode: number;
+}
+
+export interface GetAllFavoriteFoodsParams {
+  main: string;
+  q: string;
+  page: number;
+  limit: number;
+}
