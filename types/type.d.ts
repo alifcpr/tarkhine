@@ -210,3 +210,25 @@ export interface AddCommentParams {
   text: string;
   rate: number;
 }
+
+export interface allProductParams {
+  main?: string;
+  sub?: string;
+  page?: number;
+  limit?: number;
+  q?: string;
+}
+
+export interface AllProductResponse {
+  foods: {
+    data: Product[];
+    subCategory: string;
+  }[];
+  maxPage: number;
+  statusCode: number;
+}
+
+export interface GetProductByIdResponse {
+  data: Product;
+  statusCode: number;
+}
