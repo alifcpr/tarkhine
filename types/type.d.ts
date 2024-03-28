@@ -1,4 +1,3 @@
-
 export interface HeaderLinks {
   _id: number;
   title: string;
@@ -180,4 +179,14 @@ export interface Product {
   comments: Comment[];
   newPrice?: number;
   isFavorite: boolean;
+}
+
+export interface CommonResponse {
+  message: string;
+  statusCode: number;
+}
+
+export interface EditAddressParams {
+  id: string;
+  addressData: string;
 }
