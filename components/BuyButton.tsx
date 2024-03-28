@@ -1,5 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import { addProductToShoppingCartApi } from "@/services/shopping_cart-services";
+import { useMutation } from "@tanstack/react-query";
+import React from "react";
+import toast from "react-hot-toast";
 import { Oval } from "react-loader-spinner";
 
 type BuyButtonProps = {
@@ -9,15 +12,32 @@ type BuyButtonProps = {
 };
 
 const BuyButton = ({ quantity, btnClasses, foodId }: BuyButtonProps) => {
-  const [isLoaidng] = useState<boolean>(false);
+  const { mutate: addProductToShoppingCartMutate, isLoading: isAddingLoading } =
+    useMutation({
+      mutationKey: ["product"],
+      mutationFn: async (foodId: string) => addProductToShoppingCartApi(foodId),
+      onSuccess: () => {
+        toast.success("محصول مدنظر با موفقیت به سبد خرید شما اضافه شد");
+      },
+      onError: () => {
+        toast.error(
+          "محصول مدنظر به سبد خرید شما اضافه نشد ، مجددا امتحان کنید"
+        );
+      },
+    });
+
+  const handleAddProduct = () => {
+    addProductToShoppingCartMutate(foodId);
+  };
 
   return quantity > 0 ? (
     <button
+      onClick={handleAddProduct}
       className={`button-primary flex items-center justify-center ${
-        isLoaidng && "pointer-events-none opacity-80"
+        isAddingLoading && "pointer-events-none opacity-80"
       } ${btnClasses}`}
     >
-      {isLoaidng ? (
+      {isAddingLoading ? (
         <Oval
           width={23}
           height={23}
