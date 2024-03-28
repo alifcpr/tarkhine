@@ -204,3 +204,9 @@ export interface CheckOtpResponse {
     refreshToken: string;
   };
 }
+
+export interface AddCommentParams {
+  foodId: string;
+  text: string;
+  rate: number;
+}

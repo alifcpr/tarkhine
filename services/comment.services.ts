@@ -1,16 +1,12 @@
+import { AddCommentParams, CommonResponse } from "@/types/type";
 import axiosService from "./axios";
 
-type AddCommentApiParams = {
-  foodId: string;
-  text: string;
-  rate: number;
-};
 export const addCommentApi = async ({
   foodId,
   text,
   rate,
-}: AddCommentApiParams) => {
-  const { data } = await axiosService.post("/v1/comment", {
+}: AddCommentParams) => {
+  const { data } = await axiosService.post<CommonResponse>("/v1/comment", {
     foodId,
     text,
     rate,
