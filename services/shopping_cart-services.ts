@@ -1,11 +1,8 @@
+import { CommonResponse } from "@/types/type";
 import axiosService from "./axios";
 
-type Response = {
-  message: string;
-  statusCode: number;
-};
 export const addProductToShoppingCartApi = async (foodId: string) => {
-  const { data } = await axiosService.post<Response>("/v1/cart/add", {
+  const { data } = await axiosService.post<CommonResponse>("/v1/cart/add", {
     foodId,
   });
   return data;
