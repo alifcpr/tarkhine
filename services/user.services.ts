@@ -3,6 +3,7 @@ import {
   GetAllFavoriteFoodsParams,
   GetAllFavoriteFoodsResponse,
   GetUserAddressParams,
+  GetUserAddressResponse,
   GetUserInfoResponse,
   UploadProfileImageParams,
   User,
@@ -24,7 +25,7 @@ export const getUserAddress = async ({
   page = 1,
   limit = 2,
 }: GetUserAddressParams) => {
-  const { data } = await axiosService.get<GetUserInfoResponse>(
+  const { data } = await axiosService.get<GetUserAddressResponse>(
     `/v1/profile/address?page=${page}&limit=${limit}`
   );
   return data;

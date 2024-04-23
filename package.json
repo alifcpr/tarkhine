@@ -33,7 +33,7 @@
     "react-hot-toast": "^2.4.1",
     "react-loader-spinner": "^6.1.6",
     "react-multi-date-picker": "^4.4.1",
-    "react-slugify": "^3.0.3",
+    "styled-components": "^6.1.8",
     "swiper": "^11.0.5",
     "universal-cookie": "^7.0.1",
     "uuid": "^9.0.1",

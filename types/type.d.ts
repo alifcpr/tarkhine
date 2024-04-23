@@ -1,3 +1,5 @@
+import { Address } from "cluster";
+
 export interface HeaderLinks {
   _id: number;
   title: string;
@@ -188,7 +190,7 @@ export interface CommonResponse {
 
 export interface EditAddressParams {
   id: string;
-  addressData: string;
+  addressData: AddAddress;
 }
 
 export interface CheckOtpParams {
@@ -236,6 +238,11 @@ export interface GetProductByIdResponse {
 export interface GetUserInfoResponse {
   data: User | null;
   statusCode: number | null;
+}
+
+export interface GetUserAddresses {
+  data: Address,
+  statusCode: number
 }
 
 export interface GetUserAddressParams {
