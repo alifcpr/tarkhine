@@ -47,6 +47,7 @@ const BranchCard = ({
             alt={title}
             width={300}
             height={300}
+            priority={true}
             className="h-full w-full"
           />
           <div className="xl:smooth-transition hidden xl:absolute xl:inset-0 xl:flex xl:items-center xl:justify-center xl:bg-black/0 xl:group-hover:bg-black/60">

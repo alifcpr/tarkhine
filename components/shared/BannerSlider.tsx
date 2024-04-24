@@ -44,6 +44,7 @@ const BannerSlider = () => {
                       width={1920}
                       height={400}
                       alt={banner.title}
+                      priority={true}
                       className="aspect-square h-full w-full object-cover"
                     />
                     <div className="image-wrapper absolute inset-0"></div>

@@ -44,6 +44,7 @@ const ImageSlider = ({ images }: ImageSliderProps) => {
                     alt="Image"
                     width={1200}
                     height={200}
+                    priority={true}
                     className="h-full w-full object-cover"
                   />
                 </SwiperSlide>
@@ -65,6 +66,7 @@ const ImageSlider = ({ images }: ImageSliderProps) => {
                     alt="Image"
                     width={100}
                     height={100}
+                    priority={true}
                     className="h-full w-full"
                   />
                 </button>
