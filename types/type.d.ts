@@ -241,8 +241,8 @@ export interface GetUserInfoResponse {
 }
 
 export interface GetUserAddresses {
-  data: Address,
-  statusCode: number
+  data: Address;
+  statusCode: number;
 }
 
 export interface GetUserAddressParams {
@@ -271,4 +271,28 @@ export interface GetAllFavoriteFoodsParams {
   q: string;
   page: number;
   limit: number;
+}
+
+export interface ShoppingCart
+  extends Omit<
+    Product,
+    | "comments"
+    | "isFavorite"
+    | "category"
+    | "subCategory"
+    | "ingredients"
+    | "description"
+  > {}
+
+export interface ShoppingCartList {
+  data: {
+    quantity: number;
+    foodDetail: ShoppingCart;
+  }[];
+  detail: {
+    totalPrice: number;
+    totalDiscount: number;
+    cardQunatity: 4;
+  };
+  statusCode: number;
 }
