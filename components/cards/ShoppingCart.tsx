@@ -10,6 +10,7 @@ import { customeStyles } from "@/utils";
 import Link from "next/link";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
+  decreaseShoppingCartApi,
   deleteShoppingCartApi,
   increaseShoppingCartApi,
 } from "@/services/shopping_cart-services";
@@ -115,9 +116,27 @@ const ShoppingCart = ({ data }: ShoppnigCartProps) => {
     },
   });
 
+  // handle decrease product api
+  const { mutate: decProductMutate, isLoading: isDecLoading } = useMutation({
+    mutationKey: ["carts"],
+    mutationFn: async (id: string) => await decreaseShoppingCartApi(id),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["carts"] });
+      toast.success(data.message);
+    },
+    onError: ({ response }) => {
+      toast.error(response.data.message);
+    },
+  });
+
   // call increase product api when onCLick on button
   const handleIncreaseProduct = () => {
     incProductMutate(_id);
+  };
+
+  //   call decrease product api when onClick on button
+  const handleDecreaseProduct = () => {
+    decProductMutate(_id);
   };
 
   const {
@@ -130,12 +149,11 @@ const ShoppingCart = ({ data }: ShoppnigCartProps) => {
       dir="rtl"
       className="relative flex flex-col rounded-4 border-2 md:flex-row"
     >
-      {isDeleteLoading ||
-        (isIncLoading && (
-          <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-            <ThreeDots color="#fff" />
-          </div>
-        ))}
+      {(isDeleteLoading || isDecLoading || isIncLoading) && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+          <ThreeDots color="#fff" />
+        </div>
+      )}
       <Link
         href={`/product/${_id}/${title}`}
         className="relative h-40 w-full md:block md:h-36 md:w-48 lg:h-40 lg:w-52"
@@ -178,6 +196,7 @@ const ShoppingCart = ({ data }: ShoppnigCartProps) => {
               <p>{quantity}</p>
 
               <button
+                onClick={handleDecreaseProduct}
                 className={`${
                   quantity === 1 && "pointer-events-none opacity-30"
                 }`}

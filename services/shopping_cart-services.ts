@@ -27,3 +27,8 @@ export const increaseShoppingCartApi = async (foodId: string) => {
   });
   return data;
 };
+
+export const decreaseShoppingCartApi = async (foodId: string) => {
+  const { data } = await axiosService.put<CommonResponse>("/v1/cart/dec-food", { foodId });
+  return data;
+};
