@@ -36,6 +36,7 @@ const axiosService = {
   post: app.post,
   patch: app.patch,
   delete: app.delete,
+  put: app.put,
 };
 
 export default axiosService;

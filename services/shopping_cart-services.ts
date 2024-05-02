@@ -20,3 +20,10 @@ export const deleteShoppingCartApi = async (foodId: string) => {
   );
   return data;
 };
+
+export const increaseShoppingCartApi = async (foodId: string) => {
+  const { data } = await axiosService.put<CommonResponse>("/v1/cart/inc-food", {
+    foodId,
+  });
+  return data;
+};

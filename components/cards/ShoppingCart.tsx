@@ -9,7 +9,10 @@ import "@smastrom/react-rating/style.css";
 import { customeStyles } from "@/utils";
 import Link from "next/link";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteShoppingCartApi } from "@/services/shopping_cart-services";
+import {
+  deleteShoppingCartApi,
+  increaseShoppingCartApi,
+} from "@/services/shopping_cart-services";
 import toast from "react-hot-toast";
 import { ThreeDots } from "react-loader-spinner";
 
@@ -99,6 +102,24 @@ const ShoppingCart = ({ data }: ShoppnigCartProps) => {
       },
     });
 
+  // handle increase product api
+  const { mutate: incProductMutate, isLoading: isIncLoading } = useMutation({
+    mutationKey: ["carts"],
+    mutationFn: async (id: string) => await increaseShoppingCartApi(id),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["carts"] });
+      toast.success(data.message);
+    },
+    onError: ({ response }) => {
+      toast.error(response.data.message);
+    },
+  });
+
+  // call increase product api when onCLick on button
+  const handleIncreaseProduct = () => {
+    incProductMutate(_id);
+  };
+
   const {
     foodDetail: { _id, discount, imagesUrl, price, rate, title, newPrice },
     quantity,
@@ -109,11 +130,12 @@ const ShoppingCart = ({ data }: ShoppnigCartProps) => {
       dir="rtl"
       className="relative flex flex-col rounded-4 border-2 md:flex-row"
     >
-      {isDeleteLoading && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-          <ThreeDots color="#fff" />
-        </div>
-      )}
+      {isDeleteLoading ||
+        (isIncLoading && (
+          <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+            <ThreeDots color="#fff" />
+          </div>
+        ))}
       <Link
         href={`/product/${_id}/${title}`}
         className="relative h-40 w-full md:block md:h-36 md:w-48 lg:h-40 lg:w-52"
@@ -150,7 +172,7 @@ const ShoppingCart = ({ data }: ShoppnigCartProps) => {
               itemStyles={customeStyles}
             />
             <div className="flex gap-x-1 rounded-4 bg-primary-200 p-1 text-primary-900">
-              <button>
+              <button onClick={handleIncreaseProduct}>
                 <Add className="h-4 w-4" />
               </button>
               <p>{quantity}</p>
