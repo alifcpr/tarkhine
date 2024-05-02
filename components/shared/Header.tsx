@@ -44,9 +44,9 @@ const Header = () => {
 
         <div className="flex items-center gap-x-2">
           <SearchBox />
-          <button className="rounded-4 bg-primary-100 p-1 md:p-2">
+          <Link href={"/cart"} className="rounded-4 bg-primary-100 p-1 md:p-2">
             <ShoppingCart className="h-5 w-5 text-primary-800 md:h-6 md:w-6" />
-          </button>
+          </Link>
           {status === "authorized" ? (
             <button disabled={isLoading} className="group relative">
               <span className="group  flex items-center gap-x-1 rounded-4 bg-primary-600 p-1 text-white md:p-2">
