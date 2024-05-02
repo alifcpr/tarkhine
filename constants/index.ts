@@ -10,7 +10,15 @@ import {
   Question,
 } from "@/types/type.d";
 
-import { Heart, Location, LogoutCurve, User } from "iconsax-react";
+import {
+  Heart,
+  Location,
+  LogoutCurve,
+  ShoppingCart,
+  TickSquare,
+  User,
+  Wallet2,
+} from "iconsax-react";
 
 export const headerLinks: HeaderLinks[] = [
   { _id: 1, type: "link", href: "/", title: "صفحه اصلی" },
@@ -484,4 +492,10 @@ export const subFilterList = [
     key: "نوشیدنی",
     filters: ["نوشابه", "دوغ"],
   },
+];
+
+export const shoppingCartStepList = [
+  { text: "سبد خرید", Icon: ShoppingCart },
+  { text: "تکمیل اطلاعات", Icon: TickSquare },
+  { text: "پرداخت", Icon: Wallet2 },
 ];
