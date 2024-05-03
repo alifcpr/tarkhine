@@ -5,7 +5,7 @@ import { shoppingCartStepList } from "@/constants";
 import useTitle from "@/hooks/useTitle";
 import { getAllShopptingCartsApi } from "@/services/shopping_cart-services";
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { Oval, ThreeDots } from "react-loader-spinner";
 import { v4 as uuidv4 } from "uuid";
 import ShoppingCartsList from "@/components/ShoppingCartsList";
@@ -25,7 +25,11 @@ import Pagination from "@/components/Pagination";
 import AddAddressForm from "@/components/forms/AddAddressForm";
 import Modal from "@/components/shared/Modal";
 
-const AddressesContainer = () => {
+interface AddressesContainerProps {
+  values: { [key: string]: string };
+  setValues: Dispatch<SetStateAction<{ [key: string]: string }>>;
+}
+const AddressesContainer = ({ values, setValues }: AddressesContainerProps) => {
   // modal state
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -38,6 +42,10 @@ const AddressesContainer = () => {
       await getUserAddress({ page: pageQuery ? +pageQuery : 1, limit: 4 }),
     keepPreviousData: true,
   });
+
+  const handleSelectAddress = (id: string) => {
+    setValues((prev) => ({ ...prev, addressId: id }));
+  };
 
   return (
     <>
@@ -73,7 +81,7 @@ const AddressesContainer = () => {
         </div>
         <div dir="ltr" className="max-h-[310px] min-h-max overflow-auto">
           {isLoading && (
-            <div className="flex h-full w-full items-center justify-center">
+            <div className="flex h-[200px] w-full items-center justify-center">
               <Oval
                 width={40}
                 height={40}
@@ -85,21 +93,40 @@ const AddressesContainer = () => {
               />
             </div>
           )}
-          {!isLoading && addresses && (
-            <div className="flex flex-col justify-between">
-              <div
-                dir="rtl"
-                className="mt-2 flex flex-wrap justify-between gap-y-3 [&>div]:w-full md:[&>div]:w-[49%]"
-              >
-                {addresses.data.map((address: any) => (
-                  <AddressCard addressData={address} key={uuidv4()} />
-                ))}
+          {!isLoading &&
+            addresses &&
+            (addresses.data.length > 0 ? (
+              <div className="flex flex-col justify-between">
+                <div
+                  dir="rtl"
+                  className="mt-2 flex flex-wrap justify-between gap-y-3"
+                >
+                  {addresses.data.map((address: any) => (
+                    <div
+                      onClick={() => handleSelectAddress(address._id)}
+                      className={`w-full cursor-pointer md:w-[49%] [&>div]:w-full ${
+                        values.addressId === address._id &&
+                        "rounded-8 [&>div]:border-primary-800"
+                      }`}
+                      key={uuidv4()}
+                    >
+                      <AddressCard addressData={address} />
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-5">
+                  <Pagination totalPage={+addresses.maxPage} />
+                </div>
               </div>
-              <div className="mt-5">
-                <Pagination totalPage={+addresses.maxPage} />
+            ) : (
+              <div className="flex items-center justify-center p-5">
+                <Empty
+                  title=" ! هنوز آدرسی ثبت نکردی"
+                  btnLabel="ثبت آدرس"
+                  setShow={() => setIsModalOpen(true)}
+                />
               </div>
-            </div>
-          )}
+            ))}
         </div>
       </div>
     </>
@@ -109,6 +136,12 @@ const AddressesContainer = () => {
 const Page = () => {
   // step state
   const [step, setStep] = useState<number>(1);
+
+  // values state
+  const [values, setValues] = useState<{ [key: string]: string }>({
+    addressId: "",
+    discountCode: "",
+  });
 
   // page title
   useTitle("سبد خرید");
@@ -170,7 +203,7 @@ const Page = () => {
                     </div>
                   </div>
                   <div className="mt-4">
-                    <AddressesContainer />
+                    <AddressesContainer values={values} setValues={setValues} />
                   </div>
                 </>
               )}

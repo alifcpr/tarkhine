@@ -77,13 +77,19 @@ const AddressCard = ({ addressData }: AddressCardProps) => {
           </h1>
           <div className="flex gap-x-3">
             <button
-              onClick={() => setIsModalOpen(true)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsModalOpen(true);
+              }}
               className="smooth-transition hover:text-primary-800"
             >
               <Edit2 className="h-6 w-6 xl:h-7 xl:w-7" />
             </button>
             <button
-              onClick={() => handleDelete(addressData._id)}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleDelete(addressData._id);
+              }}
               className="smooth-transition hover:text-error-200"
             >
               <Trash className="h-6 w-6 xl:h-7 xl:w-7" />
