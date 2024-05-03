@@ -10,6 +10,7 @@ import { ThreeDots } from "react-loader-spinner";
 import { v4 as uuidv4 } from "uuid";
 import ShoppingCartsList from "@/components/ShoppingCartsList";
 import Empty from "@/components/profile/Empty";
+import ShoppingCartsInformation from "@/components/ShoppingCartsInformation";
 
 const Page = () => {
   // step state
@@ -51,7 +52,11 @@ const Page = () => {
           <div className="mx-auto mt-10 grid  grid-cols-12 gap-x-6 xl:max-w-[1200px] 2xl:max-w-[1300px]">
             <ShoppingCartsList data={orders.data} />
             <div className="col-span-12 h-max rounded-8 border-2 p-2 lg:col-span-5">
-              f
+              <ShoppingCartsInformation
+                data={orders}
+                step={step}
+                setStep={setStep}
+              />
             </div>
           </div>
         ) : (
