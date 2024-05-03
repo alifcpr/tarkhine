@@ -7,6 +7,8 @@ import {
   Warning2,
 } from "iconsax-react";
 import React, { Dispatch, SetStateAction } from "react";
+import SmallShoppingCart from "./cards/SmallShoppingCart";
+import { v4 as uuidv4 } from "uuid";
 
 interface ShoppingCartsInformationProps {
   data: ShoppingCartList;
@@ -19,6 +21,7 @@ const ShoppingCartsInformation = ({
   step,
   setStep,
 }: ShoppingCartsInformationProps) => {
+  // renderButton due to the step number
   const renderButton = (step: number) => {
     switch (step) {
       case 1:
@@ -59,6 +62,16 @@ const ShoppingCartsInformation = ({
           <Trash />
         </button>
       </div>
+      {step >= 2 && (
+        <div
+          dir="ltr"
+          className="my-2 hidden h-[200px] overflow-auto border-b-2 border-muted-300 lg:block"
+        >
+          {data.data.map((cartData: any) => (
+            <SmallShoppingCart data={cartData} key={uuidv4()} />
+          ))}
+        </div>
+      )}
       <div className="body-md flex items-center justify-between border-b-2 py-4">
         <p>تخفیف محصولات</p>
         <p className="text-muted-700">

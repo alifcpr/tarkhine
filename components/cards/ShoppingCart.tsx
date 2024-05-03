@@ -1,9 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { ShoppingCart as TShoppingCart } from "@/types/type";
 import Image from "next/image";
-import { Add, Minus, Trash } from "iconsax-react";
-import Modal from "../shared/Modal";
+import { Add, Minus } from "iconsax-react";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { customeStyles } from "@/utils";
@@ -16,69 +15,7 @@ import {
 } from "@/services/shopping_cart-services";
 import toast from "react-hot-toast";
 import { ThreeDots } from "react-loader-spinner";
-
-export interface DeleteShoppingCartProps
-  extends React.HTMLProps<HTMLButtonElement> {
-  title: string;
-  className?: string;
-  iconClassName?: string;
-  deleteFunc: () => void;
-}
-
-const DeleteShoppingCart = ({
-  title,
-  className,
-  iconClassName,
-  deleteFunc,
-}: DeleteShoppingCartProps) => {
-  // modal state
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const handleDelete = () => {
-    setIsOpen(false);
-    deleteFunc();
-  };
-
-  return (
-    <>
-      <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-        <Modal.Header
-          onClose={() => setIsOpen(false)}
-          containerClass="px-3 py-3 !bg-muted-400"
-          titleClass="h5-bold text-muted-800"
-          iconClass="text-muted-800 w-10 h-10"
-        >
-          {title}
-        </Modal.Header>
-        <Modal.Body containerClass="max-w-xs md:max-w-lg">
-          <div className="body-md bg-muted-100 px-4 py-3">
-            آیا مطمئن هستید که میخواهید این آیتم را از سبد خرید خود حذف کنید ؟
-            <div className="mt-4 flex items-center gap-x-4">
-              <button
-                onClick={handleDelete}
-                className="button-primary rounded-4 px-6 py-1"
-              >
-                بله
-              </button>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="rounded-4 px-6 py-1 text-error-200 hover:bg-error-200/10"
-              >
-                خیر
-              </button>
-            </div>
-          </div>
-        </Modal.Body>
-      </Modal>
-      <button
-        onClick={() => setIsOpen(true)}
-        className={`hover:text-error-200 ${className}`}
-      >
-        <Trash className={`h-6 w-6 ${iconClassName}`} />
-      </button>
-    </>
-  );
-};
+import DeleteShoppingCartBtn from "../DeleteShoppingCartBtn";
 
 interface ShoppnigCartProps {
   data: {
@@ -172,7 +109,7 @@ const ShoppingCart = ({ data }: ShoppnigCartProps) => {
           <Link href={`/product/${_id}/${title}`} className="h5-bold">
             {title}
           </Link>
-          <DeleteShoppingCart
+          <DeleteShoppingCartBtn
             title={title}
             deleteFunc={() => deleteShoppingCartMutate(_id)}
             iconClassName="w-6 h-6"
