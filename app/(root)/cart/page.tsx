@@ -5,10 +5,11 @@ import { shoppingCartStepList } from "@/constants";
 import useTitle from "@/hooks/useTitle";
 import { getAllShopptingCartsApi } from "@/services/shopping_cart-services";
 import { useQuery } from "@tanstack/react-query";
-import ShoppingCart from "@/components/cards/ShoppingCart";
 import React, { useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { v4 as uuidv4 } from "uuid";
+import ShoppingCartsList from "@/components/ShoppingCartsList";
+import Empty from "@/components/profile/Empty";
 
 const Page = () => {
   // step state
@@ -17,7 +18,7 @@ const Page = () => {
   // page title
   useTitle("سبد خرید");
 
-  const { data, isLoading } = useQuery({
+  const { data: orders, isLoading } = useQuery({
     queryKey: ["carts"],
     queryFn: async () => await getAllShopptingCartsApi(),
   });
@@ -44,21 +45,24 @@ const Page = () => {
           <ThreeDots />
         </div>
       )}
-      {!isLoading && data && (
-        <div className="mx-auto mt-10 grid  grid-cols-12 gap-x-6 xl:max-w-[1200px] 2xl:max-w-[1300px]">
-          <div
-            dir="ltr"
-            className="col-span-12 flex h-[300px] flex-col gap-y-3 overflow-y-auto rounded-8 border-2 p-4 md:h-[400px] lg:col-span-7 lg:h-[500px]"
-          >
-            {data.data.map((cartData: any, index: number) => (
-              <ShoppingCart data={cartData} key={uuidv4()} />
-            ))}
+      {!isLoading &&
+        orders &&
+        (orders.data.length > 0 ? (
+          <div className="mx-auto mt-10 grid  grid-cols-12 gap-x-6 xl:max-w-[1200px] 2xl:max-w-[1300px]">
+            <ShoppingCartsList data={orders.data} />
+            <div className="col-span-12 h-max rounded-8 border-2 p-2 lg:col-span-5">
+              f
+            </div>
           </div>
-          <div className="col-span-12 h-max rounded-8 border-2 p-2 lg:col-span-5">
-            f
+        ) : (
+          <div className="mt-10 flex h-[500px] items-center justify-center rounded-8 border-2">
+            <Empty
+              title="شما درحال حاضر هیچ سفارشی ثبت نکرده اید !"
+              btnLabel="منوی رستوران"
+              href="/menu"
+            />
           </div>
-        </div>
-      )}
+        ))}
     </div>
   );
 };
