@@ -15,7 +15,7 @@ const ShoppingCartsList = ({ data }: ShoppingCartsListProps) => {
   return (
     <div
       dir="ltr"
-      className="col-span-12 flex h-[300px] flex-col gap-y-3 overflow-y-auto rounded-8 border-2 p-4 md:h-[400px] lg:col-span-7 lg:h-[500px]"
+      className=" flex h-[300px] flex-col gap-y-3 overflow-y-auto rounded-8 border-2 p-4 md:h-[400px] lg:col-span-7 lg:h-[500px]"
     >
       {data.map((cartData: any) => (
         <ShoppingCart data={cartData} key={uuidv4()} />

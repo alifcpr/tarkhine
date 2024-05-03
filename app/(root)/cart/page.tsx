@@ -6,11 +6,105 @@ import useTitle from "@/hooks/useTitle";
 import { getAllShopptingCartsApi } from "@/services/shopping_cart-services";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { ThreeDots } from "react-loader-spinner";
+import { Oval, ThreeDots } from "react-loader-spinner";
 import { v4 as uuidv4 } from "uuid";
 import ShoppingCartsList from "@/components/ShoppingCartsList";
 import Empty from "@/components/profile/Empty";
 import ShoppingCartsInformation from "@/components/ShoppingCartsInformation";
+import {
+  AddCircle,
+  Location,
+  ShoppingBag,
+  Truck,
+  TruckFast,
+} from "iconsax-react";
+import { getUserAddress } from "@/services/user.services";
+import { useSearchParams } from "next/navigation";
+import AddressCard from "@/components/cards/AddressCard";
+import Pagination from "@/components/Pagination";
+import AddAddressForm from "@/components/forms/AddAddressForm";
+import Modal from "@/components/shared/Modal";
+
+const AddressesContainer = () => {
+  // modal state
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const searchParams = useSearchParams();
+  const pageQuery = searchParams.get("page");
+
+  const { data: addresses, isLoading } = useQuery({
+    queryKey: ["address", pageQuery],
+    queryFn: async () =>
+      await getUserAddress({ page: pageQuery ? +pageQuery : 1, limit: 4 }),
+    keepPreviousData: true,
+  });
+
+  return (
+    <>
+      <Modal
+        containerClasses="!block md:!flex"
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      >
+        <Modal.Header
+          titleClass="h7-semibold"
+          containerClass="!bg-muted-400 px-5 py-4"
+          onClose={() => setIsModalOpen(false)}
+        >
+          ثبت آدرس
+        </Modal.Header>
+        <Modal.Body containerClass="p-3 bg-muted-100">
+          <AddAddressForm type="Add" closeModal={() => setIsModalOpen(false)} />
+        </Modal.Body>
+      </Modal>
+      <div className="rounded-8 border-2 p-4">
+        <div className="flex items-center justify-between border-b-2 pb-4">
+          <div className="flex items-center gap-x-2">
+            <Location />
+            <p className="body-lg">آدرس ها</p>
+          </div>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="flex items-center gap-x-1 text-primary-800"
+          >
+            <AddCircle />
+            <p className="body-md">افزودن آدرس</p>
+          </button>
+        </div>
+        <div dir="ltr" className="max-h-[310px] min-h-max overflow-auto">
+          {isLoading && (
+            <div className="flex h-full w-full items-center justify-center">
+              <Oval
+                width={40}
+                height={40}
+                wrapperClass={"text-white"}
+                strokeWidthSecondary={10}
+                strokeWidth={5}
+                color={"#000"}
+                secondaryColor={"#000"}
+              />
+            </div>
+          )}
+          {!isLoading && addresses && (
+            <div className="flex flex-col justify-between">
+              <div
+                dir="rtl"
+                className="mt-2 flex flex-wrap justify-between gap-y-3 [&>div]:w-full md:[&>div]:w-[49%]"
+              >
+                {addresses.data.map((address: any) => (
+                  <AddressCard addressData={address} key={uuidv4()} />
+                ))}
+              </div>
+              <div className="mt-5">
+                <Pagination totalPage={+addresses.maxPage} />
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </>
+  );
+};
 
 const Page = () => {
   // step state
@@ -19,6 +113,7 @@ const Page = () => {
   // page title
   useTitle("سبد خرید");
 
+  // handle get all shoppingCarts from api
   const { data: orders, isLoading } = useQuery({
     queryKey: ["carts"],
     queryFn: async () => await getAllShopptingCartsApi(),
@@ -50,7 +145,37 @@ const Page = () => {
         orders &&
         (orders.data.length > 0 ? (
           <div className="mx-auto mt-10 grid  grid-cols-12 gap-x-6 xl:max-w-[1200px] 2xl:max-w-[1300px]">
-            <ShoppingCartsList data={orders.data} />
+            <div className="col-span-12 lg:col-span-7 ">
+              {step === 1 && <ShoppingCartsList data={orders.data} />}
+              {step === 2 && (
+                <>
+                  <div className="flex flex-col gap-y-4 rounded-8 border-2 p-4 md:flex-row md:items-center md:justify-between md:py-10">
+                    <div className="body-md md:body-lg flex gap-x-2 border-b pb-4 md:border-b-0 md:pb-0">
+                      <Truck />
+                      <p>روش تحویل سفارش</p>
+                    </div>
+                    <div className="flex items-center gap-x-2">
+                      <input type="radio" checked id="motor" />
+                      <label htmlFor="motor" className="body-md flex gap-x-2">
+                        <p>ارسال توسط پیک</p>
+                        <TruckFast className="text-muted-800" />
+                      </label>
+                    </div>
+                    <div className="flex items-center gap-x-2">
+                      <input disabled type="radio" id="bag" />
+                      <label htmlFor="bag" className="body-md flex gap-x-2">
+                        <p>تحویل حضوری</p>
+                        <ShoppingBag className="text-muted-800" />
+                      </label>
+                    </div>
+                  </div>
+                  <div className="mt-4">
+                    <AddressesContainer />
+                  </div>
+                </>
+              )}
+              {step === 3 && <div>section 3</div>}
+            </div>
             <div className="col-span-12 h-max rounded-8 border-2 p-2 lg:col-span-5">
               <ShoppingCartsInformation
                 data={orders}
