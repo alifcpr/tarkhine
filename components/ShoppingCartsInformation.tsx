@@ -1,5 +1,11 @@
 import { ShoppingCartList } from "@/types/type";
-import { Trash, Warning2 } from "iconsax-react";
+import {
+  ArrowLeft2,
+  TickCircle,
+  Trash,
+  Wallet2,
+  Warning2,
+} from "iconsax-react";
 import React, { Dispatch, SetStateAction } from "react";
 
 interface ShoppingCartsInformationProps {
@@ -13,8 +19,40 @@ const ShoppingCartsInformation = ({
   step,
   setStep,
 }: ShoppingCartsInformationProps) => {
+  const renderButton = (step: number) => {
+    switch (step) {
+      case 1:
+        return (
+          <button
+            onClick={() => setStep(2)}
+            className="button-primary body-md flex items-center justify-center rounded-4 py-1.5"
+          >
+            مرحله بعد
+            <ArrowLeft2 />
+          </button>
+        );
+      case 2:
+        return (
+          <button
+            onClick={() => setStep(3)}
+            className="button-primary body-md flex items-center justify-center gap-x-2 rounded-4 py-1.5"
+          >
+            <TickCircle />
+            ثبت سفارش
+          </button>
+        );
+      case 3:
+        return (
+          <button className="button-primary body-md flex items-center justify-center gap-x-2 rounded-4 py-1.5">
+            <Wallet2 />
+            تکمیل خرید
+          </button>
+        );
+    }
+  };
+
   return (
-    <div className="flex w-full flex-col px-4">
+    <div className="flex w-full flex-col px-4 pb-4">
       <div className="flex items-center justify-between border-b-2 py-4">
         <p className="body-md">سبد خرید ( {data.detail.cardQunatity} )</p>
         <button>
@@ -43,12 +81,7 @@ const ShoppingCartsInformation = ({
           {data.detail.totalPrice.toLocaleString("fa")} تومان
         </p>
       </div>
-      <button
-        onClick={() => setStep(2)}
-        className="button-primary body-md rounded-4 py-1"
-      >
-        تکمیل اطلاعات
-      </button>
+      {renderButton(step)}
     </div>
   );
 };
