@@ -214,6 +214,7 @@ const Page = () => {
                 data={orders}
                 step={step}
                 setStep={setStep}
+                addressId={values.addressId}
               />
             </div>
           </div>

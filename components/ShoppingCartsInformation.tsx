@@ -9,25 +9,38 @@ import {
 import React, { Dispatch, SetStateAction } from "react";
 import SmallShoppingCart from "./cards/SmallShoppingCart";
 import { v4 as uuidv4 } from "uuid";
+import toast from "react-hot-toast";
 
 interface ShoppingCartsInformationProps {
   data: ShoppingCartList;
   step: number;
   setStep: Dispatch<SetStateAction<number>>;
+  addressId: string;
 }
 
 const ShoppingCartsInformation = ({
   data,
   step,
   setStep,
+  addressId,
 }: ShoppingCartsInformationProps) => {
+  
+  // handle change step
+  const handleChangeStep = (nextStep: number) => {
+    if (step === 2) {
+      !addressId ? toast("باید محل ارسال غذا را مشخص کنید") : setStep(nextStep);
+    } else {
+      setStep(nextStep);
+    }
+  };
+
   // renderButton due to the step number
   const renderButton = (step: number) => {
     switch (step) {
       case 1:
         return (
           <button
-            onClick={() => setStep(2)}
+            onClick={() => handleChangeStep(2)}
             className="button-primary body-md flex items-center justify-center rounded-4 py-1.5"
           >
             مرحله بعد
@@ -37,7 +50,7 @@ const ShoppingCartsInformation = ({
       case 2:
         return (
           <button
-            onClick={() => setStep(3)}
+            onClick={() => handleChangeStep(3)}
             className="button-primary body-md flex items-center justify-center gap-x-2 rounded-4 py-1.5"
           >
             <TickCircle />
