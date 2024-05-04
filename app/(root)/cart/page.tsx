@@ -189,7 +189,7 @@ const Page = () => {
               active={step >= index + 1}
               icon={<Icon className="h-7 w-7" />}
               onClick={() => setStep(index + 1)}
-              disabled={true}
+              disabled={isSendingLoading}
             >
               <StepBar.Text>{text}</StepBar.Text>
             </StepBar.Step>

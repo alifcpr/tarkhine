@@ -23,11 +23,12 @@ const Text = ({ className, children }: TextProps) => {
   );
 };
 
-interface StepProps extends React.HTMLProps<HTMLDivElement> {
+interface StepProps extends React.HTMLProps<HTMLButtonElement> {
   icon?: React.ReactNode;
   children: React.ReactNode;
   active?: boolean;
   index: number;
+  type?: "button" | "submit" | "reset";
 }
 
 // step
@@ -50,15 +51,16 @@ const Step = ({
           }`}
         ></div>
       )}
-      <div
+      <button
         {...props}
+        disabled={!active}
         className={`flex w-full cursor-pointer items-center justify-center gap-x-1 first:justify-end last:justify-start ${
           active ? " text-primary-800" : " pointer-events-none text-muted-600"
         }`}
       >
         <span>{icon && icon}</span>
         {children}
-      </div>
+      </button>
       {lastStep !== index && (
         <div
           className={`h-[3px] w-full border-t-2 border-dashed  ${
