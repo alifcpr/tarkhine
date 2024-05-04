@@ -1,3 +1,4 @@
+"use client";
 import { ShoppingCartList } from "@/types/type";
 import {
   ArrowLeft2,
@@ -10,12 +11,15 @@ import React, { Dispatch, SetStateAction } from "react";
 import SmallShoppingCart from "./cards/SmallShoppingCart";
 import { v4 as uuidv4 } from "uuid";
 import toast from "react-hot-toast";
+import { ThreeDots } from "react-loader-spinner";
 
 interface ShoppingCartsInformationProps {
   data: ShoppingCartList;
   step: number;
   setStep: Dispatch<SetStateAction<number>>;
   addressId: string;
+  isLoading: boolean;
+  sendToGatewayFunc: () => void;
 }
 
 const ShoppingCartsInformation = ({
@@ -23,8 +27,17 @@ const ShoppingCartsInformation = ({
   step,
   setStep,
   addressId,
+  isLoading,
+  sendToGatewayFunc,
 }: ShoppingCartsInformationProps) => {
+
   
+  // call send to payment gateway api when onClick button
+  const handleSendToGateway = () => {
+    toast.loading("صبر کنید...", { id: "gateway-loading" });
+    sendToGatewayFunc();
+  };
+
   // handle change step
   const handleChangeStep = (nextStep: number) => {
     if (step === 2) {
@@ -59,7 +72,11 @@ const ShoppingCartsInformation = ({
         );
       case 3:
         return (
-          <button className="button-primary body-md flex items-center justify-center gap-x-2 rounded-4 py-1.5">
+          <button
+            onClick={handleSendToGateway}
+            disabled={isLoading}
+            className="button-primary body-md flex items-center justify-center gap-x-2 rounded-4 py-1.5"
+          >
             <Wallet2 />
             تکمیل خرید
           </button>
@@ -68,7 +85,12 @@ const ShoppingCartsInformation = ({
   };
 
   return (
-    <div className="flex w-full flex-col px-4 pb-4">
+    <div className="relative flex w-full flex-col overflow-hidden px-4 pb-4">
+      {isLoading && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-muted-950/40 backdrop-blur-sm">
+          <ThreeDots color="#fff" />
+        </div>
+      )}
       <div className="flex items-center justify-between border-b-2 py-4">
         <p className="body-md">سبد خرید ( {data.detail.cardQunatity} )</p>
         <button>

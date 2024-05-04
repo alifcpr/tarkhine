@@ -296,3 +296,13 @@ export interface ShoppingCartList {
   };
   statusCode: number;
 }
+
+export interface sendToPaymentGatewayParams {
+  addressId: string;
+  discountCode?: string;
+}
+
+export interface sendToPaymentGatewayResponse {
+  statusCode: number;
+  gatewayURL: string;
+}

@@ -1,4 +1,9 @@
-import { CommonResponse, ShoppingCartList } from "@/types/type";
+import {
+  CommonResponse,
+  ShoppingCartList,
+  sendToPaymentGatewayParams,
+  sendToPaymentGatewayResponse,
+} from "@/types/type";
 import axiosService from "./axios";
 
 export const addProductToShoppingCartApi = async (foodId: string) => {
@@ -29,6 +34,17 @@ export const increaseShoppingCartApi = async (foodId: string) => {
 };
 
 export const decreaseShoppingCartApi = async (foodId: string) => {
-  const { data } = await axiosService.put<CommonResponse>("/v1/cart/dec-food", { foodId });
+  const { data } = await axiosService.put<CommonResponse>("/v1/cart/dec-food", {
+    foodId,
+  });
+  return data;
+};
+
+export const sendToPaymentGateway = async (
+  params: sendToPaymentGatewayParams
+) => {
+  const { data } = await axiosService.post<sendToPaymentGatewayResponse>("/v1/payment/gateway", {
+    addressId: params.addressId,
+  });
   return data;
 };
