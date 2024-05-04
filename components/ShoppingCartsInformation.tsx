@@ -65,7 +65,7 @@ const ShoppingCartsInformation = ({
       {step >= 2 && (
         <div
           dir="ltr"
-          className="my-2 hidden max-h-[200px] min-h-[100px] overflow-auto border-b-2 border-muted-300 lg:block"
+          className="hidden max-h-[200px] min-h-max overflow-auto border-b-2 border-muted-300 py-2 lg:block"
         >
           {data.data.map((cartData: any) => (
             <SmallShoppingCart data={cartData} key={uuidv4()} />
