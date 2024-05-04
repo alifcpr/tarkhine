@@ -27,7 +27,7 @@ import AddressCard from "@/components/cards/AddressCard";
 import Pagination from "@/components/Pagination";
 import AddAddressForm from "@/components/forms/AddAddressForm";
 import Modal from "@/components/shared/Modal";
-import { sendToPaymentGatewayParams } from "@/types/type";
+import { ShoppingCartList, sendToPaymentGatewayParams } from "@/types/type";
 
 import toast from "react-hot-toast";
 
@@ -139,6 +139,63 @@ const AddressesContainer = ({ values, setValues }: AddressesContainerProps) => {
   );
 };
 
+interface StepOneProps {
+  data: ShoppingCartList;
+}
+const StepOne = ({ data: orders }: StepOneProps) => {
+  return <ShoppingCartsList data={orders.data} />;
+};
+
+interface StepTwoProps {
+  values: { [key: string]: string };
+  setValues: Dispatch<SetStateAction<{ [key: string]: string }>>;
+}
+const StepTwo = ({ values, setValues }: StepTwoProps) => {
+  return (
+    <>
+      <div className="flex flex-col gap-y-4 rounded-8 border-2 p-4 md:flex-row md:items-center md:justify-between md:py-10">
+        <div className="body-md md:body-lg flex gap-x-2 border-b pb-4 md:border-b-0 md:pb-0">
+          <Truck />
+          <p>روش تحویل سفارش</p>
+        </div>
+        <div className="flex items-center gap-x-2">
+          <input type="radio" checked id="motor" />
+          <label htmlFor="motor" className="body-md flex gap-x-2">
+            <p>ارسال توسط پیک</p>
+            <TruckFast className="text-muted-800" />
+          </label>
+        </div>
+        <div className="flex items-center gap-x-2">
+          <input disabled type="radio" id="bag" />
+          <label htmlFor="bag" className="body-md flex gap-x-2">
+            <p>تحویل حضوری</p>
+            <ShoppingBag className="text-muted-800" />
+          </label>
+        </div>
+      </div>
+      <div className="mt-4">
+        <AddressesContainer values={values} setValues={setValues} />
+      </div>
+    </>
+  );
+};
+
+interface StepThreeProps {
+  isLoading: boolean;
+}
+const StepThree = ({ isLoading }: StepThreeProps) => {
+  return (
+    <div className="relative">
+      {isLoading && (
+        <div className="absolute inset-0 z-50 bg-muted-950/40 backdrop-blur-sm">
+          <ThreeDots color="#fff" />
+        </div>
+      )}
+      <div>مرحله سوم خرید</div>
+    </div>
+  );
+};
+
 const Page = () => {
   // step state
   const [step, setStep] = useState<number>(1);
@@ -156,6 +213,9 @@ const Page = () => {
   const { data: orders, isLoading } = useQuery({
     queryKey: ["carts"],
     queryFn: async () => await getAllShopptingCartsApi(),
+    onSuccess: (data) => {
+      if (+data.detail.cardQunatity === 0) setStep(1);
+    },
   });
 
   // useRouter hook
@@ -206,44 +266,9 @@ const Page = () => {
         (orders.data.length > 0 ? (
           <div className="mx-auto mt-10 grid  grid-cols-12 gap-x-6 xl:max-w-[1200px] 2xl:max-w-[1300px]">
             <div className="col-span-12 lg:col-span-7 ">
-              {step === 1 && <ShoppingCartsList data={orders.data} />}
-              {step === 2 && (
-                <>
-                  <div className="flex flex-col gap-y-4 rounded-8 border-2 p-4 md:flex-row md:items-center md:justify-between md:py-10">
-                    <div className="body-md md:body-lg flex gap-x-2 border-b pb-4 md:border-b-0 md:pb-0">
-                      <Truck />
-                      <p>روش تحویل سفارش</p>
-                    </div>
-                    <div className="flex items-center gap-x-2">
-                      <input type="radio" checked id="motor" />
-                      <label htmlFor="motor" className="body-md flex gap-x-2">
-                        <p>ارسال توسط پیک</p>
-                        <TruckFast className="text-muted-800" />
-                      </label>
-                    </div>
-                    <div className="flex items-center gap-x-2">
-                      <input disabled type="radio" id="bag" />
-                      <label htmlFor="bag" className="body-md flex gap-x-2">
-                        <p>تحویل حضوری</p>
-                        <ShoppingBag className="text-muted-800" />
-                      </label>
-                    </div>
-                  </div>
-                  <div className="mt-4">
-                    <AddressesContainer values={values} setValues={setValues} />
-                  </div>
-                </>
-              )}
-              {step === 3 && (
-                <div className="relative">
-                  {isSendingLoading && (
-                    <div className="absolute inset-0 z-50 bg-muted-950/40 backdrop-blur-sm">
-                      <ThreeDots color="#fff" />
-                    </div>
-                  )}
-                  <div>مرحله سوم خرید</div>
-                </div>
-              )}
+              {step === 1 && <StepOne data={orders} />}
+              {step === 2 && <StepTwo values={values} setValues={setValues} />}
+              {step === 3 && <StepThree isLoading={isSendingLoading} />}
             </div>
             <div className="col-span-12 h-max rounded-8 border-2 p-2 lg:col-span-5">
               <ShoppingCartsInformation
