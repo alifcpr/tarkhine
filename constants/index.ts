@@ -171,21 +171,21 @@ export const bannerSliderItems: BannerSliderItems[] = [
     picture: "/assets/images/Slider-image1.jpg",
     title: "تجربه غذای سالم و گیاهی به سبک ترخینه",
     buttonText: "سفارش غذا",
-    href: "/foods",
+    href: "/menu",
   },
   {
     _id: 2,
     picture: "/assets/images/Slider-image2.jpg",
     title: "سرسبزی تریخینه دلیل حس خوب شماست!",
     buttonText: "سفارش غذا",
-    href: "/foods",
+    href: "/menu",
   },
   {
     _id: 3,
     picture: "/assets/images/Slider-image3.jpg",
     title: "لذت غذای سالم و گیاهی را با ترخینه تجربه کنید!",
     buttonText: "سفارش غذا",
-    href: "/foods",
+    href: "/menu",
   },
 ];
 
