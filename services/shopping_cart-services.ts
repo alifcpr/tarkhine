@@ -1,4 +1,5 @@
 import {
+  CheckDiscountCodeResponse,
   CommonResponse,
   ShoppingCartList,
   sendToPaymentGatewayParams,
@@ -43,8 +44,26 @@ export const decreaseShoppingCartApi = async (foodId: string) => {
 export const sendToPaymentGateway = async (
   params: sendToPaymentGatewayParams
 ) => {
-  const { data } = await axiosService.post<sendToPaymentGatewayResponse>("/v1/payment/gateway", {
-    addressId: params.addressId,
-  });
+  const { data } = await axiosService.post<sendToPaymentGatewayResponse>(
+    "/v1/payment/gateway",
+    params.discountCode
+      ? {
+          addressId: params.addressId,
+          discountCode: params.discountCode,
+        }
+      : {
+          addressId: params.addressId,
+        }
+  );
+  return data;
+};
+
+export const checkShoppingCartDiscountCodeApi = async (
+  discountCode: string
+) => {
+  const { data } = await axiosService.post<CheckDiscountCodeResponse>(
+    "/v1/cart",
+    { discountCode }
+  );
   return data;
 };

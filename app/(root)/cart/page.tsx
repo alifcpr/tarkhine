@@ -4,6 +4,7 @@ import StepBar from "@/components/StepBar";
 import { shoppingCartStepList } from "@/constants";
 import useTitle from "@/hooks/useTitle";
 import {
+  checkShoppingCartDiscountCodeApi,
   getAllShopptingCartsApi,
   sendToPaymentGateway,
 } from "@/services/shopping_cart-services";
@@ -28,7 +29,11 @@ import AddressCard from "@/components/cards/AddressCard";
 import Pagination from "@/components/Pagination";
 import AddAddressForm from "@/components/forms/AddAddressForm";
 import Modal from "@/components/shared/Modal";
-import { ShoppingCartList, sendToPaymentGatewayParams } from "@/types/type";
+import {
+  DiscountCodeInfo,
+  ShoppingCartList,
+  sendToPaymentGatewayParams,
+} from "@/types/type";
 
 import toast from "react-hot-toast";
 
@@ -185,17 +190,27 @@ interface StepThreeProps {
   values: { [key: string]: string };
   setValues: Dispatch<SetStateAction<{ [key: string]: string }>>;
   isLoading: boolean;
+  checkDiscountCodeFunc: () => void;
 }
-const StepThree = ({ isLoading, values, setValues }: StepThreeProps) => {
+const StepThree = ({
+  isLoading,
+  values,
+  setValues,
+  checkDiscountCodeFunc,
+}: StepThreeProps) => {
   // input change handler
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setValues((prev) => ({ ...prev, discountCode: e.target.value }));
   };
 
+  const handleCheckDiscountCode = () => {
+    checkDiscountCodeFunc();
+  };
+
   return (
     <div className="relative">
       {isLoading && (
-        <div className="absolute inset-0 z-50 bg-muted-950/40 backdrop-blur-sm">
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-muted-950/40 backdrop-blur-sm">
           <ThreeDots color="#fff" />
         </div>
       )}
@@ -213,6 +228,7 @@ const StepThree = ({ isLoading, values, setValues }: StepThreeProps) => {
           />
           <button
             disabled={values.discountCode.length === 0}
+            onClick={handleCheckDiscountCode}
             className="button-outline-primary px-3 py-1 disabled:px-3 disabled:py-1 disabled:opacity-50"
           >
             ثبت کد
@@ -231,6 +247,14 @@ const Page = () => {
   const [values, setValues] = useState<{ [key: string]: string }>({
     addressId: "",
     discountCode: "",
+  });
+
+  // discountCode state
+  const [discountInfo, setDiscountInfo] = useState<DiscountCodeInfo>({
+    totalPrice: 0,
+    newPrice: 0,
+    percentage: 0,
+    lastPrice: 0,
   });
 
   // page title
@@ -262,6 +286,37 @@ const Page = () => {
         toast.error("مشکلی در ارسال به درگاه خرید به وجود آمده است", {
           id: "gateway-loading",
         });
+      },
+    });
+
+  // handle check discount code api
+  const { mutate: checkDiscountCodeMutate, isLoading: isCheckingLoading } =
+    useMutation({
+      mutationKey: ["discount-code"],
+      mutationFn: async (code: string) =>
+        checkShoppingCartDiscountCodeApi(code),
+      onSuccess: (data) => {
+        if (data.detail.discountCodeStatus) {
+          toast.success(`کد تخفیف اعمال شد`);
+          setDiscountInfo({
+            totalPrice: data.detail.lastPrice,
+            newPrice: data.detail.totalPrice,
+            percentage: data.detail.totalPercent,
+            lastPrice: data.detail.lastPrice,
+          });
+        } else {
+          toast.error(`کد تخفیف وارد شده اشتباه است`);
+          setDiscountInfo({
+            totalPrice: 0,
+            newPrice: 0,
+            percentage: 0,
+            lastPrice: 0,
+          });
+          setValues((prev) => ({ ...prev, discountCode: "" }));
+        }
+      },
+      onError: () => {
+        toast.error("مشکلی به وجود آمده است ، مجددا تلاش کنید");
       },
     });
 
@@ -299,7 +354,10 @@ const Page = () => {
                 <StepThree
                   values={values}
                   setValues={setValues}
-                  isLoading={isSendingLoading}
+                  isLoading={isSendingLoading || isCheckingLoading}
+                  checkDiscountCodeFunc={() =>
+                    checkDiscountCodeMutate(values.discountCode)
+                  }
                 />
               )}
             </div>
@@ -308,10 +366,14 @@ const Page = () => {
                 data={orders}
                 step={step}
                 setStep={setStep}
-                isLoading={isSendingLoading}
+                isLoading={isSendingLoading || isCheckingLoading}
                 addressId={values.addressId}
+                discountCodeInfo={discountInfo}
                 sendToGatewayFunc={() =>
-                  sendToGatewayMutate({ addressId: values.addressId })
+                  sendToGatewayMutate({
+                    addressId: values.addressId,
+                    discountCode: values.discountCode,
+                  })
                 }
               />
             </div>

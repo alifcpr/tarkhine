@@ -1,5 +1,5 @@
 "use client";
-import { ShoppingCartList } from "@/types/type";
+import { DiscountCodeInfo, ShoppingCartList } from "@/types/type";
 import {
   ArrowLeft2,
   TickCircle,
@@ -23,6 +23,7 @@ interface ShoppingCartsInformationProps {
   addressId: string;
   isLoading: boolean;
   sendToGatewayFunc: () => void;
+  discountCodeInfo: DiscountCodeInfo;
 }
 
 const ShoppingCartsInformation = ({
@@ -32,6 +33,7 @@ const ShoppingCartsInformation = ({
   addressId,
   isLoading,
   sendToGatewayFunc,
+  discountCodeInfo,
 }: ShoppingCartsInformationProps) => {
   const { data: userData, isLoading: userLoading } = useUser();
 
@@ -128,9 +130,25 @@ const ShoppingCartsInformation = ({
       </div>
       <div className="body-md  flex items-center justify-between py-4">
         <p>مبلغ قابل پرداخت</p>
-        <p className="text-primary-800">
-          {data.detail.totalPrice.toLocaleString("fa")} تومان
-        </p>
+        {discountCodeInfo.percentage ? (
+          <div className="flex flex-col items-center gap-x-3 gap-y-2 md:flex-row">
+            <div className="flex items-center gap-x-2">
+              <p className="text-muted-600 line-through">
+                {discountCodeInfo.lastPrice.toLocaleString("fa")}
+              </p>
+              <span className="rounded-8 bg-error-200/10 px-2 text-error-200">
+                {discountCodeInfo.percentage} %
+              </span>
+            </div>
+            <p className="order-last md:order-first">
+              {Number(discountCodeInfo.newPrice).toLocaleString("fa")} تومان
+            </p>
+          </div>
+        ) : (
+          <p className="text-primary-800">
+            {data.detail.totalPrice.toLocaleString("fa")} تومان
+          </p>
+        )}
       </div>
       {userLoading ? (
         <p className="body-md">درحال بررسی ...</p>

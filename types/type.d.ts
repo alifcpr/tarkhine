@@ -311,3 +311,21 @@ export interface getProductBySearchResponse {
   foods: Product[];
   statusCode: number;
 }
+
+export interface CheckDiscountCodeResponse {
+  detail: {
+    totalPrice: number;
+    totalDiscount: number;
+    discountCodeStatus: boolean;
+    lastPrice: number;
+    totalPercent: number;
+  };
+  statusCode: number;
+}
+
+export interface DiscountCodeInfo {
+  totalPrice: number;
+  newPrice: number;
+  percentage: number;
+  lastPrice: number;
+}
