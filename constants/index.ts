@@ -193,26 +193,26 @@ export const categoryItems: CategoryItems[] = [
   {
     _id: 1,
     pitcture: "/assets/images/ct-1.png",
-    href: "/food?category=nooshidani",
-    title: "نوشیدنی",
+    href: "/menu?mainCategory=غذای اصلی",
+    title: "غذای اصلی",
   },
   {
     _id: 2,
     pitcture: "/assets/images/ct-2.png",
-    href: "/food?category=deser",
-    title: "دسر",
+    href: "/menu?mainCategory=پیش غذا",
+    title: "پیش غذا",
   },
   {
     _id: 3,
     pitcture: "/assets/images/ct-3.png",
-    href: "/food?category=pishghaza",
-    title: "پیش غذا",
+    href: "/menu?mainCategory=دسر",
+    title: "دسر",
   },
   {
     _id: 4,
     pitcture: "/assets/images/ct-4.png",
-    href: "/food?category=mainfood",
-    title: "غذای اصلی",
+    href: "/menu?mainCategory=نوشیدنی",
+    title: "نوشیدنی",
   },
 ];
 
