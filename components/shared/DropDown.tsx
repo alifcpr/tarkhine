@@ -20,7 +20,9 @@ type DropDownProps = {
 
 const DropDown = ({ children, containerClasses }: DropDownProps) => {
   return (
-    <div className={`absolute left-0 top-8 z-[9] w-fit ${containerClasses}`}>
+    <div
+      className={`absolute left-0 top-8 z-[99999] w-fit ${containerClasses}`}
+    >
       <ul className={`mt-4 overflow-hidden rounded-8 bg-muted-100 shadow-md`}>
         {children}
       </ul>
