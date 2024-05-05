@@ -44,8 +44,18 @@ export const middleware = async (req: NextRequest) => {
     const absoluteURL = new URL("/profile/info", req.nextUrl.origin);
     return NextResponse.redirect(absoluteURL.toString());
   }
+
+  if (
+    req.nextUrl.pathname === "/v1/payment/verify" &&
+    !req.nextUrl.searchParams.has("status") &&
+    !req.nextUrl.searchParams.has("success") &&
+    !req.nextUrl.searchParams.has("trackId")
+  ) {
+    const absoluteURL = new URL("/", req.nextUrl.origin);
+    return NextResponse.redirect(absoluteURL.toString());
+  }
 };
 
 export const config = {
-  matcher: ["/login", "/profile", "/admin"],
+  matcher: ["/login", "/profile", "/admin", "/v1/payment/verify"],
 };
