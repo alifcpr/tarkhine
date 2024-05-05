@@ -98,8 +98,7 @@ const ShoppingCart = ({ data }: ShoppnigCartProps) => {
         <Image
           src={imagesUrl[0]}
           alt={`تصویر ${title}`}
-          height={200}
-          width={200}
+          fill
           className="h-full w-full object-cover object-center"
           priority
         />

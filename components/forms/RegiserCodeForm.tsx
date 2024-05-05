@@ -16,7 +16,7 @@ import Countdown, { zeroPad } from "react-countdown";
 import { Clock } from "iconsax-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { checkOtpApi, resendCodeApi } from "@/services/auth.services";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { setAuthCookie } from "@/utils/setAuthCookie";
 // import { useRouter } from "next/navigation";
 
@@ -39,6 +39,7 @@ const RegisterCodeForm = ({
   const [reset, setRest] = useState<boolean>(false);
 
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const queryClient = useQueryClient();
   const { mutate: checkOtpMutate, isLoading: isCheckingOtp } = useMutation({
@@ -48,7 +49,9 @@ const RegisterCodeForm = ({
     onSuccess: (data) => {
       setAuthCookie(data.tokens.accessToken, data.tokens.refreshToken);
       toast.success("به وبسایت ترخینه خوش آمدید");
-      router.replace("/");
+      searchParams.has("redirect_url")
+        ? router.push(searchParams.get("redirect_url")!)
+        : router.push("/");
       queryClient.invalidateQueries({ queryKey: ["user"] });
       setOtpError(false);
     },

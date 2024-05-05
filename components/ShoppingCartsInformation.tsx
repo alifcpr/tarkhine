@@ -4,6 +4,7 @@ import {
   ArrowLeft2,
   TickCircle,
   Trash,
+  User,
   Wallet2,
   Warning2,
 } from "iconsax-react";
@@ -12,6 +13,8 @@ import SmallShoppingCart from "./cards/SmallShoppingCart";
 import { v4 as uuidv4 } from "uuid";
 import toast from "react-hot-toast";
 import { ThreeDots } from "react-loader-spinner";
+import useUser from "@/hooks/useUser";
+import Link from "next/link";
 
 interface ShoppingCartsInformationProps {
   data: ShoppingCartList;
@@ -30,8 +33,8 @@ const ShoppingCartsInformation = ({
   isLoading,
   sendToGatewayFunc,
 }: ShoppingCartsInformationProps) => {
+  const { data: userData, isLoading: userLoading } = useUser();
 
-  
   // call send to payment gateway api when onClick button
   const handleSendToGateway = () => {
     toast.loading("صبر کنید...", { id: "gateway-loading" });
@@ -129,7 +132,19 @@ const ShoppingCartsInformation = ({
           {data.detail.totalPrice.toLocaleString("fa")} تومان
         </p>
       </div>
-      {renderButton(step)}
+      {userLoading ? (
+        <p className="body-md">درحال بررسی ...</p>
+      ) : userData?.phone ? (
+        renderButton(step)
+      ) : (
+        <Link
+          href={"/login?redirect_url=/cart"}
+          className="button-primary body-md flex items-center justify-center gap-x-1 rounded-4 py-1.5"
+        >
+          <User />
+          ورود به حساب کاربری
+        </Link>
+      )}
     </div>
   );
 };
