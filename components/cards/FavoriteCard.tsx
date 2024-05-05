@@ -34,7 +34,7 @@ const FavoriteCard = ({ data }: FavoriteCardProps) => {
         <div className="flex items-center justify-between">
           <Link
             title={title}
-            href={`/product/${_id}`}
+            href={`/product/${_id}/${title}`}
             className="caption-lg md:body-md"
           >
             {title}

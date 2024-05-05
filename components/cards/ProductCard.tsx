@@ -36,7 +36,7 @@ const ProductCard = (
   return (
     <div className="smooth-transition group col-span-12 grid grid-cols-12 overflow-hidden rounded-8 border-2 md:col-span-6  xl:hover:shadow-lg 2xl:col-span-4">
       <Link
-        href={`/product/${_id}`}
+        href={`/product/${_id}/${title}`}
         className="relative col-span-4 h-full lg:col-span-4 "
       >
         <Image
