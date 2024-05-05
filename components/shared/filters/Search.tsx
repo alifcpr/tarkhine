@@ -12,6 +12,7 @@ type SearchProps = {
   closeModal?: () => void;
   mode: "Enter" | "Write";
   query?: string;
+  value?: string;
 };
 
 const Search = ({
@@ -22,13 +23,15 @@ const Search = ({
   closeModal,
   mode,
   query,
+  value,
 }: SearchProps) => {
   // searchParams
   const searchParams = useSearchParams();
 
   // input value , get value from query when (mode === Write)
   const [searchValue, setSearchValue] = useState<string>(
-    mode === "Write" ? searchParams.get(query!) || "" : ""
+    // mode === "Write" ? searchParams.get(query!) || "" : ""
+    mode === "Write" ? searchParams.get(query!) || "" : value || ""
   );
 
   // router
@@ -44,7 +47,7 @@ const Search = ({
     if (e.key === "Enter") {
       if (mode === "Enter") {
         closeModal && closeModal();
-        router.push(`/food/${searchValue}`, { scroll: false });
+        router.push(`/search/${searchValue}`, { scroll: false });
       }
     }
   };

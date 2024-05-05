@@ -306,3 +306,8 @@ export interface sendToPaymentGatewayResponse {
   statusCode: number;
   gatewayURL: string;
 }
+
+export interface getProductBySearchResponse {
+  foods: Product[];
+  statusCode: number;
+}
