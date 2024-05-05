@@ -8,7 +8,7 @@ import {
   sendToPaymentGateway,
 } from "@/services/shopping_cart-services";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { Oval, ThreeDots } from "react-loader-spinner";
 import { v4 as uuidv4 } from "uuid";
 import ShoppingCartsList from "@/components/ShoppingCartsList";
@@ -16,6 +16,7 @@ import Empty from "@/components/profile/Empty";
 import ShoppingCartsInformation from "@/components/ShoppingCartsInformation";
 import {
   AddCircle,
+  DiscountShape,
   Location,
   ShoppingBag,
   Truck,
@@ -181,9 +182,16 @@ const StepTwo = ({ values, setValues }: StepTwoProps) => {
 };
 
 interface StepThreeProps {
+  values: { [key: string]: string };
+  setValues: Dispatch<SetStateAction<{ [key: string]: string }>>;
   isLoading: boolean;
 }
-const StepThree = ({ isLoading }: StepThreeProps) => {
+const StepThree = ({ isLoading, values, setValues }: StepThreeProps) => {
+  // input change handler
+  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setValues((prev) => ({ ...prev, discountCode: e.target.value }));
+  };
+
   return (
     <div className="relative">
       {isLoading && (
@@ -191,7 +199,26 @@ const StepThree = ({ isLoading }: StepThreeProps) => {
           <ThreeDots color="#fff" />
         </div>
       )}
-      <div>مرحله سوم خرید</div>
+      <div className="flex w-full flex-col rounded-8 border-2 p-3 md:flex-row md:justify-between md:p-6">
+        <div className="flex items-center gap-x-2 border-b pb-3 md:border-none md:pb-0">
+          <DiscountShape />
+          <p className="body-md md:body-lg">ثبت کد تخفیف</p>
+        </div>
+        <div className="mt-3 flex w-full items-center justify-between gap-x-2 md:mt-0 md:w-max md:justify-normal">
+          <input
+            placeholder="کد تخفیف"
+            value={values.discountCode}
+            onChange={changeHandler}
+            className="body-md rounded-4 border-2 px-3 py-1 focus:outline-none"
+          />
+          <button
+            disabled={values.discountCode.length === 0}
+            className="button-outline-primary px-3 py-1 disabled:px-3 disabled:py-1 disabled:opacity-50"
+          >
+            ثبت کد
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
@@ -268,7 +295,13 @@ const Page = () => {
             <div className="col-span-12 lg:col-span-7 ">
               {step === 1 && <StepOne data={orders} />}
               {step === 2 && <StepTwo values={values} setValues={setValues} />}
-              {step === 3 && <StepThree isLoading={isSendingLoading} />}
+              {step === 3 && (
+                <StepThree
+                  values={values}
+                  setValues={setValues}
+                  isLoading={isSendingLoading}
+                />
+              )}
             </div>
             <div className="col-span-12 h-max rounded-8 border-2 p-2 lg:col-span-5">
               <ShoppingCartsInformation
