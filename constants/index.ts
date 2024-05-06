@@ -499,3 +499,5 @@ export const shoppingCartStepList = [
   { text: "تکمیل اطلاعات", Icon: TickSquare },
   { text: "پرداخت", Icon: Wallet2 },
 ];
+
+export const ordersFilterList = ["همه", "جاری", "تحویل شده", "لغو شده"];
