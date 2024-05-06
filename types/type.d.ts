@@ -329,3 +329,46 @@ export interface DiscountCodeInfo {
   percentage: number;
   lastPrice: number;
 }
+
+export interface Order {
+  _id: string;
+  userPhone: string;
+  totalPayment: number;
+  description: string;
+  invoiceNumber: number;
+  userId: string;
+  addressId: {
+    _id: string;
+    addressTitle: string;
+    description: string;
+    ownReceiver: boolean;
+  };
+  verify: boolean;
+  paymentDate: string;
+  carts: {
+    order: [
+      {
+        foodId: string;
+        totalQuantity: number[];
+        title: string;
+        ingredients: string[];
+        description: string;
+        price: number;
+        discount: number;
+        quantity: number;
+        category: string[];
+        subCategory: string[];
+        images: string[];
+        imagesUrl: string[];
+        rateCount: number;
+      },
+    ];
+  };
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface getUserOrdersResponse {
+  userOrders: Order[];
+  stautsCode: number;
+}

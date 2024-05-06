@@ -7,6 +7,7 @@ import {
   GetUserInfoResponse,
   UploadProfileImageParams,
   User,
+  getUserOrdersResponse,
 } from "@/types/type.d";
 import axiosService from "./axios";
 
@@ -92,5 +93,11 @@ export const getAllFavoriteFoodsApi = async ({
 
 export const logOutApi = async () => {
   const { data } = await axiosService.get<CommonResponse>("/v1/auth/logout");
+  return data;
+};
+
+export const getUserOrdersApi = async () => {
+  const { data } =
+    await axiosService.get<getUserOrdersResponse>("/v1/profile/orders");
   return data;
 };
