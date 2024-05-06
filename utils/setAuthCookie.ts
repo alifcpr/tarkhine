@@ -6,12 +6,12 @@ export const setAuthCookie = (accessToken: string, refreshToken: string) => {
     httpOnly: false,
     secure: true,
     sameSite: "none",
-    maxAge: 1 * 3600 * 1200,
+    maxAge: 3 * 3600 * 1000,
   });
   cookies().set("refresh-token", refreshToken, {
     httpOnly: false,
     secure: true,
     sameSite: "none",
-    maxAge: 1 * 3600 * 1200,
+    maxAge: 9 * 3600 * 24 * 1000,
   });
 };
