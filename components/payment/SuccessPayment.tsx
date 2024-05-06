@@ -32,7 +32,7 @@ const SuccessPayment = ({ trackId }: SuccessPaymentProps) => {
           بازگشت به صفحه اصلی
         </Link>
         <Link
-          href={"/orders"}
+          href={"/profile/orders"}
           className="button-primary body-md rounded-4 px-5 py-1.5"
         >
           پیگیری سفارش
