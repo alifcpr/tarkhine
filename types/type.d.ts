@@ -346,23 +346,21 @@ export interface Order {
   verify: boolean;
   paymentDate: string;
   carts: {
-    order: [
-      {
-        foodId: string;
-        totalQuantity: number[];
-        title: string;
-        ingredients: string[];
-        description: string;
-        price: number;
-        discount: number;
-        quantity: number;
-        category: string[];
-        subCategory: string[];
-        images: string[];
-        imagesUrl: string[];
-        rateCount: number;
-      },
-    ];
+    order: {
+      foodId: string;
+      totalQuantity: number[];
+      title: string;
+      ingredients: string[];
+      description: string;
+      price: number;
+      discount: number;
+      quantity: number;
+      category: string[];
+      subCategory: string[];
+      images: string[];
+      imagesUrl: string[];
+      rateCount: number;
+    }[];
   };
   createdAt: string;
   updatedAt: string;

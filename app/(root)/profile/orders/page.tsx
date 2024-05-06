@@ -5,6 +5,11 @@ import React from "react";
 import useProfileMenuController from "@/hooks/useProfileMenuController";
 import useTitle from "@/hooks/useTitle";
 import OrdersFilter from "@/components/filters/OrdersFilter";
+import { useQuery } from "@tanstack/react-query";
+import { getUserOrdersApi } from "@/services/user.services";
+import { Oval } from "react-loader-spinner";
+import { v4 as uuiv4 } from "uuid";
+import OrderCart from "@/components/cards/OrderCart";
 
 const Page = () => {
   // for back to profile page and open menu
@@ -12,6 +17,11 @@ const Page = () => {
 
   // page title
   useTitle("سفارش های من");
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["orders"],
+    queryFn: async () => await getUserOrdersApi(),
+  });
 
   return (
     <div>
@@ -26,6 +36,27 @@ const Page = () => {
       <div className="mt-3">
         <OrdersFilter />
       </div>
+
+      {isLoading && (
+        <div className="flex h-[400px] w-full items-center justify-center ">
+          <Oval
+            width={40}
+            height={40}
+            wrapperClass={"text-white"}
+            strokeWidthSecondary={10}
+            strokeWidth={5}
+            color={"#000"}
+            secondaryColor={"#000"}
+          />
+        </div>
+      )}
+      {!isLoading && data && (
+        <div className="mt-4 flex flex-col gap-y-4">
+          {data.userOrders.map((orderData: any) => (
+            <OrderCart data={orderData} key={uuiv4()} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

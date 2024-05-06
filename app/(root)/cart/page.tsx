@@ -327,7 +327,7 @@ const Page = () => {
           {shoppingCartStepList.map(({ text, Icon }, index: number) => (
             <StepBar.Step
               key={uuidv4()}
-              index={index + 1}
+              index={index }
               active={step >= index + 1}
               icon={<Icon className="h-7 w-7" />}
               onClick={() => setStep(index + 1)}

@@ -44,7 +44,7 @@ const Step = ({
 
   return (
     <div className={`flex w-full items-center gap-x-1 `}>
-      {index !== 1 && (
+      {index !== 0 && (
         <div
           className={`h-[3px] w-full border-t-2 border-dashed  ${
             active && "border-primary-800"
@@ -61,7 +61,7 @@ const Step = ({
         <span>{icon && icon}</span>
         {children}
       </button>
-      {lastStep !== index && (
+      {lastStep-1 !== index && (
         <div
           className={`h-[3px] w-full border-t-2 border-dashed  ${
             active && "border-primary-800"

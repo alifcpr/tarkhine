@@ -12,10 +12,13 @@ import {
 
 import {
   Heart,
+  Home2,
   Location,
   LogoutCurve,
   ShoppingCart,
+  TickCircle,
   TickSquare,
+  TruckFast,
   User,
   Wallet2,
 } from "iconsax-react";
@@ -501,3 +504,9 @@ export const shoppingCartStepList = [
 ];
 
 export const ordersFilterList = ["همه", "جاری", "تحویل شده", "لغو شده"];
+
+export const orderCartStepList = [
+  { text: "درحال آماده سازی", Icon: Home2 },
+  { text: "ارسال توسط پیک", Icon: TruckFast },
+  { text: "تحویل سفارش", Icon: TickCircle },
+];
