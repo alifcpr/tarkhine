@@ -7,6 +7,7 @@ import { logOutApi } from "@/services/user.services";
 import { Oval } from "react-loader-spinner";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import deleteAuthCookie from "@/utils/deleteAuthCookie";
 
 type LogOutProps = {
   textClasses?: string;
@@ -32,6 +33,7 @@ const LogOut = ({
       setOpen(false);
       router.replace("/");
       toast.success("از حساب کاربری خود خارج شدید");
+      deleteAuthCookie();
       queryCilent.invalidateQueries({ queryKey: ["user"] });
     },
     onError: () => {
