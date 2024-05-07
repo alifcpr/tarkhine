@@ -5,6 +5,7 @@ import { Chart2, Home, MenuBoard, User } from "iconsax-react";
 import Image from "next/image";
 import React from "react";
 import { Metadata } from "next";
+import { v4 as uuidv4 } from "uuid";
 
 export const metadata: Metadata = {
   title: "درباره ی ما",
@@ -75,10 +76,10 @@ const About = () => {
         </div>
       </div>
       <div className="mt-5 flex flex-wrap gap-y-4 bg-muted-400 py-5 md:flex-nowrap xl:mt-14 xl:px-28 xl:py-12">
-        {aboutItems.map((item: AboutItems, index: number) => (
+        {aboutItems.map((item: AboutItems) => (
           <div
             className="caption-md md:body-md lg:body-lg flex w-1/2 flex-col items-center border-muted-500 text-muted-800 max-sm:border-none md:w-auto md:grow  md:border-r-2 md:first:border-none"
-            key={index}
+            key={uuidv4()}
           >
             {renderIcon(item.icon)}
             <span className="mt-3">{item.text}</span>

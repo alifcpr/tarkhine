@@ -4,17 +4,18 @@ import { HelpLinksItems } from "@/types/type.d";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const HelpLinks = () => {
   const pathName = usePathname();
   return (
     <div className="flex items-center gap-x-6 bg-muted-400 px-5 ">
-      {helpLinksItems.map((item: HelpLinksItems, index: number) => {
+      {helpLinksItems.map((item: HelpLinksItems) => {
         const isActive = item.href === pathName;
 
         return (
           <Link
-            key={index}
+            key={uuidv4()}
             href={item.href}
             className={` py-3 ${
               isActive

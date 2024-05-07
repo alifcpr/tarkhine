@@ -3,6 +3,7 @@ import { subFilterList } from "@/constants";
 import { formUrlQuery, removeUrlQuery } from "@/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useRef } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const SubFilterFood = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -40,13 +41,13 @@ const SubFilterFood = () => {
       ref={containerRef}
       className="hideSB relative flex w-full gap-x-3 overflow-hidden overflow-x-auto "
     >
-      {subFilters?.filters.map((item, index: number) => (
+      {subFilters?.filters.map((item: any) => (
         <button
           onClick={setFilterHandler(item)}
           className={`caption-lg md:body-md whitespace-nowrap rounded-24 bg-muted-400 px-2 py-1 ${
             subCategoryQuery === item && "bg-muted-500 text-muted-950"
           }`}
-          key={index}
+          key={uuidv4()}
           ref={filterBtnRef}
         >
           {item}

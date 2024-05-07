@@ -6,6 +6,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowDown2 } from "iconsax-react";
 import DropDown from "./DropDown";
+import { v4 as uuidv4 } from "uuid";
 
 const HeaderLinks = () => {
   // for get current page path
@@ -13,11 +14,11 @@ const HeaderLinks = () => {
 
   return (
     <>
-      {headerLinks.map((item: HLType, index: number) => {
+      {headerLinks.map((item: HLType) => {
         const isActive = pathName === item.href;
 
         return (
-          <div key={index} className="group relative">
+          <div key={uuidv4()} className="group relative">
             <div className="flex cursor-pointer items-center justify-between px-3">
               {item.type === "link" ? (
                 <Link
@@ -43,10 +44,8 @@ const HeaderLinks = () => {
             {item.dropDownItems && (
               <DropDown containerClasses="smooth-transition opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto !w-32">
                 {item.dropDownItems.map((dropItem) => (
-                  <DropDown.Item key={dropItem._id}>
-                    <Link href={dropItem.href}>
-                      {dropItem.title}
-                    </Link>
+                  <DropDown.Item key={uuidv4()}>
+                    <Link href={dropItem.href}>{dropItem.title}</Link>
                   </DropDown.Item>
                 ))}
               </DropDown>

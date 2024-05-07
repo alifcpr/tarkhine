@@ -14,6 +14,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Drawer from "./Drawer";
 import Accordian from "../Accordian";
+import { v4 as uuidv4 } from "uuid";
 
 // types
 type MobileLinksProps = {
@@ -50,7 +51,7 @@ const MobileLinks = ({ closeDrawer }: MobileLinksProps) => {
 
         return (
           <li
-            key={index}
+            key={uuidv4()}
             className={`caption-lg border-muted-500 py-2 [&:not(first-child)]:border-b ${
               isActive && "text-primary-800"
             }`}
@@ -73,19 +74,17 @@ const MobileLinks = ({ closeDrawer }: MobileLinksProps) => {
                 contentClasses="flex flex-col pe-5"
                 titleContainer="gap-2"
               >
-                {item.accordionItems?.map(
-                  (accordionContent: any, index: number) => (
-                    <Link
-                      onClick={closeDrawer}
-                      href={accordionContent.href}
-                      key={index}
-                    >
-                      <div className="caption-md mt-2 rounded-8 bg-primary-100 p-2 hover:bg-primary-100">
-                        {accordionContent.title}
-                      </div>
-                    </Link>
-                  )
-                )}
+                {item.accordionItems?.map((accordionContent: any) => (
+                  <Link
+                    onClick={closeDrawer}
+                    href={accordionContent.href}
+                    key={uuidv4()}
+                  >
+                    <div className="caption-md mt-2 rounded-8 bg-primary-100 p-2 hover:bg-primary-100">
+                      {accordionContent.title}
+                    </div>
+                  </Link>
+                ))}
               </Accordian>
             )}
           </li>

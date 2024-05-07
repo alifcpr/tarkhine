@@ -3,6 +3,7 @@ import { bytesToMegabytes } from "@/utils";
 import { Add, FolderAdd } from "iconsax-react";
 import React, { useRef, useState } from "react";
 import toast from "react-hot-toast";
+import { v4 as uuidv4 } from "uuid";
 import NextImage from "next/image";
 
 type UploadImageBoxProps = {
@@ -139,7 +140,7 @@ const UploadImageBox = ({
             const imageUrl = URL.createObjectURL(item);
             return (
               <div
-                key={index}
+                key={uuidv4()}
                 className={`relative min-h-[150px] w-5/12 overflow-hidden ${previewCardStyle}`}
               >
                 <span className="absolute left-0 top-0 z-40 h-12 w-full bg-gradient-to-r from-muted-900 to-transparent "></span>

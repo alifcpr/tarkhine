@@ -4,6 +4,7 @@ import { formUrlQuery } from "@/utils";
 import { ArrowLeft3, ArrowRight3 } from "iconsax-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 type PaginationProps = {
   totalPage: number;
@@ -62,7 +63,7 @@ const Pagination = ({ totalPage }: PaginationProps) => {
               ? "bg-primary-800 text-muted-100"
               : "bg-primary-200"
           }`}
-          key={index}
+          key={uuidv4()}
         >
           {button}
         </button>

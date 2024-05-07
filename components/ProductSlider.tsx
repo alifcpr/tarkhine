@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Navigation, Pagination } from "swiper/modules";
 import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/css";
+import { v4 as uuidv4 } from "uuid";
 
 type ProductSliderProps = {
   images: string[];
@@ -41,7 +42,7 @@ const ProductSlider = ({ images }: ProductSliderProps) => {
           grabCursor
         >
           {images.map((image: string) => (
-            <SwiperSlide key={image}>
+            <SwiperSlide key={uuidv4()}>
               <div className="relative h-[200px] w-full md:h-[400px] 2xl:h-[550px]">
                 <Image
                   fill
@@ -59,7 +60,7 @@ const ProductSlider = ({ images }: ProductSliderProps) => {
       <div className="mt-4 flex items-center justify-center gap-x-4 md:justify-start">
         {images.map((image: string, index: number) => (
           <div
-            key={image}
+            key={uuidv4()}
             onClick={() => handleSlideChange(index)}
             className={`smooth-transition relative h-20 w-32 cursor-pointer overflow-hidden rounded-4 bg-black ring-primary-800 ring-offset-2 hover:ring-2 md:h-28 md:w-48 ${
               active === index && "border-primary-800 ring-2"

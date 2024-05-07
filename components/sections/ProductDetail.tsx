@@ -65,7 +65,7 @@ const ProductDetail = ({ foodId }: ProductDetailProps) => {
       <div className="relative grid grid-cols-12 gap-4 px-4 xl:px-14 2xl:px-28">
         <div className="col-span-12 rounded-8 bg-muted-200 p-2">
           <BreadCrumb>
-            {breadCrumbData.map((item) => (
+            {breadCrumbData.map((item: any) => (
               <BreadCrumbItem
                 key={uuidv4()}
                 href={item.href}

@@ -11,6 +11,7 @@ import SearchBox from "./filters/SearchBox";
 import { usePathname } from "next/navigation";
 import useUser from "@/hooks/useUser";
 import LogOut from "./LogOut";
+import { v4 as uuidv4 } from "uuid";
 
 const Header = () => {
   const pathName = usePathname();
@@ -54,8 +55,8 @@ const Header = () => {
                 <ArrowDown2 className="h-5 w-5 text-white md:h-6 md:w-6" />
               </span>
               <DropDown containerClasses="smooth-transition opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto">
-                {profileLinks.map(({ Icon, _id, href, title }) => (
-                  <DropDown.Item key={_id}>
+                {profileLinks.map(({ Icon, href, title }) => (
+                  <DropDown.Item key={uuidv4()}>
                     <div className="flex items-center gap-x-2">
                       <Icon className="h-5 w-5 text-muted-950" />
                       <Link href={href}>{title}</Link>

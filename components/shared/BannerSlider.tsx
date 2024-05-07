@@ -8,6 +8,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
+import { v4 as uuidv4 } from "uuid";
 
 const BannerSlider = () => {
   return (
@@ -35,34 +36,32 @@ const BannerSlider = () => {
             }}
             className="h-full"
           >
-            {bannerSliderItems.map(
-              (banner: BannerSliderItems, index: number) => (
-                <SwiperSlide key={index}>
-                  <div className="relative flex h-full w-full items-center justify-center">
-                    <Image
-                      src={banner.picture}
-                      width={1920}
-                      height={400}
-                      alt={banner.title}
-                      priority={true}
-                      className="aspect-square h-full w-full object-cover"
-                    />
-                    <div className="image-wrapper absolute inset-0"></div>
-                    <div className="absolute flex flex-col items-center gap-4 md:gap-5 lg:gap-10">
-                      <h1 className="h6-bold md:h4-bold lg:h3-bold xl:h2-bold text-muted-100">
-                        {banner.title}
-                      </h1>
-                      <Link
-                        href={banner.href}
-                        className="caption-sm md:caption-md lg:button-lg rounded-4 bg-primary-800 px-3 py-1 text-muted-100 hover:bg-primary-900 md:px-5  lg:px-9"
-                      >
-                        {banner.buttonText}
-                      </Link>
-                    </div>
+            {bannerSliderItems.map((banner: BannerSliderItems) => (
+              <SwiperSlide key={uuidv4()}>
+                <div className="relative flex h-full w-full items-center justify-center">
+                  <Image
+                    src={banner.picture}
+                    width={1920}
+                    height={400}
+                    alt={banner.title}
+                    priority={true}
+                    className="aspect-square h-full w-full object-cover"
+                  />
+                  <div className="image-wrapper absolute inset-0"></div>
+                  <div className="absolute flex flex-col items-center gap-4 md:gap-5 lg:gap-10">
+                    <h1 className="h6-bold md:h4-bold lg:h3-bold xl:h2-bold text-muted-100">
+                      {banner.title}
+                    </h1>
+                    <Link
+                      href={banner.href}
+                      className="caption-sm md:caption-md lg:button-lg rounded-4 bg-primary-800 px-3 py-1 text-muted-100 hover:bg-primary-900 md:px-5  lg:px-9"
+                    >
+                      {banner.buttonText}
+                    </Link>
                   </div>
-                </SwiperSlide>
-              )
-            )}
+                </div>
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
         <div className="pointer-events-none absolute -bottom-1 left-0 z-50 flex h-max w-full items-center justify-center ">

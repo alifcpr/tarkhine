@@ -7,6 +7,7 @@ import { BranchParams, CategoryItems } from "@/types/type.d";
 import { Diagram, HomeWifi, MenuBoard, User } from "iconsax-react";
 import { Metadata } from "next";
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export const metadata: Metadata = {
   title: "ترخینه | صفحه اصلی",
@@ -26,8 +27,8 @@ const Home = () => {
       <section className="mt-10 flex flex-col gap-y-14 px-4 md:gap-y-16 lg:gap-y-20  xl:gap-y-28">
         <h1 className="h5-bold  lg:h4-bold text-center">منوی رستوران</h1>
         <div className="mx-4 grid grid-cols-12 gap-x-4 gap-y-20 md:gap-x-10 md:gap-y-24 xl:mx-10 2xl:mx-28">
-          {categoryItems.map((category: CategoryItems, index: number) => (
-            <CategoryCard key={index} {...category} />
+          {categoryItems.map((category: CategoryItems) => (
+            <CategoryCard key={uuidv4()} {...category} />
           ))}
         </div>
       </section>
@@ -83,8 +84,8 @@ const Home = () => {
           ترخینه گردی
         </h1>
         <div className="mx-4 grid grid-cols-12 gap-3 max-xl:h-max md:gap-6 xl:mx-10 xl:h-[350px] xl:gap-10 2xl:mx-28">
-          {branchList.map((branch: BranchParams, index: number) => (
-            <BranchCard key={index} {...branch} />
+          {branchList.map((branch: BranchParams) => (
+            <BranchCard key={uuidv4()} {...branch} />
           ))}
         </div>
       </section>

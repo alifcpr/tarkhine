@@ -44,7 +44,7 @@ const ProfileTab = () => {
     >
       <ProfileHeader />
       <div className="flex flex-col gap-y-2 px-2">
-        {profileLinks.map(({ Icon, href, title, _id }, index: number) => {
+        {profileLinks.map(({ Icon, href, title }) => {
           const isActive = href === pathName;
 
           return (

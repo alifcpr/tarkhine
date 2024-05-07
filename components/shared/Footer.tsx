@@ -8,6 +8,7 @@ import { HelpLinksItems } from "@/types/type.d";
 import Link from "next/link";
 import { IoLogoLinkedin } from "react-icons/io";
 import { FaGithubSquare } from "react-icons/fa";
+import { v4 as uuidv4 } from "uuid";
 
 const Footer = () => {
   const pathName = usePathname();
@@ -31,8 +32,8 @@ const Footer = () => {
       <div className="flex w-full items-start justify-evenly xl:justify-between">
         <ul className="flex flex-col items-center gap-y-5">
           <li className="body-sm xl:h5-bold lg:body-lg mb-1">دسترسی آسان</li>
-          {helpLinksItems.map((item: HelpLinksItems, index: number) => (
-            <li key={index} className="caption-md xl:body-md lg:caption-lg">
+          {helpLinksItems.map((item: HelpLinksItems) => (
+            <li key={uuidv4()} className="caption-md xl:body-md lg:caption-lg">
               <Link href={item.href}>{item.title}</Link>
             </li>
           ))}

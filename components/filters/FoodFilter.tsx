@@ -3,6 +3,7 @@ import { foodFilterList } from "@/constants";
 import { formUrlQuery, removeUrlQuery } from "@/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 
 type FoodFilterProps = {
   activeClasses?: string;
@@ -42,7 +43,7 @@ const FoodFilter = ({ activeClasses, buttonClasses }: FoodFilterProps) => {
       {foodFilterList.map((item: string, index: number) => (
         <button
           onClick={setFilterHandler(item)}
-          key={index}
+          key={uuidv4()}
           className={`${buttonClasses} ${item === query && activeClasses}`}
         >
           {item}
