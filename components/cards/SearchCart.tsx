@@ -47,7 +47,7 @@ const SearchCart = ({ data }: SearchCartProps) => {
           {discount > 0 && newPrice && (
             <div className="flex items-center gap-x-2">
               <p className="body-md text-muted-700 line-through">
-                {newPrice.toLocaleString("fa")}
+                {price.toLocaleString("fa")}
               </p>
               <span className="body-sm rounded-4 bg-error-200/20 px-2 py-0.5 text-error-300">
                 {discount} %
@@ -60,10 +60,10 @@ const SearchCart = ({ data }: SearchCartProps) => {
             <Star variant="Bold" className="h-7 w-7 text-warning-200" />
             <p className="font-semibold">{rate.toFixed(1)}</p>
           </div>
-          {discount > 0 ? (
-            <p className="body-lg">{price.toLocaleString("fa")} تومان</p>
+          {discount > 0 && newPrice ? (
+            <p className="body-lg">{newPrice.toLocaleString("fa")} تومان</p>
           ) : (
-            <p className="body-lg">{(11000).toLocaleString("fa")} تومان</p>
+            <p className="body-lg">{price.toLocaleString("fa")} تومان</p>
           )}
         </div>
         <BuyButton
