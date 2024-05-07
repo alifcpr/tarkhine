@@ -2,6 +2,7 @@ import SearchSection from "@/components/sections/SearchSection";
 import Search from "@/components/shared/filters/Search";
 import { getProductBySearchApi } from "@/services/product.services";
 import { QueryClient, dehydrate, Hydrate } from "@tanstack/react-query";
+import { Metadata } from "next";
 import React from "react";
 
 interface PageParams {
@@ -10,7 +11,18 @@ interface PageParams {
   };
 }
 
+export const generateMetadata = async ({
+  params: { productName },
+}: {
+  params: { productName: string };
+}): Promise<Metadata> => {
+  return {
+    title: `جستجو : ${decodeURIComponent(productName)}`,
+  };
+};
+
 const Page = async ({ params: { productName } }: PageParams) => {
+  // handle get product by search api
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: ["foods", productName],
