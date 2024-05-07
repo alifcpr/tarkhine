@@ -19,7 +19,7 @@ const Page = () => {
     success: 0,
   });
 
-  // remove all queries 
+  // remove all queries
   useLayoutEffect(() => {
     setTimeout(() => {
       window.history.replaceState(null, "", window.location.pathname);
@@ -34,7 +34,7 @@ const Page = () => {
 
     setTimeout(() => {
       setInitial(true);
-    }, 200);
+    }, 20);
   }, []);
 
   return (
