@@ -13,14 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 const Footer = () => {
   const pathName = usePathname();
 
-  const doNotshowRouteLists = [
-    "/profile",
-    "/profile/addresses",
-    "/profile/orders",
-    "/profile/favorite",
-    "/profile/edit",
-    "/login",
-  ];
+  const doNotshowRouteLists = ["/login"];
 
   // do not show component in this routes
   if (doNotshowRouteLists.includes(pathName)) {
