@@ -14,6 +14,9 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [{ source: "/branch", destination: "/menu", permanent: true }];
+  },
 };
 
 module.exports = nextConfig;
