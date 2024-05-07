@@ -28,7 +28,7 @@ const ProductSlider = ({ images }: ProductSliderProps) => {
 
   return (
     <>
-      <div className="max-h-[550px] overflow-hidden rounded-8 bg-red-500">
+      <div className="max-h-[550px] overflow-hidden rounded-8">
         <Swiper
           slidesPerView={1}
           autoplay
@@ -37,7 +37,7 @@ const ProductSlider = ({ images }: ProductSliderProps) => {
           }
           modules={[Navigation, Pagination]}
           ref={swiperRef}
-          loop={true}
+          loop={false}
           grabCursor
         >
           {images.map((image: string) => (
