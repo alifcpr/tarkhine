@@ -371,3 +371,7 @@ export interface getUserOrdersResponse {
   userOrders: Order[];
   stautsCode: number;
 }
+
+export interface getUserOrdersParams {
+  stauts?: string;
+}

@@ -7,6 +7,7 @@ import {
   GetUserInfoResponse,
   UploadProfileImageParams,
   User,
+  getUserOrdersParams,
   getUserOrdersResponse,
 } from "@/types/type.d";
 import axiosService from "./axios";
@@ -96,8 +97,9 @@ export const logOutApi = async () => {
   return data;
 };
 
-export const getUserOrdersApi = async () => {
-  const { data } =
-    await axiosService.get<getUserOrdersResponse>("/v1/profile/orders");
+export const getUserOrdersApi = async (params: getUserOrdersParams) => {
+  const { data } = await axiosService.get<getUserOrdersResponse>(
+    `/v1/profile/orders?status=${params.stauts}`
+  );
   return data;
 };

@@ -10,6 +10,9 @@ import { getUserOrdersApi } from "@/services/user.services";
 import { Oval } from "react-loader-spinner";
 import { v4 as uuiv4 } from "uuid";
 import OrderCart from "@/components/cards/OrderCart";
+import Empty from "@/components/profile/Empty";
+import { useSearchParams } from "next/navigation";
+import NotFound from "@/components/NotFound";
 
 const Page = () => {
   // for back to profile page and open menu
@@ -18,9 +21,14 @@ const Page = () => {
   // page title
   useTitle("سفارش های من");
 
+  // searchParams
+  const searchParams = useSearchParams();
+  const statusQuery = searchParams.get("status") ?? "";
+
+  // handle get all orders api
   const { data, isLoading } = useQuery({
-    queryKey: ["orders"],
-    queryFn: async () => await getUserOrdersApi(),
+    queryKey: ["orders", statusQuery],
+    queryFn: async () => await getUserOrdersApi({ stauts: statusQuery }),
   });
 
   return (
@@ -50,13 +58,27 @@ const Page = () => {
           />
         </div>
       )}
-      {!isLoading && data && (
-        <div className="mt-4 flex flex-col gap-y-4">
-          {data.userOrders.map((orderData: any) => (
-            <OrderCart data={orderData} key={uuiv4()} />
-          ))}
-        </div>
-      )}
+      {!isLoading &&
+        data &&
+        (data.userOrders.length > 0 ? (
+          <div className="mt-4 flex flex-col gap-y-4">
+            {data.userOrders.map((orderData: any) => (
+              <OrderCart data={orderData} key={uuiv4()} />
+            ))}
+          </div>
+        ) : (
+          <div className="flex h-[500px] w-full items-center justify-center">
+            {statusQuery ? (
+              <NotFound title="موردی با این مشخصات یافت نشد !" />
+            ) : (
+              <Empty
+                title="شما تاکنون سفارشی ثبت نکردید !"
+                href="/menu"
+                btnLabel="منو غذا"
+              />
+            )}
+          </div>
+        ))}
     </div>
   );
 };
