@@ -16,9 +16,14 @@ const ProfileHeader = () => {
     <div className="mb-4 flex flex-row items-center gap-x-3 border-b border-muted-700 py-4 md:flex-col md:gap-x-6">
       <ProfileImage image={data?.imageUrl} />
       <div className="flex flex-col items-center justify-center gap-y-1 md:mt-3">
-        <p title={data?.name} className="body-lg truncate">
-          {data?.name} {data?.family}
-        </p>
+        {data?.name && data.family ? (
+          <p title={data?.name} className="body-lg truncate">
+            {data?.name} {data?.family}
+          </p>
+        ) : (
+          <p className="body-lg truncate">{data?.username}</p>
+        )}
+
         <span className="text-muted-800" dir="ltr">
           {data?.phone}
         </span>
