@@ -43,6 +43,8 @@ const ProductCard = (
           src={imagesUrl[0]}
           className="absolute min-h-full w-full object-cover object-center"
           fill
+          priority
+          sizes="100vw"
           alt="image"
         />
       </Link>
