@@ -10,7 +10,7 @@ import useGetAddresses from "@/hooks/useGetAddresses";
 import Pagination from "@/components/Pagination";
 import useProfileMenuController from "@/hooks/useProfileMenuController";
 import useTitle from "@/hooks/useTitle";
-import Loading from "./loading";
+import { Oval } from "react-loader-spinner";
 
 const Page = () => {
   // for back to profile page and open menu
@@ -58,9 +58,20 @@ const Page = () => {
             <span className="whitespace-nowrap">افزودن آدرس جدید</span>
           </button>
         </div>
-        {isLoading ? (
-          <Loading />
-        ) : addresses && addresses.data.length > 0 ? (
+        {isLoading && (
+          <div className="flex h-full w-full items-center justify-center">
+            <Oval
+              width={40}
+              height={40}
+              wrapperClass={"text-white"}
+              strokeWidthSecondary={10}
+              strokeWidth={5}
+              color={"#000"}
+              secondaryColor={"#000"}
+            />
+          </div>
+        )}
+        {!isLoading && addresses && addresses.data.length > 0 ? (
           <>
             <div className="my-5 flex flex-wrap justify-between gap-2">
               {addresses.data.map((address) => (
