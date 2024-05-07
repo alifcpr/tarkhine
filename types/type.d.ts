@@ -334,6 +334,7 @@ export interface Order {
   _id: string;
   userPhone: string;
   totalPayment: number;
+  totalDiscount: number;
   description: string;
   invoiceNumber: number;
   userId: string;
@@ -348,7 +349,7 @@ export interface Order {
   carts: {
     order: {
       foodId: string;
-      totalQuantity: number[];
+      totalQuantity: number;
       title: string;
       ingredients: string[];
       description: string;

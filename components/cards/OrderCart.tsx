@@ -15,8 +15,9 @@ const OrderCart = ({ data }: OrderCartProps) => {
   const {
     createdAt,
     carts,
-    addressId: { addressTitle },
+    addressId: { description },
     totalPayment,
+    totalDiscount,
   } = data;
 
   return (
@@ -41,15 +42,22 @@ const OrderCart = ({ data }: OrderCartProps) => {
             </p>
           </div>
           <div className="flex items-center gap-x-2">
-            <Wallet2 className="md:hidden" />
-            <p className="caption-lg md:body-md">
-              مبلغ : {totalPayment.toLocaleString("fa")} تومان
-            </p>
+            <div className="flex items-center gap-x-2">
+              <Wallet2 className="md:hidden" />
+              <p className="caption-lg md:body-md">
+                مبلغ : {totalPayment.toLocaleString("fa")} تومان
+              </p>
+            </div>
+            {totalDiscount > 0 && (
+              <p className="caption-lg md:body-md">
+                تخفیف : {totalDiscount.toLocaleString("fa")} تومان
+              </p>
+            )}
           </div>
         </div>
         <div className="flex items-center gap-x-2">
           <Location />
-          <p className="caption-lg md:body-md">{addressTitle}</p>
+          <p className="caption-lg md:body-md">{description}</p>
         </div>
       </div>
       <div className="mx-auto mt-5 flex  justify-center">
@@ -71,12 +79,12 @@ const OrderCart = ({ data }: OrderCartProps) => {
           <div className="rounded-8 border" key={uuidv4()}>
             <div className="relative h-[115px] w-[140px] xl:h-[140px] xl:w-[200px]">
               {item.discount > 0 && (
-                <span className="caption-md absolute left-2 top-2 flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 items-center rounded-full bg-error-100 p-0.5 text-error-200">
+                <span className="caption-md absolute left-2 top-1 flex w-[50px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-error-100 p-0.5 text-error-200">
                   % {item.discount}
                 </span>
               )}
               <span className="caption-lg absolute bottom-2 left-2 z-[9999]  bg-primary-100 px-2 text-primary-800">
-                x{item.totalQuantity.length}
+                x{item.totalQuantity}
               </span>
               <Image
                 src={item.imagesUrl[0]}
