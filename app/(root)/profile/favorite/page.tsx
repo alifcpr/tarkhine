@@ -12,7 +12,6 @@ import FavoriteCard from "@/components/cards/FavoriteCard";
 import NotFound from "@/components/NotFound";
 import Pagination from "@/components/Pagination";
 import Empty from "@/components/profile/Empty";
-import Loading from "./loading";
 import { Oval } from "react-loader-spinner";
 
 const Page = () => {
@@ -22,12 +21,14 @@ const Page = () => {
   // page title
   useTitle("غذای های موردعلاقه ی من");
 
+  // searchParams and queries
   const searchParams = useSearchParams();
   const mainCategory = searchParams.get("mainCategory") ?? "";
   const pageQuery = searchParams.get("page") ?? 1;
   const limitQuery = searchParams.get("limit") ?? 10;
   const searchQuery = searchParams.get("q") ?? "";
 
+  // handle get all favorite foods api
   const { data, isLoading, isPreviousData } = useQuery({
     queryKey: ["foods", mainCategory, pageQuery, limitQuery, searchQuery],
     queryFn: async () =>
@@ -41,7 +42,19 @@ const Page = () => {
   });
 
   if (isLoading) {
-    return <Loading />;
+    return (
+      <div className="flex h-full w-full items-center justify-center">
+        <Oval
+          width={40}
+          height={40}
+          wrapperClass={"text-white"}
+          strokeWidthSecondary={10}
+          strokeWidth={5}
+          color={"#000"}
+          secondaryColor={"#000"}
+        />
+      </div>
+    );
   }
 
   if (data)
