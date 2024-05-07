@@ -1,5 +1,5 @@
 import SearchSection from "@/components/sections/SearchSection";
-import Search from "@/components/shared/filters/Search";
+import Search from "@/components/filters/Search";
 import { getProductBySearchApi } from "@/services/product.services";
 import { QueryClient, dehydrate, Hydrate } from "@tanstack/react-query";
 import { Metadata } from "next";

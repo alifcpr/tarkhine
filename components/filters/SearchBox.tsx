@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Modal from "../Modal";
+import Modal from "../shared/Modal";
 import Search from "./Search";
 import { SearchNormal1 } from "iconsax-react";
 

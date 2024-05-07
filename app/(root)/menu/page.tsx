@@ -2,7 +2,7 @@ import FoodFilter from "@/components/filters/FoodFilter";
 import SubFilterFood from "@/components/filters/SubFilterFood";
 import ProductsSection from "@/components/sections/ProductsSection";
 import BannerSlider from "@/components/shared/BannerSlider";
-import Search from "@/components/shared/filters/Search";
+import Search from "@/components/filters/Search";
 import { getAllProductApi } from "@/services/product.services";
 import { UrlQuery } from "@/types/type";
 import { QueryClient, dehydrate, Hydrate } from "@tanstack/react-query";

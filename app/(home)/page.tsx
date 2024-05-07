@@ -1,7 +1,7 @@
 import BranchCard from "@/components/cards/BranchCard";
 import CategoryCard from "@/components/cards/CategoryCard";
 import BannerSlider from "@/components/shared/BannerSlider";
-import Search from "@/components/shared/filters/Search";
+import Search from "@/components/filters/Search";
 import { branchList, categoryItems } from "@/constants";
 import { BranchParams, CategoryItems } from "@/types/type.d";
 import { Diagram, HomeWifi, MenuBoard, User } from "iconsax-react";

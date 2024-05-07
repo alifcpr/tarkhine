@@ -4,7 +4,7 @@ import React from "react";
 import useProfileMenuController from "@/hooks/useProfileMenuController";
 import useTitle from "@/hooks/useTitle";
 import FoodFilter from "@/components/filters/FoodFilter";
-import Search from "@/components/shared/filters/Search";
+import Search from "@/components/filters/Search";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import { getAllFavoriteFoodsApi } from "@/services/user.services";

@@ -7,7 +7,7 @@ import DropDown from "./DropDown";
 import { ArrowDown2, ShoppingCart, User } from "iconsax-react";
 import HeaderLinks from "./HeaderLinks";
 import MobileNav from "./MobileNav";
-import SearchBox from "./filters/SearchBox";
+import SearchBox from "../filters/SearchBox";
 import { usePathname } from "next/navigation";
 import useUser from "@/hooks/useUser";
 import LogOut from "./LogOut";
