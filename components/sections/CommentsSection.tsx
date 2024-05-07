@@ -58,7 +58,7 @@ const CommentsSection = ({ comments, foodId }: CommentsSectionProps) => {
           <Empty
             title="هنوز دیدگاهی ثبت نشده !"
             btnLabel="افزودن دیدگاه"
-            setShow={() => setShow(true)}
+            setShow={handleShowForm}
           />
         </div>
       )}
