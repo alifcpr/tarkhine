@@ -12,8 +12,10 @@ import { v4 as uuidv4 } from "uuid";
 
 const Footer = () => {
   const pathName = usePathname();
-
   const doNotshowRouteLists = ["/login"];
+
+  
+  const isProductPage = pathName.includes("/product");
 
   // do not show component in this routes
   if (doNotshowRouteLists.includes(pathName)) {
@@ -21,7 +23,11 @@ const Footer = () => {
   }
 
   return (
-    <div className="flex w-full flex-col   bg-black/80 bg-[url(/assets/images/footer-image.jpg)] bg-cover bg-center p-5 text-muted-100 bg-blend-darken  xl:px-10 xl:py-8 2xl:px-28">
+    <div
+      className={`flex w-full flex-col bg-black/80 bg-[url(/assets/images/footer-image.jpg)] bg-cover bg-center p-5 text-muted-100 bg-blend-darken  xl:px-10 xl:py-8 2xl:px-28 ${
+        isProductPage && "mb-16 lg:mb-0"
+      }`}
+    >
       <div className="flex w-full items-start justify-evenly xl:justify-between">
         <ul className="flex flex-col items-center gap-y-5">
           <li className="body-sm xl:h5-bold lg:body-lg mb-1">دسترسی آسان</li>
