@@ -217,7 +217,7 @@ const StepThree = ({
       <div className="flex w-full flex-col rounded-8 border-2 p-3 md:flex-row md:justify-between md:p-6">
         <div className="flex items-center gap-x-2 border-b pb-3 md:border-none md:pb-0">
           <DiscountShape />
-          <p className="body-md md:body-lg">ثبت کد تخفیف</p>
+          <p className="body-md md:body-lg">ثبت کد تخفیف (18ae78d8)</p>
         </div>
         <div className="mt-3 flex w-full items-center justify-between gap-x-2 md:mt-0 md:w-max md:justify-normal">
           <input
@@ -327,7 +327,7 @@ const Page = () => {
           {shoppingCartStepList.map(({ text, Icon }, index: number) => (
             <StepBar.Step
               key={uuidv4()}
-              index={index }
+              index={index}
               active={step >= index + 1}
               icon={<Icon className="h-7 w-7" />}
               onClick={() => setStep(index + 1)}
@@ -346,7 +346,7 @@ const Page = () => {
       {!isLoading &&
         orders &&
         (orders.data.length > 0 ? (
-          <div className="mx-auto mt-10 grid  grid-cols-12 gap-x-6 xl:max-w-[1200px] 2xl:max-w-[1300px]">
+          <div className="mx-auto mt-10 grid grid-cols-12 gap-x-6 gap-y-5 xl:max-w-[1200px] 2xl:max-w-[1300px]">
             <div className="col-span-12 lg:col-span-7 ">
               {step === 1 && <StepOne data={orders} />}
               {step === 2 && <StepTwo values={values} setValues={setValues} />}

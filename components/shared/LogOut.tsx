@@ -34,6 +34,7 @@ const LogOut = ({
       router.replace("/");
       toast.success("از حساب کاربری خود خارج شدید");
       deleteAuthCookie();
+      queryCilent.invalidateQueries({ queryKey: ["cart-quantity"] });
       queryCilent.invalidateQueries({ queryKey: ["user"] });
     },
     onError: () => {
