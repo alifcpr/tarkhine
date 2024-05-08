@@ -14,7 +14,6 @@ const Footer = () => {
   const pathName = usePathname();
   const doNotshowRouteLists = ["/login"];
 
-  
   const isProductPage = pathName.includes("/product");
 
   // do not show component in this routes
@@ -44,10 +43,30 @@ const Footer = () => {
           <li className="body-sm xl:h5-bold lg:body-lg mb-1">
             شعبه های ترخینه
           </li>
-          <li className="caption-md xl:body-md md:caption-lg">شعبه اکباتان</li>
-          <li className="caption-md xl:body-md md:caption-lg">شعبه چالوس</li>
-          <li className="caption-md xl:body-md md:caption-lg">شعبه اقدسیه</li>
-          <li className="caption-md xl:body-md md:caption-lg">شعبه ونک</li>
+          <Link
+            href={"/branch"}
+            className="caption-md xl:body-md md:caption-lg"
+          >
+            شعبه اکباتان
+          </Link>
+          <Link
+            href={"/branch"}
+            className="caption-md xl:body-md md:caption-lg"
+          >
+            شعبه چالوس
+          </Link>
+          <Link
+            href={"/branch"}
+            className="caption-md xl:body-md md:caption-lg"
+          >
+            شعبه اقدسیه
+          </Link>
+          <Link
+            href={"/branch"}
+            className="caption-md xl:body-md md:caption-lg"
+          >
+            شعبه ونک
+          </Link>
         </ul>
         <MessageBox />
       </div>
