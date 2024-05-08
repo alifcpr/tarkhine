@@ -109,7 +109,7 @@ const ProductDetail = ({ foodId }: ProductDetailProps) => {
           </div>
         </div>
         <div className="col-span-12 md:w-full lg:col-span-3 xl:col-span-4">
-          <div className="fixed bottom-0 left-0 z-[9999]  w-full bg-muted-200 p-2 lg:sticky lg:left-0 lg:top-0 lg:rounded-4 lg:p-2">
+          <div className="fixed bottom-0 left-0 z-[9999]  w-full bg-muted-200 p-2 lg:sticky lg:left-0 lg:top-3 lg:rounded-4 lg:p-2">
             <div
               className={`flex items-center lg:mb-2 lg:flex-col xl:flex-row ${
                 newPrice ? "justify-between" : "justify-center"
