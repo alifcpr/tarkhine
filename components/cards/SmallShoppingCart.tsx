@@ -32,8 +32,9 @@ const SmallShoppingCart = ({ data }: SmallShoppingCartProps) => {
       mutationKey: ["carts"],
       mutationFn: async (id: string) => await deleteShoppingCartApi(id),
       onSuccess: (data) => {
-        toast.success(data.message);
         queryClient.invalidateQueries({ queryKey: ["carts"] });
+        queryClient.invalidateQueries({ queryKey: ["cart-quantity"] });
+        toast.success(data.message);
       },
       onError: ({ response }) => {
         toast.error(response.data.message);
@@ -46,6 +47,7 @@ const SmallShoppingCart = ({ data }: SmallShoppingCartProps) => {
     mutationFn: async (id: string) => await increaseShoppingCartApi(id),
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["carts"] });
+      queryClient.invalidateQueries({ queryKey: ["cart-quantity"] });
       toast.success(data.message);
     },
     onError: ({ response }) => {
@@ -58,6 +60,7 @@ const SmallShoppingCart = ({ data }: SmallShoppingCartProps) => {
     mutationKey: ["carts"],
     mutationFn: async (id: string) => await decreaseShoppingCartApi(id),
     onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["cart-quantity"] });
       queryClient.invalidateQueries({ queryKey: ["carts"] });
       toast.success(data.message);
     },
