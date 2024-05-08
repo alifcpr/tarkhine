@@ -1,4 +1,5 @@
 import {
+  CartQuantityResponse,
   CheckDiscountCodeResponse,
   CommonResponse,
   ShoppingCartList,
@@ -65,5 +66,11 @@ export const checkShoppingCartDiscountCodeApi = async (
     "/v1/cart",
     { discountCode }
   );
+  return data;
+};
+
+export const cartQuantityApi = async () => {
+  const { data } =
+    await axiosService.get<CartQuantityResponse>("/v1/cart/count");
   return data;
 };

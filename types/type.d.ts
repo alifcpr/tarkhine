@@ -375,3 +375,10 @@ export interface getUserOrdersResponse {
 export interface getUserOrdersParams {
   stauts?: string;
 }
+
+export interface CartQuantityResponse {
+  numberOfCart: {
+    carts: number;
+  };
+  statusCode: number;
+}

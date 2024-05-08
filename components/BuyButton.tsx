@@ -1,6 +1,6 @@
 "use client";
 import { addProductToShoppingCartApi } from "@/services/shopping_cart-services";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import toast from "react-hot-toast";
 import { Oval } from "react-loader-spinner";
@@ -12,12 +12,15 @@ type BuyButtonProps = {
 };
 
 const BuyButton = ({ quantity, btnClasses, foodId }: BuyButtonProps) => {
+  const queryClient = useQueryClient();
   const { mutate: addProductToShoppingCartMutate, isLoading: isAddingLoading } =
     useMutation({
-      mutationKey: ["product"],
+      mutationKey: ["foods"],
       mutationFn: async (foodId: string) => addProductToShoppingCartApi(foodId),
       onSuccess: () => {
         toast.success("محصول مدنظر با موفقیت به سبد خرید شما اضافه شد");
+        queryClient.invalidateQueries({ queryKey: ["carts"] });
+        queryClient.invalidateQueries({ queryKey: ["cart-quantity"] });
       },
       onError: () => {
         toast.error(
