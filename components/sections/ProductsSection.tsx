@@ -13,7 +13,7 @@ const ProductsSection = () => {
 
   const mainQuery = searchParams.get("mainCategory") ?? "";
   const subQuery = searchParams.get("subCategory") ?? "";
-  const limitQuery = searchParams.get("limit") ?? 10;
+  const limitQuery = searchParams.get("limit") ?? 4;
   const pageQuery = searchParams.get("page") ?? 1;
   const searchQuery = searchParams.get("q") ?? "";
 

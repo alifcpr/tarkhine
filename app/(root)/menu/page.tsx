@@ -12,7 +12,7 @@ const Page = async ({ searchParams }: UrlQuery) => {
   const {
     mainCategory = "",
     subCategory = "",
-    limit = 10,
+    limit = 4,
     page = 1,
     q = "",
   } = searchParams;
