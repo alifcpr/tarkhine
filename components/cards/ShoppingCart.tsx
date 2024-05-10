@@ -80,7 +80,16 @@ const ShoppingCart = ({ data }: ShoppnigCartProps) => {
   };
 
   const {
-    foodDetail: { _id, discount, imagesUrl, price, rate, title, newPrice },
+    foodDetail: {
+      _id,
+      discount,
+      imagesUrl,
+      price,
+      rate,
+      title,
+      newPrice,
+      ingredients,
+    },
     quantity,
   } = data;
 
@@ -118,7 +127,7 @@ const ShoppingCart = ({ data }: ShoppnigCartProps) => {
           />
         </div>
         <div className="mt-3">
-          <p className="body-md">خمیر ، نون</p>
+          <p className="body-md">{ingredients.toString()}</p>
         </div>
         <div className="flex flex-col items-center justify-between md:flex-row">
           <div className="flex w-full items-center justify-between md:justify-normal md:gap-x-3">

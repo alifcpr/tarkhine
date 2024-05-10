@@ -276,12 +276,7 @@ export interface GetAllFavoriteFoodsParams {
 export interface ShoppingCart
   extends Omit<
     Product,
-    | "comments"
-    | "isFavorite"
-    | "category"
-    | "subCategory"
-    | "ingredients"
-    | "description"
+    "comments" | "isFavorite" | "category" | "subCategory" | "description"
   > {}
 
 export interface ShoppingCartList {
