@@ -36,15 +36,17 @@ const Header = () => {
     <>
       <div className="flex items-center justify-between bg-muted-100 p-5 lg:px-4 lg:py-8 xl:px-14 xl:py-9 2xl:px-28">
         <MobileNav />
-        <Link href={"/"}>
-          <Image
-            src={"/assets/images/Logo.png"}
-            className="w-32 md:w-44"
-            alt="logo"
-            width={200}
-            height={200}
-          />
-        </Link>
+        <div className="w-32 md:w-44">
+          <Link href={"/"}>
+            <Image
+              src={"/assets/images/Logo.png"}
+              className="h-full w-full object-cover object-center"
+              alt="logo"
+              width={300}
+              height={300}
+            />
+          </Link>
+        </div>
 
         <div className=" hidden items-center gap-x-2 lg:flex">
           <HeaderLinks />

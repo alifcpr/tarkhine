@@ -41,7 +41,7 @@ export default function RootLayout({
             />
             <Header />
             <main className="mx-auto max-w-7xl">{children}</main>
-            <Toaster containerClassName="font-estedad" />
+            <Toaster containerClassName="font-estedad !z-[999999999999]" />
             <Footer />
           </ReactQueryProvider>
         </div>
