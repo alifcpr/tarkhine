@@ -25,7 +25,7 @@ const Page = async ({ params: { productName } }: PageParams) => {
   // handle get product by search api
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
-    queryKey: ["foods", productName],
+    queryKey: ["foods"],
     queryFn: async () => await getProductBySearchApi(productName),
   });
 

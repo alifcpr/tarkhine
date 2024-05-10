@@ -12,7 +12,7 @@ interface SearchSectionProps {
 
 const SearchSection = ({ productName }: SearchSectionProps) => {
   const { data } = useQuery({
-    queryKey: ["foods", productName],
+    queryKey: ["foods"],
     queryFn: async () => await getProductBySearchApi(productName),
   });
 
