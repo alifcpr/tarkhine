@@ -1,6 +1,6 @@
 import { Maybe, array, boolean, mixed, number, object, string } from "yup";
 
-const phoneRegex = /^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}/;
+const phoneRegex = /^(\+98|0)?9\d{9}$/;
 const emailRegex =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const nationalCodeRegex = /^([0-9]){10}$/;
