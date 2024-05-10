@@ -35,9 +35,6 @@ const MessageBox = () => {
       setIsLoading(true);
       toast.success("پیام شما به موفقیت به ترخینه ارسال شد");
     } catch (error) {
-      // get Error
-      console.log(error);
-      throw error;
     } finally {
       setIsLoading(false);
     }

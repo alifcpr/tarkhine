@@ -11,7 +11,6 @@ interface ShoppingCartsListProps {
 }
 
 const ShoppingCartsList = ({ data }: ShoppingCartsListProps) => {
-  console.log("Shop", data);
   return (
     <div
       dir="ltr"

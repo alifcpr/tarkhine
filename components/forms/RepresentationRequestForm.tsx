@@ -48,7 +48,6 @@ const RepresentationRequestForm = () => {
     } finally {
       setIsLoading(false);
     }
-    console.log(data);
   };
 
   return (

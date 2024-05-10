@@ -28,7 +28,6 @@ const ProfileInfoForm = () => {
     mutationFn: async (userData: User) => await editProfileApi(userData),
     onSuccess: (data) => {
       toast.success("پروفایل شما با موفقیت تغییر کرد");
-      console.log("data : ", data);
       queryClient.invalidateQueries(["user"]);
     },
   });
@@ -54,7 +53,6 @@ const ProfileInfoForm = () => {
 
   // for call user change info api
   const changeData = (data: any) => {
-    console.log(data);
     updateProfile(data);
   };
 

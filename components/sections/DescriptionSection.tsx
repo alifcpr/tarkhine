@@ -15,13 +15,6 @@ const DescriptionSection = ({ description }: DescriptionSectionProps) => {
   useEffect(() => {
     const contentBox = contentRef.current!;
 
-    // if (contentBox.scrollHeight > 20) {
-    //   setHeight("12rem");
-    //   setShow(false);
-    // } else {
-    //   setHeight("100%");
-    //   setShow(true);
-    // }
     if (contentBox.scrollHeight < 30) {
       setShowBtn(false);
       setHeight("auto");
@@ -35,10 +28,6 @@ const DescriptionSection = ({ description }: DescriptionSectionProps) => {
       setShowMore(true);
     }
   }, []);
-
-  useEffect(() => {
-    console.log(contentRef.current!.scrollHeight);
-  }, [contentRef.current?.scrollHeight]);
 
   // handle show more item
   const handleShowMore = () => {
