@@ -40,7 +40,7 @@
 </h4>
 
 <h4 align="start" dir="rtl">
-برنامه نویس فرانت اند :   صدرا سلیمانی 
+برنامه نویس بک اند :   صدرا سلیمانی 
 </h4>
 <h4 dir="rtl">
 <a href="https://www.linkedin.com/in/sadra-soleimani-48465a255/">لینکدین</a>  <a href="https://github.com/sadrax4">گیت هاب<a/>
