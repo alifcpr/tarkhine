@@ -60,7 +60,7 @@ const ChooseImageForm = ({
         )}
         <UploadImageBox
           setState={setImage}
-          placeHolder="تصویر پروفایل خود را بارگزاری کنید"
+          placeHolder="برای آپلود ، عکس را بکشید و رها کنید ، یا کلیک کنید"
           maxImage={1}
           maxWidth={800}
           maxHeight={800}
